@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - travel</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/travel/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-02-04T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/travel/atom.xml</id>
+    <entry xml:lang="en">
+        <title>FOSDEM 2026: Brussels, Beer, and Good Tech</title>
+        <published>2026-02-04T00:00:00+00:00</published>
+        <updated>2026-02-04T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/fosdem-2026-recap/"/>
+        <id>https://daviey.github.io/posts/fosdem-2026-recap/</id>
+        
+        <summary type="html">&lt;p&gt;Just back from Brussels for FOSDEM 2026. Always brilliant. Solid technical content, interesting people, too much Belgian beer. Here&#x27;s what I took away from the best bits.&lt;&#x2F;p&gt;
+&lt;p&gt;This year&#x27;s highlights included some genuinely useful Go tooling (OOMProf for debugging memory issues with eBPF), the NixOS crowd showing off proper zero-trust infrastructure for homelabs using TPM attestation, and Daniel Stenberg reminding everyone that we&#x27;re wasting time on AI hype while basic security problems go unfixed. Also covered: containers, systemd integration, and why Belgian beer is dangerous when you&#x27;re trying to explain TLS to strangers.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Met this bloke who insisted on buying rounds of 12% ABV stuff. Being British, I couldn&#x27;t say no to free beer. Mistake. Next thing I know, I&#x27;m explaining how TLS works to someone who definitely doesn&#x27;t care, and they&#x27;re nodding along politely because I&#x27;ve had too many. Classic.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;The technical content was strong, but the real value of FOSDEM is always the people. Walking around ULB campus surrounded by folks who wrote half the software you use daily, having random conversations that turn into collaborations - that&#x27;s what makes it worth the trip.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

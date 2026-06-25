@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - saml</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/saml/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-11-10T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/saml/atom.xml</id>
+    <entry xml:lang="en">
+        <title>OAuth2 vs SAML: Which One and Why?</title>
+        <published>2025-11-10T00:00:00+00:00</published>
+        <updated>2025-11-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/oauth2-vs-saml-differences/"/>
+        <id>https://daviey.github.io/posts/oauth2-vs-saml-differences/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need single sign-on for our new internal app.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What kind? OAuth2 or SAML?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; Does it matter? They both do login.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; One&#x27;s for APIs and mobile apps. The other&#x27;s for enterprise SSO. Yeah, it matters.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;SAML is what enterprises use because they&#x27;ve used it for 20 years and it works. OAuth2 is what startups use because it&#x27;s simple and modern. Neither is wrong, just different.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;I&#x27;ve had this conversation too many times. Someone builds a new internal application, needs authentication, gets confused between OAuth2 and SAML. They&#x27;re both &quot;login with company account&quot; from user&#x27;s perspective. Underneath? Completely different protocols for different problems.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

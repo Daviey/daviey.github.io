@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Daviey's blog</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-07-23T22:20:00+01:00</updated><entry><title>Test</title><link href="/test.html" rel="alternate"></link><updated>2015-07-23T22:20:00+01:00</updated><author><name>Dave Walker</name></author><id>tag:,2015-07-23:test.html</id><summary type="html">&lt;p&gt;This is a test.&lt;/p&gt;</summary></entry></feed>

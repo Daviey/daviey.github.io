@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - detection</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/detection/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-11-12T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/detection/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Security Tools That Actually Work vs What Vendors Sell You</title>
+        <published>2024-11-12T00:00:00+00:00</published>
+        <updated>2024-11-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-tools-marketing-vs-reality/"/>
+        <id>https://daviey.github.io/posts/security-tools-marketing-vs-reality/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; Our AI-powered platform detects zero-day threats before they happen using quantum machine learning.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Can I configure it?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; No, it&#x27;s automated intelligence.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Can I see logs?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; No, proprietary algorithms.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What exactly do I get?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; Peace of mind.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Marketing departments discovered that &#x27;AI-powered security&#x27; sells better than &#x27;decent grep with sensible regex&#x27;. The rest is history.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Security vendor marketing has drifted so far from reality that products and datasheets might as well be different languages. Bought a product that promises &quot;zero false positive threat hunting&quot;? Got a glorified SIEM with slightly better alerting. Purchased &quot;autonomous incident response&quot;? Got some prewritten playbooks and a lot of configuration work.&lt;&#x2F;p&gt;
+&lt;p&gt;This isn&#x27;t about shitting on all vendors. Some make genuinely good products. But the gap between what security teams think they&#x27;re buying and what they actually deploy is massive. And that&#x27;s before the sales team starts explaining how the &quot;AI&quot; part works.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Canary Tokens: Early Warning Systems That Actually Work</title>
+        <published>2024-11-06T00:00:00+00:00</published>
+        <updated>2024-11-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/canary-tokens-early-warning/"/>
+        <id>https://daviey.github.io/posts/canary-tokens-early-warning/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; How long did the attacker have access before you detected them?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; About six months.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; What finally tipped you off?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Customer complained their data showed up on a forum.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;This conversation happens more than you&#x27;d think. Not because organizations lack security tools. Because they lack detection that works when prevention fails.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Prevention gets all the budget. Detection gets what&#x27;s left. Yet detection is what tells you when prevention failed - which it will.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get an alert. No false positives. No tuning. No complex rules. Just a clear signal: someone&#x27;s where they shouldn&#x27;t be.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

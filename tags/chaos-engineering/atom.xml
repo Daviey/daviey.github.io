@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - chaos-engineering</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/chaos-engineering/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-05-15T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/chaos-engineering/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Chaos Engineering as Security Tool: Breaking Things to Make Them Stronger</title>
+        <published>2025-05-15T00:00:00+00:00</published>
+        <updated>2025-05-15T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/chaos-engineering-security-tool/"/>
+        <id>https://daviey.github.io/posts/chaos-engineering-security-tool/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Our security team is world-class. Firewalls, IDS, EDR, SIEM. We&#x27;re covered.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sre&quot;&gt;SRE:&lt;&#x2F;span&gt; What happens if a switch fails? Or database goes down? Or network partitions?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; That&#x27;s ops problem. Security is about preventing attacks.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sre&quot;&gt;SRE:&lt;&#x2F;span&gt; Security without resilience is useless. If everything breaks under pressure, attacker wins. If you survive chaos, attacker doesn&#x27;t matter.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The best security test isn&#x27;t a penetration test. It&#x27;s Game Day when everything tries to break at once and you see what holds together.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Traditional security is defensive. Firewalls, EDR, access controls. Prevent attacks, detect intruders, respond to incidents. But there&#x27;s a problem: you only know your defenses work when someone attacks. And you only find weaknesses when they&#x27;re exploited.&lt;&#x2F;p&gt;
+&lt;p&gt;Chaos engineering is offensive. You break things on purpose. Systematically. Repeatedly. Not to cause problems, but to discover them. To find where your resilience fails before attackers exploit those failures.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

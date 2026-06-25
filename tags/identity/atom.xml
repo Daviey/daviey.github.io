@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - identity</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/identity/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-02-08T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/identity/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Workload Identity: Giving Your Services an Identity Without the Secret Sprawl</title>
+        <published>2026-02-08T00:00:00+00:00</published>
+        <updated>2026-02-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/workload-identity-beyond-api-keys/"/>
+        <id>https://daviey.github.io/posts/workload-identity-beyond-api-keys/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The database connection is failing.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Check the credentials in the config.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Which config? There are twelve.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The one with the password that expires every 90 days.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; That expired yesterday. Nobody told me.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Did you check the rotation runbook?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The runbook is in a wiki that requires the database to log in.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Service accounts. API keys. Connection strings. Database passwords scattered across config files, environment variables, Kubernetes secrets, and that one spreadsheet someone maintains &quot;just in case&quot;. This is how most organisations handle non-human identity. It&#x27;s also how most organisations get compromised.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+Every hardcoded credential is a future incident waiting to happen. The question isn&#x27;t whether it leaks - it&#x27;s whether you notice when it does.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Workload identity is about giving your services proper identities without the secret sprawl. Not another password to rotate. Not another API key to revoke when it appears in a GitHub commit. An identity that your infrastructure manages, rotates, and revokes automatically.&lt;&#x2F;p&gt;
+&lt;p&gt;This post covers what workload identity actually means, how to implement it on major clouds and on-prem, and the practical patterns that make it survivable.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Zero Trust: What It Actually Means When You Have to Implement It</title>
+        <published>2025-08-05T00:00:00+00:00</published>
+        <updated>2025-08-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/zero-trust-what-it-actually-means/"/>
+        <id>https://daviey.github.io/posts/zero-trust-what-it-actually-means/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; Our zero trust platform provides seamless, frictionless, AI-powered security across your entire estate.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What does it actually do?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; It verifies every request, every time, everywhere.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; So does a firewall rule and a login page. What does yours do differently?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt;...it has a dashboard.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Zero trust has become the most abused term in security marketing. Every vendor has a zero trust product. Every slide deck has a zero trust slide. Every CISO has a zero trust initiative.&lt;&#x2F;p&gt;
+&lt;p&gt;Most of them are buying a product and calling it a strategy.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+Zero trust is not a product. It&#x27;s the slow, painful process of removing implicit trust from your network, one assumption at a time.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;This post is about what zero trust actually looks like when you have to implement it. Not the conference version. The version where you&#x27;re staring at a network diagram, a list of legacy systems, and a budget that won&#x27;t cover half of what the vendors quoted you.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

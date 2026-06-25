@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - ai</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/ai/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-30T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/ai/atom.xml</id>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 8 - Practical Tools That Actually Help (Bonus Episode)</title>
+        <published>2026-01-30T00:00:00+00:00</published>
+        <updated>2026-01-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-8/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-8/</id>
+        
+        <summary type="html">&lt;p&gt;Part 7 was meant to be the end. &quot;Good luck, you&#x27;ll need it.&quot; Fin.&lt;&#x2F;p&gt;
+&lt;p&gt;Then someone asked: &quot;Alright, but what tools actually work? Not vendor pitches. Not &#x27;AI observability platforms&#x27; that cost more than my salary. Actual tools that help run AI systems without making everything worse.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Fair question.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The best AI ops tools are the boring ones. Prometheus. Grafana. Python scripts. Git. The same tools you&#x27;d use for normal systems, just pointed at different metrics.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Bonus episode. Practical tools and techniques that actually help when you&#x27;re running AI systems. Things I&#x27;ve used. Things that work.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 7 - Why Smart People Keep Making Dumb Decisions</title>
+        <published>2026-01-23T00:00:00+00:00</published>
+        <updated>2026-01-23T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-7/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-7/</id>
+        
+        <summary type="html">&lt;p&gt;Six parts of this series explaining what goes wrong with AI systems. Testing that doesn&#x27;t happen. Monitoring that doesn&#x27;t exist. Models shipped before they&#x27;re ready. Incidents that could have been prevented.&lt;&#x2F;p&gt;
+&lt;p&gt;You&#x27;d think after reading all that, teams would learn. They don&#x27;t.&lt;&#x2F;p&gt;
+&lt;p&gt;The same mistakes happen over and over. Not because people are stupid. Because the organizational incentives guarantee failure.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;You can have thorough testing or you can ship by Friday. You can&#x27;t have both. Management always picks Friday.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 7. The last of the core series. Why organizations are structurally incapable of running AI systems properly, and what you can do about it (spoiler: not much).&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 6 - Case Studies (What Actually Goes Wrong)</title>
+        <published>2026-01-16T00:00:00+00:00</published>
+        <updated>2026-01-16T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-6/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-6/</id>
+        
+        <summary type="html">&lt;p&gt;This is where I tell you about actual AI deployments that went wrong. Real incidents. Real failures. Real consequences.&lt;&#x2F;p&gt;
+&lt;p&gt;Names changed. Details changed enough that you can&#x27;t identify the companies. But the failures? Those are real.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Every AI disaster follows the same pattern: someone knew it was broken, someone decided to ship it anyway, and someone else carried the can when it broke in production.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 6 of the series. Case studies. Learn from other people&#x27;s mistakes so you don&#x27;t repeat them.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 5 - When to Say No (And How to Make It Stick)</title>
+        <published>2026-01-09T00:00:00+00:00</published>
+        <updated>2026-01-09T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-5/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-5/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need to deploy the customer sentiment analysis model by end of week.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; It&#x27;s not ready.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; The client&#x27;s expecting it.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; It fails on 30% of non-English inputs. Your client has international customers.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We&#x27;ll fix that in the next release.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; No.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; What do you mean, no?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; I mean no. We&#x27;re not deploying broken software because someone made a promise we can&#x27;t keep.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;This conversation never goes well. Have it anyway.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The person saying &#x27;we can&#x27;t ship this&#x27; is always the bad guy. Right up until production breaks and suddenly everyone&#x27;s asking why we didn&#x27;t catch this in testing.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 5 of the series. This one&#x27;s about saying no. When to do it, how to do it, and how to not get fired for it.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 4 - Testing Before You Ship (Or: Stop Discovering Bugs in Production)</title>
+        <published>2026-01-02T00:00:00+00:00</published>
+        <updated>2026-01-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-4/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-4/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We&#x27;ve tested the model. It works.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What did you test?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We ran it on the validation set. 94% accuracy.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What about edge cases?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What edge cases?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The ones that will break it in production.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We&#x27;ll handle those when we see them.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;And that&#x27;s how you end up debugging at 3am.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Testing that your model loads and returns predictions is not testing. That&#x27;s checking if Python still works. Testing is finding out all the ways your model breaks before your users do.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 4 of the series. This one&#x27;s about testing AI systems before deployment. Not the &quot;it runs on my laptop&quot; kind of testing. The &quot;I&#x27;ve actively tried to break this and couldn&#x27;t&quot; kind of testing.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 3 - Incident Response When You Have No Idea Why</title>
+        <published>2025-12-19T00:00:00+00:00</published>
+        <updated>2025-12-19T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-3/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-3/</id>
+        
+        <summary type="html">&lt;p&gt;3:47am. Phone rings. On-call engineer sounds panicked.&lt;&#x2F;p&gt;
+&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; The model&#x27;s broken.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What&#x27;s it doing?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; Giving wrong answers.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; How wrong?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; Very wrong. Accuracy dropped from 92% to 54% in the last hour.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Any deployment changes?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; No.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Input data look different?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; Don&#x27;t know. How do I check?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Can you roll back?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;OnCall:&lt;&#x2F;span&gt; To what? The model hasn&#x27;t changed.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Welcome to AI incident response.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Normal incident: &#x27;The database crashed.&#x27; AI incident: &#x27;The model&#x27;s giving wrong answers and nobody knows why because machine learning is basically a magic box that we&#x27;ve convinced ourselves we understand.&#x27;&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 3 of the series. This one&#x27;s about what to do when your AI system breaks at 3am and you&#x27;re expected to have answers you don&#x27;t have.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 2 - Monitoring That Actually Works</title>
+        <published>2025-12-12T00:00:00+00:00</published>
+        <updated>2025-12-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-2/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-2/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The model&#x27;s working fine. Look, uptime is 99.9%!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; And the accuracy?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The accuracy. What percentage of predictions are correct?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We don&#x27;t track that.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Then you don&#x27;t know if it&#x27;s working.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Your monitoring dashboard shows five green lights and one red one. The red one is &#x27;model accuracy: unknown&#x27;. That&#x27;s not a monitoring problem. That&#x27;s a career problem.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 2 of the series on running AI systems. This one&#x27;s about monitoring. Not the useless kind vendors sell you. The kind that actually tells you when things are broken before management finds out from Twitter.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 1 - Who Carries the Can?</title>
+        <published>2025-12-05T00:00:00+00:00</published>
+        <updated>2025-12-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-1/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-1/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need to deploy the AI model to production by Friday.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Have you tested it?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; The data scientists say it&#x27;s good.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; That&#x27;s not what I asked.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; Well, no, but marketing promised the client-&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Then no.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;When your AI system denies someone&#x27;s mortgage application because they have a Welsh surname, guess who gets the phone call? Not the data scientist. Not the VP of Innovation. You.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;This is part one of a series about running AI systems when you&#x27;re the poor sod responsible for keeping them alive. Not the hand-wavy ethics stuff. The practical bits: what breaks, how to know it&#x27;s broken, and how to not get blamed when it inevitably goes sideways.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

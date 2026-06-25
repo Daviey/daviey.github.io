@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - encryption</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/encryption/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-03-01T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/encryption/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Confidential Computing: Processing Data While Keeping It Secret</title>
+        <published>2025-03-01T00:00:00+00:00</published>
+        <updated>2025-03-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/confidential-computing-encrypted-data-processing/"/>
+        <id>https://daviey.github.io/posts/confidential-computing-encrypted-data-processing/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Our data never leaves the network. Encrypted at rest, encrypted in transit. We&#x27;re covered.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What happens when we need to process it?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; We decrypt it, process it, encrypt it again. Standard procedure.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What if we could process it without ever decrypting it?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Impossible. You can&#x27;t do math on encrypted data.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The goal is processing data you never access directly.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Traditional encryption works by keeping data secret until you need it. Decrypt, process, encrypt again. It&#x27;s worked for decades. But it has a limitation: at some point, the data must be exposed in plaintext.&lt;&#x2F;p&gt;
+&lt;p&gt;Confidential computing flips this on its head. Instead of protecting data by controlling who can access it, we protect data by ensuring it&#x27;s never accessible in plaintext at all. Even during processing.&lt;&#x2F;p&gt;
+&lt;p&gt;This isn&#x27;t theoretical. Companies are using it today. Financial analytics on encrypted transactions. Healthcare processing without seeing patient records. Collaborative fraud detection between competitors without sharing raw data.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

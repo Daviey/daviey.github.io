@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - deception</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/deception/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-11-06T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/deception/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Canary Tokens: Early Warning Systems That Actually Work</title>
+        <published>2024-11-06T00:00:00+00:00</published>
+        <updated>2024-11-06T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/canary-tokens-early-warning/"/>
+        <id>https://daviey.github.io/posts/canary-tokens-early-warning/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; How long did the attacker have access before you detected them?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; About six months.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; What finally tipped you off?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Customer complained their data showed up on a forum.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;This conversation happens more than you&#x27;d think. Not because organizations lack security tools. Because they lack detection that works when prevention fails.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Prevention gets all the budget. Detection gets what&#x27;s left. Yet detection is what tells you when prevention failed - which it will.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get an alert. No false positives. No tuning. No complex rules. Just a clear signal: someone&#x27;s where they shouldn&#x27;t be.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

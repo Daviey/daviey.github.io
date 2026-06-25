@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - monitoring</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/monitoring/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-12-12T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/monitoring/atom.xml</id>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 2 - Monitoring That Actually Works</title>
+        <published>2025-12-12T00:00:00+00:00</published>
+        <updated>2025-12-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-2/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-2/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The model&#x27;s working fine. Look, uptime is 99.9%!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; And the accuracy?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The accuracy. What percentage of predictions are correct?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We don&#x27;t track that.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Then you don&#x27;t know if it&#x27;s working.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Your monitoring dashboard shows five green lights and one red one. The red one is &#x27;model accuracy: unknown&#x27;. That&#x27;s not a monitoring problem. That&#x27;s a career problem.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 2 of the series on running AI systems. This one&#x27;s about monitoring. Not the useless kind vendors sell you. The kind that actually tells you when things are broken before management finds out from Twitter.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>DNS Security: What Actually Breaks</title>
+        <published>2025-06-12T00:00:00+00:00</published>
+        <updated>2025-06-12T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/dns-security-what-actually-breaks/"/>
+        <id>https://daviey.github.io/posts/dns-security-what-actually-breaks/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;On-call:&lt;&#x2F;span&gt; The website is down.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; But the servers are fine. CPU is low. No errors.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Your DNS records point at last week&#x27;s IP.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; DNS is just a phone book. How can that take us down?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Because your whole company uses it as the source of truth, whether you admit it or not.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;DNS is the most boring critical system you run. Nobody thinks about it until it fails, and when it fails everyone suddenly becomes very interested in TTLs.&lt;&#x2F;p&gt;
+&lt;p&gt;You can patch servers. You can roll back deployments. You can add more replicas. None of that matters if clients can&#x27;t resolve names.&lt;&#x2F;p&gt;
+&lt;p&gt;DNS security goes beyond &quot;do DNSSEC and you&#x27;re done&quot;. It covers availability, integrity, and watching the bits that attackers like because you usually leave them alone.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+DNS isn&#x27;t a phone book. It&#x27;s a control plane.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;This post covers how DNS breaks in the real world, how attackers use it, what you can monitor without buying a new platform, and what to do at 3am when name resolution goes sideways.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Prometheus for Security: Monitoring What Actually Matters</title>
+        <published>2024-10-18T00:00:00+00:00</published>
+        <updated>2024-10-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/prometheus-security-monitoring/"/>
+        <id>https://daviey.github.io/posts/prometheus-security-monitoring/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need better visibility into security events.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What are you currently monitoring?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; Service uptime. CPU. Memory. The usual.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What about failed logins? Unexpected services? File changes?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; That&#x27;s what the SIEM is for.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; When did you last look at the SIEM?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt;...&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;This is the problem with security monitoring. Teams spend thousands on SIEMs that nobody uses. Meanwhile, Prometheus sits there collecting metrics, and nobody thinks to point it at security problems.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Security monitoring doesn&#x27;t need a six-figure SIEM budget. It needs metrics that matter, alerts that fire when something&#x27;s actually wrong, and people who respond when they do.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Prometheus is already in your infrastructure. It&#x27;s collecting metrics. It&#x27;s generating alerts. You just need to point it at the right things.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

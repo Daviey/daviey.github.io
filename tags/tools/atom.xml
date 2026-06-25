@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - tools</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/tools/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-30T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/tools/atom.xml</id>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 8 - Practical Tools That Actually Help (Bonus Episode)</title>
+        <published>2026-01-30T00:00:00+00:00</published>
+        <updated>2026-01-30T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-8/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-8/</id>
+        
+        <summary type="html">&lt;p&gt;Part 7 was meant to be the end. &quot;Good luck, you&#x27;ll need it.&quot; Fin.&lt;&#x2F;p&gt;
+&lt;p&gt;Then someone asked: &quot;Alright, but what tools actually work? Not vendor pitches. Not &#x27;AI observability platforms&#x27; that cost more than my salary. Actual tools that help run AI systems without making everything worse.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Fair question.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The best AI ops tools are the boring ones. Prometheus. Grafana. Python scripts. Git. The same tools you&#x27;d use for normal systems, just pointed at different metrics.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Bonus episode. Practical tools and techniques that actually help when you&#x27;re running AI systems. Things I&#x27;ve used. Things that work.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

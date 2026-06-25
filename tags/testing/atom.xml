@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - testing</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/testing/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-01-02T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/testing/atom.xml</id>
+    <entry xml:lang="en">
+        <title>AI Systems Responsibility: Part 4 - Testing Before You Ship (Or: Stop Discovering Bugs in Production)</title>
+        <published>2026-01-02T00:00:00+00:00</published>
+        <updated>2026-01-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-4/"/>
+        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-4/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We&#x27;ve tested the model. It works.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What did you test?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We ran it on the validation set. 94% accuracy.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What about edge cases?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; What edge cases?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The ones that will break it in production.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We&#x27;ll handle those when we see them.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;And that&#x27;s how you end up debugging at 3am.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Testing that your model loads and returns predictions is not testing. That&#x27;s checking if Python still works. Testing is finding out all the ways your model breaks before your users do.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Part 4 of the series. This one&#x27;s about testing AI systems before deployment. Not the &quot;it runs on my laptop&quot; kind of testing. The &quot;I&#x27;ve actively tried to break this and couldn&#x27;t&quot; kind of testing.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

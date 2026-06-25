@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - ssh</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/ssh/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-03-18T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/ssh/atom.xml</id>
+    <entry xml:lang="en">
+        <title>SSH Hardening: What Actually Matters</title>
+        <published>2025-03-18T00:00:00+00:00</published>
+        <updated>2025-03-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ssh-hardening-what-actually-matters/"/>
+        <id>https://daviey.github.io/posts/ssh-hardening-what-actually-matters/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; I&#x27;ve hardened SSH. Disabled root login, changed the port, installed fail2ban.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Changed the port?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; Yeah, moved it to 2222. Security through obscurity.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; A port scan takes four seconds. What about certificate auth?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; What about what?&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;SSH hardening advice on the internet falls into two categories: the stuff that doesn&#x27;t matter (change the port, install fail2ban, add a banner) and the stuff that does matter but nobody explains properly (certificate auth, key management, agent forwarding risks, auditing).&lt;&#x2F;p&gt;
+&lt;p&gt;This post is about the second category.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key that&#x27;s been sitting in a developer&#x27;s home directory since 2019, with no passphrase, copied to six machines.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;If you&#x27;re running Linux servers - on-prem, cloud, doesn&#x27;t matter - SSH is your management plane. If SSH is compromised, everything behind it is compromised. Treat it accordingly.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

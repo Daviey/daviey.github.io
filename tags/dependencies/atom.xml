@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - dependencies</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/dependencies/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-11-10T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/dependencies/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Supply Chain Attacks: How They Happen and What Actually Works to Stop Them</title>
+        <published>2025-11-10T00:00:00+00:00</published>
+        <updated>2025-11-10T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/"/>
+        <id>https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; Our own code is secure. Dependencies from npm, GitHub, Docker Hub. That&#x27;s safe, right?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; That&#x27;s where most attacks actually happen.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; But those maintainers are legit companies!&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; So were SolarWinds and Log4j maintainers. What&#x27;s your point?&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;The attack surface isn&#x27;t what you wrote. It&#x27;s everything you trusted. And you trusted a lot.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;We obsess over secure coding practices. Input validation, authentication, access controls. But then we pull in 2000 dependencies from npm, PyPI, Docker Hub. We download images, run unverified binaries, trust package maintainers we&#x27;ve never met.&lt;&#x2F;p&gt;
+&lt;p&gt;That&#x27;s where supply chain attacks live. Not in your code. In everyone else&#x27;s.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

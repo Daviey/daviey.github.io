@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - automation</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/automation/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-11-22T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/automation/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Beyond Scanning: What Security as Code Really Means</title>
+        <published>2025-11-22T00:00:00+00:00</published>
+        <updated>2025-11-22T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-as-code-beyond-scanning/"/>
+        <id>https://daviey.github.io/posts/security-as-code-beyond-scanning/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Engineering manager:&lt;&#x2F;span&gt; We&#x27;ve got security as code! Look, the dashboard shows our scans running in CI.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Me:&lt;&#x2F;span&gt; That&#x27;s scanning as code. Not the same thing.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Engineering manager:&lt;&#x2F;span&gt; What&#x27;s the difference?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Me:&lt;&#x2F;span&gt; About five years of security incidents you haven&#x27;t had yet.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Adding a scanner to your pipeline is like adding a smoke detector to a building. Useful, but not the same as building with fire-resistant materials in the first place.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Security as Code isn&#x27;t about running more scanners automatically. It&#x27;s about changing how security gets built into systems. Most organizations miss this. They automate detection, declare victory, then wonder why breaches still happen.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Security as Code: From Checklists to Automation</title>
+        <published>2025-09-18T00:00:00+00:00</published>
+        <updated>2025-09-18T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-as-code/"/>
+        <id>https://daviey.github.io/posts/security-as-code/</id>
+        
+        <summary type="html">&lt;p&gt;&quot;Here&#x27;s the security checklist for the new release.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;&quot;We&#x27;re deploying next week. When can we do the review?&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;&quot;The review takes two weeks minimum. You scheduled it last month.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;&quot;...we didn&#x27;t.&quot;&lt;&#x2F;p&gt;
+&lt;p&gt;This is the problem with security checklists. They&#x27;re designed for a world where you deploy quarterly. In continuous deployment environments, they&#x27;re the wrong tool.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Security checklists codify knowledge but don&#x27;t scale. Security as Code codifies requirements into executable tests. Checklists tell you what to check. Code checks it for you, every time.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;The evolution from checklists to code isn&#x27;t about abandoning security knowledge. It&#x27;s about making security verification scale with modern development practices.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>

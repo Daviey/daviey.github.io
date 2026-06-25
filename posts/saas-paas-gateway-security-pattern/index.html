@@ -1,0 +1,366 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><meta content="Engineering, security, and the messy reality of running systems in production." name=description><meta content=noodp name=robots><link href=https://daviey.github.io rel=canonical><link href=https://daviey.github.io/css/extended.min.css rel=stylesheet><link href=https://daviey.github.io/css/buttons.min.css rel=stylesheet><link href=https://daviey.github.io/css/code.min.css rel=stylesheet><link href=https://daviey.github.io/css/fonts.min.css rel=stylesheet><link href=https://daviey.github.io/css/footer.min.css rel=stylesheet><link href=https://daviey.github.io/css/gist.min.css rel=stylesheet><link href=https://daviey.github.io/css/header.min.css rel=stylesheet><link href=https://daviey.github.io/css/main.min.css rel=stylesheet><link href=https://daviey.github.io/css/menu.min.css rel=stylesheet><link href=https://daviey.github.io/css/pagination.min.css rel=stylesheet><link href=https://daviey.github.io/css/post.min.css rel=stylesheet><link href=https://daviey.github.io/css/syntax.min.css rel=stylesheet><link href=https://daviey.github.io/css/terminal.min.css rel=stylesheet><link href=https://daviey.github.io/css/terms.min.css rel=stylesheet><link rel="shortcut icon" href=https://daviey.github.io/favicon.png><link href=https://daviey.github.io/apple-touch-icon.png rel=apple-touch-icon><meta content=summary name=twitter:card><meta content=en property=og:locale><meta content=website property=og:type><meta content="Dave's Blog" property=og:title><meta content="Engineering, security, and the messy reality of running systems in production." property=og:description><meta content=https://daviey.github.io property=og:url><meta content="Dave's Blog" property=og:site_name><meta content=https://daviey.github.io/og-image.png property=og:image><meta content=1200 property=og:image:width><meta content=627 property=og:image:height><link title="Dave's Blog" href=https://daviey.github.io/atom.xml rel=alternate type=application/atom+xml><title>SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty :: Dave's Blog</title><body><div class="container center"><header class=header><div class=header__inner><div class=header__logo><a href=https://daviey.github.io> <div class=logo>dave@blog:~$</div> </a></div><div class=header__search><input placeholder="Quick search..." style="color:#eee;background:#222;border:1px solid #444;border-radius:3px;width:200px;padding:5px 10px;font-size:14px" id=header-search></div><ul class="menu menu--mobile"><li class=menu__trigger>Menu ▾<li><ul class=menu__dropdown><li><a href=/posts/>All</a><li><a href=/tags/>Tags</a><li><a href=/archive/>Archive</a><li><a href=/about/>About</a></ul></ul></div><nav class=navigation-menu><ul class="navigation-menu__inner menu--desktop"><li><a href=/posts/>All</a><li><a href=/tags/>Tags</a><li><a href=/archive/>Archive</a><li><a href=/about/>About</a></ul></nav></header><script>(function() {
+            const searchInput = document.getElementById('header-search');
+            if (!searchInput) return;
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const query = this.value.trim();
+                    if (query) {
+                        window.location.href = 'https://daviey.github.io/search?q=' + encodeURIComponent(query);
+                    }
+                }
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(e.target.tagName)) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                if (e.key === 'Escape' && e.target === searchInput) {
+                    searchInput.blur();
+                }
+            });
+        })();</script><style>.header__inner{align-items:center;gap:20px;display:flex}.header__search{flex:none;margin-left:auto}#header-search::placeholder{color:#666;font-style:italic}#header-search:focus{border-color:#888;outline:none}.menu--mobile .menu__dropdown{display:none}.menu--mobile .menu__trigger{cursor:pointer}@media (width<=684px){.header__search{display:none}}</style><div class=content><article class=post><h1 class=post-title><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/>SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty</a></h1><div class=post-meta><time class=post-date>2026-02-11</time><span class=post-author>Dave</span><span class=post-reading-time>6 min read (1087 words)</span></div><span class=post-tags> #<a href=https://daviey.github.io/tags/azure/>azure</a>  #<a href=https://daviey.github.io/tags/security/>security</a>  #<a href=https://daviey.github.io/tags/saas/>saas</a>  #<a href=https://daviey.github.io/tags/architecture/>architecture</a>  #<a href=https://daviey.github.io/tags/api-gateway/>api-gateway</a>  #<a href=https://daviey.github.io/tags/trust-boundary/>trust-boundary</a>  </span><div class=table-of-contents><h2>Table of Contents</h2><ul><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#saas-paas-gateway-security-pattern-trust-boundaries-and-data-sovereignty>SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty</a> <ul><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#the-architecture>The Architecture</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#why-this-is-best-practice>Why This IS Best Practice</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#request-flow-step-by-step>Request Flow: Step by Step</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#security-threats-and-mitigations>Security Threats and Mitigations</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#implementation-patterns>Implementation Patterns</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#best-practices-for-secure-implementation>Best Practices for Secure Implementation</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#monitoring-and-observability>Monitoring and Observability</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#common-pitfalls-to-avoid>Common Pitfalls to Avoid</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#performance-considerations>Performance Considerations</a><li><a href=https://daviey.github.io/posts/saas-paas-gateway-security-pattern/#conclusion-why-this-pattern-works>Conclusion: Why This Pattern Works</a></ul></ul></div><div class=post-content><div><h1 id=saas-paas-gateway-security-pattern-trust-boundaries-and-data-sovereignty>SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty</h1><p>Modern SaaS platforms often need to integrate with customer data stored in Azure. The user logs into the SaaS UI, but the actual data lives in the customer's Azure subscription. How do you provide real-time access without storing customer data in the SaaS database?<p>The answer: a PaaS API gateway that acts as a controlled bridge.</p><span id=continue-reading></span><h2 id=the-architecture>The Architecture</h2><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Third-Party SaaS Platform</span></span>
+<span class=giallo-l><span> (You don't control, don't store data)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span> OAuth / JWT / API Key (Authentication)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span>Your PaaS API Gateway</span></span>
+<span class=giallo-l><span> (You control this middle layer)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span>Azure Services - Your Tenant</span></span>
+<span class=giallo-l><span> -> Cosmos DB (stores data)</span></span>
+<span class=giallo-l><span> -> SQL Database (stores data)</span></span>
+<span class=giallo-l><span> -> Azure Blob Storage (files)</span></span>
+<span class=giallo-l><span> -> Azure Key Vault (secrets)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span> Validated Response (Logged)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span> Data sent to SaaS Web UI for display</span></span></code></pre><h2 id=why-this-is-best-practice>Why This IS Best Practice</h2><h3 id=1-trust-boundary>1. Trust Boundary</h3><p><strong>Data never touches SaaS storage.</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS Compromised:</span></span>
+<span class=giallo-l><span> -> Attacker gets SaaS database</span></span>
+<span class=giallo-l><span> -> ❌ NO sensitive user data (stored in your Azure)</span></span>
+<span class=giallo-l><span> -> Only: SaaS metadata, session tokens</span></span>
+<span class=giallo-l><span> -> Attacker sees nothing valuable</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Your Azure API Gateway Compromised:</span></span>
+<span class=giallo-l><span> -> Attacker has access to your tenant</span></span>
+<span class=giallo-l><span> -> ✅ All sensitive data is exposed</span></span>
+<span class=giallo-l><span> -> But: You control gateway, you can detect/respond</span></span></code></pre><p><strong>Security benefit:</strong> SaaS being hacked doesn't expose your customer data. Attackers hit a wall - they only see the SaaS's own data, not your customers'.<h3 id=2-zero-trust-architecture>2. Zero Trust Architecture</h3><p><strong>Every data request is authenticated and authorized.</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS -> Your API Gateway:</span></span>
+<span class=giallo-l><span> -> Validates: OAuth token / API key</span></span>
+<span class=giallo-l><span> -> Checks: Rate limiting, IP restrictions</span></span>
+<span class=giallo-l><span> -> Logs: Every request</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Your API Gateway -> Azure Services:</span></span>
+<span class=giallo-l><span> -> Validates: Managed identity permissions</span></span>
+<span class=giallo-l><span> -> Checks: Scope-based access</span></span>
+<span class=giallo-l><span> -> Logs: Every data access</span></span></code></pre><p><strong>Security benefit:</strong> No implicit trust. Every request is explicitly authorized at your gateway before reaching your services. The SaaS can't make unauthorized requests - your gateway blocks them.<h3 id=3-single-point-of-enforcement>3. Single Point of Enforcement</h3><p><strong>You control gateway security - the SaaS doesn't decide who accesses what.</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Security Controls - At Your API Gateway</span></span>
+<span class=giallo-l><span> • Rate limiting per SaaS client</span></span>
+<span class=giallo-l><span> • IP whitelisting/blacklisting</span></span>
+<span class=giallo-l><span> • Real-time anomaly detection</span></span>
+<span class=giallo-l><span> • Per-tenant data isolation</span></span>
+<span class=giallo-l><span> • Request/response logging</span></span>
+<span class=giallo-l><span> • Custom authorization logic</span></span></code></pre><p><strong>Security benefit:</strong> You control enforcement. If the SaaS's frontend has a bug that tries to bypass controls, your gateway rejects the request. Frontend bugs can't compromise backend security.<h3 id=4-data-sovereignty-and-compliance>4. Data Sovereignty and Compliance</h3><p><strong>Data stays in your tenant.</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Scenario: GDPR compliance</span></span>
+<span class=giallo-l><span> Customer data stored: Your Azure subscription</span></span>
+<span class=giallo-l><span> Data location: Your chosen region (UK, EU, US)</span></span>
+<span class=giallo-l><span> Data access logging: Your Log Analytics workspace</span></span>
+<span class=giallo-l><span> Data retention: You control deletion policies</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>vs.</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Scenario: Data stored on SaaS</span></span>
+<span class=giallo-l><span> Customer data stored: SaaS provider's systems</span></span>
+<span class=giallo-l><span> Data location: Wherever SaaS chose (could be anywhere)</span></span>
+<span class=giallo-l><span> Data access logging: SaaS provider's logs</span></span>
+<span class=giallo-l><span> Data retention: SaaS provider's policies</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>-> ✅ You can prove compliance</span></span></code></pre><p><strong>Security benefit:</strong> You control data residency, retention policies, and audit trails. You can prove to regulators that you're meeting requirements.<h3 id=5-vendor-independence>5. Vendor Independence</h3><p><strong>You're not locked into the SaaS.</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Current Setup:</span></span>
+<span class=giallo-l><span> SaaS + Azure PaaS Gateway + Your Azure Services</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>If SaaS has issues:</span></span>
+<span class=giallo-l><span> -> Security vulnerability</span></span>
+<span class=giallo-l><span> -> Downtime</span></span>
+<span class=giallo-l><span> -> Price increase</span></span>
+<span class=giallo-l><span> -> Non-compliance with regulations</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>You can:</span></span>
+<span class=giallo-l><span> -> Switch PaaS gateway to different SaaS</span></span>
+<span class=giallo-l><span> -> Or build your own SaaS frontend</span></span>
+<span class=giallo-l><span> -> Your Azure services continue unchanged</span></span>
+<span class=giallo-l><span> -> No data migration needed</span></span></code></pre><p><strong>Security benefit:</strong> Avoid vendor lock-in. If the SaaS vendor becomes problematic, you can switch providers without moving data.<h2 id=request-flow-step-by-step>Request Flow: Step by Step</h2><h3 id=step-1-authentication>Step 1: Authentication</h3><p>The SaaS authenticates to your PaaS API gateway:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=json><span class=giallo-l><span style=color:#88846f>// The SaaS requests an access token</span></span>
+<span class=giallo-l><span>POST /oauth/token</span></span>
+<span class=giallo-l><span>{</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "client_id"</span><span>:</span><span style=color:#cfcfc2> "saas-client-123"</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "client_secret"</span><span>:</span><span style=color:#cfcfc2> "saas-secret-xxx"</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "grant_type"</span><span>:</span><span style=color:#cfcfc2> "client_credentials"</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "scope"</span><span>:</span><span style=color:#cfcfc2> "read:customer_data"</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><p><strong>Response:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=json><span class=giallo-l><span>{</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "access_token"</span><span>:</span><span style=color:#cfcfc2> "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs..."</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "token_type"</span><span>:</span><span style=color:#cfcfc2> "Bearer"</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "expires_in"</span><span>:</span><span style=color:#ae81ff> 3600</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "scope"</span><span>:</span><span style=color:#cfcfc2> "read:customer_data"</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><p><strong>Key point:</strong> The SaaS gets a <strong>scoped, short-lived token</strong> - not full access to your Azure services.<h3 id=step-2-data-request>Step 2: Data Request</h3><p>The SaaS requests data using the access token:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=http><span class=giallo-l><span style=color:#f92672>GET</span><span> /api/customers/{customerId}/orders</span></span>
+<span class=giallo-l><span style=color:#f92672>Host:</span><span style=color:#e6db74> api.your-company.com</span></span>
+<span class=giallo-l><span style=color:#f92672>Authorization:</span><span style=color:#e6db74> Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIs...</span></span></code></pre><h3 id=step-3-gateway-validation>Step 3: Gateway Validation</h3><p>Your gateway validates every request:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Your API Gateway middleware</span></span>
+<span class=giallo-l><span>app.</span><span style=color:#a6e22e>use</span><span>(</span><span style=color:#f92672>async</span><span> (</span><span style=color:#fd971f;font-style:italic>req</span><span>,</span><span style=color:#fd971f;font-style:italic> res</span><span>,</span><span style=color:#fd971f;font-style:italic> next</span><span>)</span><span style=color:#66d9ef;font-style:italic> =></span><span> {</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> token</span><span style=color:#f92672> =</span><span> req.headers.authorization?.</span><span style=color:#a6e22e>replace</span><span>(</span><span style=color:#e6db74>'Bearer '</span><span>,</span><span style=color:#e6db74> ''</span><span>);</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // 1. Validate token</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>!await</span><span style=color:#a6e22e> validateToken</span><span>(token)) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> res.</span><span style=color:#a6e22e>status</span><span>(</span><span style=color:#ae81ff>401</span><span>).</span><span style=color:#a6e22e>json</span><span>({ error:</span><span style=color:#e6db74> 'Invalid token'</span><span> });</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // 2. Check rate limits</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> clientId</span><span style=color:#f92672> =</span><span style=color:#a6e22e> decodeToken</span><span>(token).client_id;</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>await</span><span style=color:#a6e22e> isRateLimited</span><span>(clientId)) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> res.</span><span style=color:#a6e22e>status</span><span>(</span><span style=color:#ae81ff>429</span><span>).</span><span style=color:#a6e22e>json</span><span>({ error:</span><span style=color:#e6db74> 'Rate limit exceeded'</span><span> });</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // 3. Check IP restrictions (if configured)</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>await</span><span style=color:#a6e22e> isIPBlocked</span><span>(req.ip)) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> res.</span><span style=color:#a6e22e>status</span><span>(</span><span style=color:#ae81ff>403</span><span>).</span><span style=color:#a6e22e>json</span><span>({ error:</span><span style=color:#e6db74> 'IP not authorized'</span><span> });</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // 4. Check scope</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> decoded</span><span style=color:#f92672> =</span><span style=color:#a6e22e> decodeToken</span><span>(token);</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>!</span><span>decoded.scope.</span><span style=color:#a6e22e>includes</span><span>(</span><span style=color:#e6db74>'read:customer_data'</span><span>)) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> res.</span><span style=color:#a6e22e>status</span><span>(</span><span style=color:#ae81ff>403</span><span>).</span><span style=color:#a6e22e>json</span><span>({ error:</span><span style=color:#e6db74> 'Insufficient scope'</span><span> });</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#a6e22e> next</span><span>();</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><p><strong>Key point:</strong> Multiple layers of validation before the request reaches your data.<h3 id=step-4-azure-service-access>Step 4: Azure Service Access</h3><p>The gateway uses managed identity to access Azure services:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Gateway fetches data from Cosmos DB</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> cosmos</span><span style=color:#f92672> =</span><span style=color:#a6e22e> require</span><span>(</span><span style=color:#e6db74>'@azure/cosmos-db'</span><span>).CosmosClient;</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> container</span><span style=color:#f92672> =</span><span> cosmos.</span><span style=color:#a6e22e>database</span><span>(</span><span style=color:#e6db74>'CustomerData'</span><span>).</span><span style=color:#a6e22e>container</span><span>(</span><span style=color:#e6db74>'Customers'</span><span>);</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> { resources }</span><span style=color:#f92672> = await</span><span> container.items.</span><span style=color:#a6e22e>query</span><span>(</span><span style=color:#e6db74>`SELECT * FROM c WHERE c.id = @customerId`</span><span>, {</span></span>
+<span class=giallo-l><span> parameters: [{ name:</span><span style=color:#e6db74> '@customerId'</span><span>, value: req.params.customerId }]</span></span>
+<span class=giallo-l><span> }).</span><span style=color:#a6e22e>fetchAll</span><span>();</span></span></code></pre><p><strong>Key point:</strong> No connection strings or secrets. The gateway uses managed identity with specific RBAC permissions.<h3 id=step-5-response-and-logging>Step 5: Response and Logging</h3><p>The gateway logs everything:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Before sending response</span></span>
+<span class=giallo-l><span style=color:#f92672>await</span><span style=color:#a6e22e> logToAnalytics</span><span>({</span></span>
+<span class=giallo-l><span> timestamp:</span><span style=color:#f92672> new</span><span style=color:#a6e22e> Date</span><span>(),</span></span>
+<span class=giallo-l><span> saas_client: clientId,</span></span>
+<span class=giallo-l><span> customer_id: req.params.customerId,</span></span>
+<span class=giallo-l><span> action:</span><span style=color:#e6db74> 'READ_CUSTOMER_ORDERS'</span><span>,</span></span>
+<span class=giallo-l><span> data_accessed: resources.length,</span></span>
+<span class=giallo-l><span> ip_address: req.ip,</span></span>
+<span class=giallo-l><span> status:</span><span style=color:#e6db74> 'SUCCESS'</span></span>
+<span class=giallo-l><span>});</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f>// Send response</span></span>
+<span class=giallo-l><span>res.</span><span style=color:#a6e22e>json</span><span>(resources);</span></span></code></pre><p><strong>Key point:</strong> Complete audit trail. The SaaS can't hide access attempts.<h2 id=security-threats-and-mitigations>Security Threats and Mitigations</h2><h3 id=threat-1-token-theft>Threat 1: Token Theft</h3><p><strong>Scenario:</strong> The SaaS's access token is stolen.<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Attacker has token: "Bearer eyJ0eXAiOiJKV1Qi..."</span></span>
+<span class=giallo-l><span> -> Can call: /api/customers/{id}/orders</span></span>
+<span class=giallo-l><span> -> Can access: Data for that customer</span></span>
+<span class=giallo-l><span> -> Limited by: Token scope (can't access all customers)</span></span>
+<span class=giallo-l><span> -> Limited by: Token expiry (short-lived)</span></span></code></pre><p><strong>Mitigation:</strong><ul><li>Use short-lived tokens (5-15 minutes)<li>Implement token binding (IP, device ID)<li>Require MFA for new SaaS client registrations<li>Monitor for anomalous usage patterns<li>Quick token revocation (invalidate cached tokens)</ul><h3 id=threat-2-gateway-compromise>Threat 2: Gateway Compromise</h3><p><strong>Scenario:</strong> Your PaaS API gateway is breached.<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Gateway compromised:</span></span>
+<span class=giallo-l><span> -> Attacker has access to all SaaS clients</span></span>
+<span class=giallo-l><span> -> Can fetch all customer data</span></span>
+<span class=giallo-l><span> -> BUT: You control gateway, you can detect/respond</span></span></code></pre><p><strong>Mitigation:</strong><ul><li>Monitor the gateway for anomalous patterns<li>Implement circuit breakers for suspicious activity<li>Use a separate gateway per SaaS client (isolation)<li>Regular security audits of gateway code<li>Zero trust: Assume gateway could be compromised, validate all requests</ul><h3 id=threat-3-saas-side-channel-attacks>Threat 3: SaaS Side-Channel Attacks</h3><p><strong>Scenario:</strong> The SaaS is modified to include malicious scripts.<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS compromised:</span></span>
+<span class=giallo-l><span> -> Modified JavaScript to send all data to attacker</span></span>
+<span class=giallo-l><span> -> The gateway can't detect this (requests are valid)</span></span>
+<span class=giallo-l><span> -> Gateway returns data normally</span></span></code></pre><p><strong>Mitigation:</strong><ul><li>Validate all SaaS requests (origin, content-type)<li>Set CSP headers on gateway responses<li>Rate limit per SaaS client<li>Monitor the SaaS domain for changes (certificate transparency)</ul><h3 id=threat-4-privilege-escalation-via-scopes>Threat 4: Privilege Escalation via Scopes</h3><p><strong>Scenario:</strong> The SaaS requests more scope than authorized.<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS has token: scope="read:customer_data"</span></span>
+<span class=giallo-l><span> -> Attacker tries: POST /api/customers/{id} (write)</span></span>
+<span class=giallo-l><span> -> The gateway rejects: Insufficient scope</span></span></code></pre><p><strong>Mitigation:</strong><ul><li>Implement strict scope validation<li>Use granular scopes (read:orders vs read:all)<li>Audit scope assignments regularly<li>Just-in-time scope elevation (temporary access)</ul><h2 id=implementation-patterns>Implementation Patterns</h2><h3 id=pattern-1-multi-saas-gateway>Pattern 1: Multi-SaaS Gateway</h3><p>One gateway serves multiple SaaS platforms:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>Your Gateway</span></span>
+<span class=giallo-l><span> ├─-> SaaS Client A (scope: read_a)</span></span>
+<span class=giallo-l><span> ├─-> SaaS Client B (scope: read_b)</span></span>
+<span class=giallo-l><span> └─-> SaaS Client C (scope: read_c)</span></span>
+<span class=giallo-l><span> ↓</span></span>
+<span class=giallo-l><span>Azure Services (with RBAC per client)</span></span></code></pre><p><strong>Benefits:</strong><ul><li>Centralized monitoring<li>Single codebase<li>Easier to maintain</ul><p><strong>Risks:</strong><ul><li>Blast radius if gateway is compromised<li>Harder to isolate issues</ul><p><strong>Mitigation:</strong><ul><li>Rate limits per client<li>Separate RBAC scopes per client<li>Gateway deployment per region (availability zones)</ul><h3 id=pattern-2-gateway-per-tenant>Pattern 2: Gateway per Tenant</h3><p>Each SaaS client gets a dedicated gateway:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS Client A -> Gateway A -> Azure Tenant A</span></span>
+<span class=giallo-l><span>SaaS Client B -> Gateway B -> Azure Tenant B</span></span>
+<span class=giallo-l><span>SaaS Client C -> Gateway C -> Azure Tenant C</span></span></code></pre><p><strong>Benefits:</strong><ul><li>Maximum isolation<li>Per-tenant customization<li>Independent scaling</ul><p><strong>Risks:</strong><ul><li>Infrastructure overhead<li>Management complexity</ul><p><strong>Mitigation:</strong><ul><li>Use templates/IaC for gateway deployment<li>Centralized logging across all gateways<li>Shared security policies via config</ul><h3 id=pattern-3-direct-integration-gateway-skip>Pattern 3: Direct Integration (Gateway Skip)</h3><p>The SaaS integrates directly with Azure services:<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>SaaS -> Azure Services (Direct)</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Pros:</span></span>
+<span class=giallo-l><span> • Fewer hops (faster)</span></span>
+<span class=giallo-l><span> • Less infrastructure to manage</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Cons:</span></span>
+<span class=giallo-l><span> ❌ No single enforcement point</span></span>
+<span class=giallo-l><span> ❌ Can't implement SaaS-specific controls</span></span>
+<span class=giallo-l><span> ❌ Harder to monitor per SaaS usage</span></span>
+<span class=giallo-l><span> ❌ If one service is compromised, no isolation</span></span></code></pre><p><strong>When to use:</strong><ul><li>Simple CRUD with minimal security requirements<li>Same team maintains everything<li>Fast iteration needed</ul><p><strong>When NOT to use:</strong><ul><li>High security requirements<li>Compliance-driven audits<li>Multi-tenant SaaS clients<li>Need per-SaaS monitoring</ul><h2 id=best-practices-for-secure-implementation>Best Practices for Secure Implementation</h2><h3 id=1-use-managed-identities>1. Use Managed Identities</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Gateway uses managed identity to access Azure</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> cosmos</span><span style=color:#f92672> =</span><span style=color:#a6e22e> require</span><span>(</span><span style=color:#e6db74>'@azure/cosmos-db'</span><span>).</span><span style=color:#a6e22e>CosmosClient</span><span>({</span></span>
+<span class=giallo-l><span> endpoint: process.env.COSMOS_ENDPOINT,</span></span>
+<span class=giallo-l><span> aadCredentials:</span><span style=color:#f92672> new</span><span style=color:#a6e22e> DefaultAzureCredential</span><span>()</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><p><strong>Grant minimal permissions:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=shellscript><span class=giallo-l><span style=color:#88846f># Gateway identity can only read customer data</span></span>
+<span class=giallo-l><span style=color:#a6e22e>az</span><span style=color:#e6db74> role assignment create</span><span style=color:#ae81ff> \</span></span>
+<span class=giallo-l><span style=color:#ae81ff> --assignee-id</span><span> $(</span><span style=color:#a6e22e>az</span><span style=color:#e6db74> identity show</span><span style=color:#ae81ff> --resource-group</span><span style=color:#e6db74> MyRG</span><span style=color:#ae81ff> --name</span><span style=color:#e6db74> GatewayIdentity</span><span style=color:#ae81ff> --query</span><span style=color:#e6db74> principalId</span><span style=color:#ae81ff> -o</span><span style=color:#e6db74> tsv</span><span>)</span><span style=color:#ae81ff> \</span></span>
+<span class=giallo-l><span style=color:#ae81ff> --role</span><span style=color:#e6db74> 'Cosmos DB Built-in Data Contributor'</span><span style=color:#ae81ff> \</span></span>
+<span class=giallo-l><span style=color:#ae81ff> --scope</span><span style=color:#e6db74> /subscriptions/xxx/resourceGroups/xxx/providers/Microsoft.DocumentDB/databaseAccounts/xxx</span></span></code></pre><h3 id=2-implement-token-caching-with-invalidation>2. Implement Token Caching (With Invalidation)</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> tokenCache</span><span style=color:#f92672> = new</span><span style=color:#a6e22e> Map</span><span>();</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>function</span><span style=color:#a6e22e> validateToken</span><span>(</span><span style=color:#fd971f;font-style:italic>token</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#88846f> // Check cache</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> cached</span><span style=color:#f92672> =</span><span> tokenCache.</span><span style=color:#a6e22e>get</span><span>(token);</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (cached) {</span></span>
+<span class=giallo-l><span style=color:#88846f> // Validate hasn't been revoked</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>!await</span><span style=color:#a6e22e> isTokenRevoked</span><span>(token)) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> cached.decoded;</span></span>
+<span class=giallo-l><span> }</span><span style=color:#f92672> else</span><span> {</span></span>
+<span class=giallo-l><span> tokenCache.</span><span style=color:#a6e22e>delete</span><span>(token);</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span style=color:#ae81ff> null</span><span>;</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Validate with Azure AD</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> decoded</span><span style=color:#f92672> = await</span><span> msal.</span><span style=color:#a6e22e>verify</span><span>(token);</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>!</span><span>decoded)</span><span style=color:#f92672> return</span><span style=color:#ae81ff> null</span><span>;</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Cache successful validation</span></span>
+<span class=giallo-l><span> tokenCache.</span><span style=color:#a6e22e>set</span><span>(token, { decoded, timestamp: Date.</span><span style=color:#a6e22e>now</span><span>() }, ttl: </span><span style=color:#ae81ff>300000</span><span>);</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> decoded;</span></span>
+<span class=giallo-l><span>}</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>function</span><span style=color:#a6e22e> revokeToken</span><span>(</span><span style=color:#fd971f;font-style:italic>token</span><span>) {</span></span>
+<span class=giallo-l><span> tokenCache.</span><span style=color:#a6e22e>delete</span><span>(token);</span></span>
+<span class=giallo-l><span style=color:#88846f> // Notify all gateway instances via cache/Redis/pub-sub</span></span>
+<span class=giallo-l><span style=color:#a6e22e> publishTokenRevocation</span><span>(token);</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h3 id=3-implement-logging>3. Implement Logging</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Structured logging for security analytics</span></span>
+<span class=giallo-l><span style=color:#f92672>async</span><span style=color:#66d9ef;font-style:italic> function</span><span style=color:#a6e22e> logSecurityEvent</span><span>(</span><span style=color:#fd971f;font-style:italic>event</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span> analytics.</span><span style=color:#a6e22e>trackEvent</span><span>({</span></span>
+<span class=giallo-l><span> timestamp:</span><span style=color:#f92672> new</span><span style=color:#a6e22e> Date</span><span>(),</span></span>
+<span class=giallo-l><span> event_type: event.type,</span></span>
+<span class=giallo-l><span> saas_client_id: event.clientId,</span></span>
+<span class=giallo-l><span> customer_id: event.customerId,</span></span>
+<span class=giallo-l><span> ip_address: event.ip,</span></span>
+<span class=giallo-l><span> user_agent: event.userAgent,</span></span>
+<span class=giallo-l><span> request_path: event.path,</span></span>
+<span class=giallo-l><span> status_code: event.statusCode,</span></span>
+<span class=giallo-l><span> latency_ms: event.duration,</span></span>
+<span class=giallo-l><span> scope_requested: event.scope,</span></span>
+<span class=giallo-l><span> auth_method: event.authMethod,</span></span>
+<span class=giallo-l><span> risk_score:</span><span style=color:#a6e22e> calculateRiskScore</span><span>(event)</span></span>
+<span class=giallo-l><span> });</span></span>
+<span class=giallo-l><span>}</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f>// Example events</span></span>
+<span class=giallo-l><span style=color:#f92672>await</span><span style=color:#a6e22e> logSecurityEvent</span><span>({</span></span>
+<span class=giallo-l><span> type:</span><span style=color:#e6db74> 'AUTHENTICATION_SUCCESS'</span><span>,</span></span>
+<span class=giallo-l><span> clientId:</span><span style=color:#e6db74> 'saas-client-123'</span><span>,</span></span>
+<span class=giallo-l><span> customer_id:</span><span style=color:#e6db74> 'cust-456'</span><span>,</span></span>
+<span class=giallo-l><span> ip:</span><span style=color:#e6db74> '10.0.1.50'</span><span>,</span></span>
+<span class=giallo-l><span> statusCode:</span><span style=color:#ae81ff> 200</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><h3 id=4-rate-limiting-strategy>4. Rate Limiting Strategy</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Per-client rate limits</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> rateLimits</span><span style=color:#f92672> =</span><span> {</span></span>
+<span class=giallo-l><span style=color:#e6db74> 'saas-client-123'</span><span>: { requests:</span><span style=color:#ae81ff> 100</span><span>, window:</span><span style=color:#ae81ff> 60000</span><span> },</span><span style=color:#88846f> // 100 req / minute</span></span>
+<span class=giallo-l><span style=color:#e6db74> 'saas-client-456'</span><span>: { requests:</span><span style=color:#ae81ff> 10</span><span>, window:</span><span style=color:#ae81ff> 60000</span><span> }</span><span style=color:#88846f> // 10 req / minute (stricter)</span></span>
+<span class=giallo-l><span>};</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>function</span><span style=color:#a6e22e> checkRateLimit</span><span>(</span><span style=color:#fd971f;font-style:italic>clientId</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> limit</span><span style=color:#f92672> =</span><span> rateLimits[clientId];</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> now</span><span style=color:#f92672> =</span><span> Date.</span><span style=color:#a6e22e>now</span><span>();</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Sliding window</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> recentRequests</span><span style=color:#f92672> = await</span><span> redis.</span><span style=color:#a6e22e>lrange</span><span>(</span><span style=color:#e6db74>`rate:</span><span style=color:#f92672>${</span><span>clientId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>,</span><span style=color:#ae81ff> 0</span><span>,</span><span style=color:#f92672> -</span><span style=color:#ae81ff>1</span><span>);</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> windowStart</span><span style=color:#f92672> =</span><span> now</span><span style=color:#f92672> -</span><span> limit.window;</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Remove expired entries</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span> redis.</span><span style=color:#a6e22e>ltrim</span><span>(</span><span style=color:#e6db74>`rate:</span><span style=color:#f92672>${</span><span>clientId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>,</span><span style=color:#ae81ff> 0</span><span>,</span><span style=color:#f92672> await</span><span> redis.</span><span style=color:#a6e22e>llen</span><span>(</span><span style=color:#e6db74>`rate:</span><span style=color:#f92672>${</span><span>clientId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>));</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (recentRequests.length</span><span style=color:#f92672> >=</span><span> limit.requests) {</span></span>
+<span class=giallo-l><span style=color:#f92672> throw new</span><span style=color:#a6e22e> RateLimitError</span><span>(</span><span style=color:#e6db74>`Rate limit exceeded: </span><span style=color:#f92672>${</span><span>limit.requests</span><span style=color:#f92672>}</span><span style=color:#e6db74> requests / </span><span style=color:#f92672>${</span><span>limit.window</span><span style=color:#f92672> /</span><span style=color:#ae81ff> 1000</span><span style=color:#f92672>}</span><span style=color:#e6db74>s`</span><span>);</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Add current request</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span> redis.</span><span style=color:#a6e22e>lpush</span><span>(</span><span style=color:#e6db74>`rate:</span><span style=color:#f92672>${</span><span>clientId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>, now);</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span> redis.</span><span style=color:#a6e22e>expire</span><span>(</span><span style=color:#e6db74>`rate:</span><span style=color:#f92672>${</span><span>clientId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>, limit.window</span><span style=color:#f92672> /</span><span style=color:#ae81ff> 1000</span><span>);</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h3 id=5-input-validation-and-sanitization>5. Input Validation and Sanitization</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Validate before passing to Azure services</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>function</span><span style=color:#a6e22e> validateCustomerRequest</span><span>(</span><span style=color:#fd971f;font-style:italic>params</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> errors</span><span style=color:#f92672> =</span><span> [];</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Validate customer ID format</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (</span><span style=color:#f92672>!</span><span style=color:#e6db74>/</span><span style=color:#f92672>^</span><span style=color:#ae81ff>[a-f0-9]</span><span style=color:#f92672>{32}$</span><span style=color:#e6db74>/</span><span>.</span><span style=color:#a6e22e>test</span><span>(params.customerId)) {</span></span>
+<span class=giallo-l><span> errors.</span><span style=color:#a6e22e>push</span><span>(</span><span style=color:#e6db74>'Invalid customer ID format'</span><span>);</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Validate parameters</span></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (params.limit</span><span style=color:#f92672> &&</span><span> (params.limit</span><span style=color:#f92672> &lt;</span><span style=color:#ae81ff> 1</span><span style=color:#f92672> ||</span><span> params.limit</span><span style=color:#f92672> ></span><span style=color:#ae81ff> 100</span><span>)) {</span></span>
+<span class=giallo-l><span> errors.</span><span style=color:#a6e22e>push</span><span>(</span><span style=color:#e6db74>'Limit must be between 1 and 100'</span><span>);</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Sanitize input (prevent injection)</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> const</span><span> sanitized</span><span style=color:#f92672> =</span><span> {</span></span>
+<span class=giallo-l><span> customerId: params.customerId.</span><span style=color:#a6e22e>replace</span><span>(</span><span style=color:#e6db74>/</span><span style=color:#ae81ff>[</span><span style=color:#f92672>^</span><span style=color:#ae81ff>a-f0-9]</span><span style=color:#e6db74>/</span><span style=color:#f92672>g</span><span>,</span><span style=color:#e6db74> ''</span><span>),</span></span>
+<span class=giallo-l><span> limit: Math.</span><span style=color:#a6e22e>min</span><span>(</span><span style=color:#ae81ff>100</span><span>,</span><span style=color:#a6e22e> parseInt</span><span>(params.limit)</span><span style=color:#f92672> ||</span><span style=color:#ae81ff> 10</span><span>),</span></span>
+<span class=giallo-l><span> offset: Math.</span><span style=color:#a6e22e>max</span><span>(</span><span style=color:#ae81ff>0</span><span>,</span><span style=color:#a6e22e> parseInt</span><span>(params.offset)</span><span style=color:#f92672> ||</span><span style=color:#ae81ff> 0</span><span>)</span></span>
+<span class=giallo-l><span> };</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#f92672> if</span><span> (errors.length</span><span style=color:#f92672> ></span><span style=color:#ae81ff> 0</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#f92672> throw new</span><span style=color:#a6e22e> ValidationError</span><span>(errors.</span><span style=color:#a6e22e>join</span><span>(</span><span style=color:#e6db74>', '</span><span>));</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> sanitized;</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h3 id=6-circuit-breaker-pattern>6. Circuit Breaker Pattern</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Prevent cascading failures</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> CircuitBreaker</span><span style=color:#f92672> =</span><span style=color:#a6e22e> require</span><span>(</span><span style=color:#e6db74>'opossum-circuit-breaker'</span><span>).CircuitBreaker;</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> breaker</span><span style=color:#f92672> = new</span><span style=color:#a6e22e> CircuitBreaker</span><span>({</span></span>
+<span class=giallo-l><span> timeout:</span><span style=color:#ae81ff> 30000</span><span>,</span><span style=color:#88846f> // 30 second timeout</span></span>
+<span class=giallo-l><span> errorThresholdPercentage:</span><span style=color:#ae81ff> 50</span><span>,</span><span style=color:#88846f> // Open if 50% fail</span></span>
+<span class=giallo-l><span> resetTimeout:</span><span style=color:#ae81ff> 60000</span><span style=color:#88846f> // Try again after 60 seconds</span></span>
+<span class=giallo-l><span>});</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#f92672>async</span><span style=color:#66d9ef;font-style:italic> function</span><span style=color:#a6e22e> fetchCustomerData</span><span>(</span><span style=color:#fd971f;font-style:italic>customerId</span><span>) {</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span> breaker.</span><span style=color:#a6e22e>fire</span><span>(</span></span>
+<span class=giallo-l><span> ()</span><span style=color:#66d9ef;font-style:italic> =></span><span> cosmos.</span><span style=color:#a6e22e>fetchCustomer</span><span>(customerId),</span></span>
+<span class=giallo-l><span> (</span><span style=color:#fd971f;font-style:italic>error</span><span>)</span><span style=color:#66d9ef;font-style:italic> =></span><span> {</span></span>
+<span class=giallo-l><span style=color:#88846f> // Fallback: use cache or return error</span></span>
+<span class=giallo-l><span style=color:#a6e22e> logSecurityEvent</span><span>({</span></span>
+<span class=giallo-l><span> type:</span><span style=color:#e6db74> 'CIRCUIT_BREAKER_OPEN'</span><span>,</span></span>
+<span class=giallo-l><span> error: error.message</span></span>
+<span class=giallo-l><span> });</span></span>
+<span class=giallo-l><span style=color:#f92672> return</span><span style=color:#a6e22e> getCachedData</span><span>(customerId);</span></span>
+<span class=giallo-l><span> }</span></span>
+<span class=giallo-l><span> );</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h2 id=monitoring-and-observability>Monitoring and Observability</h2><h3 id=key-metrics-to-track>Key Metrics to Track</h3><table><thead><tr><th>Metric<th>What It Shows<th>Why It Matters<tbody><tr><td><strong>Request rate</strong><td>Requests/second per SaaS client<td>Detect abuse, DDoS<tr><td><strong>Error rate</strong><td>Failed requests percentage<td>Detect attacks, misconfiguration<tr><td><strong>Latency p95/p99</strong><td>Response time at 95th/99th percentile<td>Detect degradation<tr><td><strong>Scope violations</strong><td>Unauthorized scope access attempts<td>Detect token misuse<tr><td><strong>IP anomalies</strong><td>Unusual geographic or time patterns<td>Detect stolen tokens<tr><td><strong>Data access volume</strong><td>MB/GB returned per client<td>Detect exfiltration<tr><td><strong>Gateway health</strong><td>Uptime, error rates, circuit status<td>Detect infrastructure issues</table><h3 id=alerting-strategy>Alerting Strategy</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Set up alerts</span></span>
+<span class=giallo-l><span style=color:#f92672>async</span><span style=color:#66d9ef;font-style:italic> function</span><span style=color:#a6e22e> setupAlerts</span><span>() {</span></span>
+<span class=giallo-l><span style=color:#88846f> // High error rate</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span style=color:#a6e22e> alertRule</span><span>({</span></span>
+<span class=giallo-l><span> name:</span><span style=color:#e6db74> 'High Error Rate'</span><span>,</span></span>
+<span class=giallo-l><span> condition:</span><span style=color:#e6db74> 'error_rate > 10%'</span><span>,</span></span>
+<span class=giallo-l><span> window:</span><span style=color:#e6db74> '5m'</span><span>,</span></span>
+<span class=giallo-l><span> severity:</span><span style=color:#e6db74> 'WARNING'</span><span>,</span></span>
+<span class=giallo-l><span> action:</span><span style=color:#e6db74> 'notify_security_team'</span></span>
+<span class=giallo-l><span> });</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Suspicious IP access</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span style=color:#a6e22e> alertRule</span><span>({</span></span>
+<span class=giallo-l><span> name:</span><span style=color:#e6db74> 'Unusual Geographic Access'</span><span>,</span></span>
+<span class=giallo-l><span> condition:</span><span style=color:#e6db74> 'new_country_count > 3'</span><span>,</span></span>
+<span class=giallo-l><span> window:</span><span style=color:#e6db74> '10m'</span><span>,</span></span>
+<span class=giallo-l><span> severity:</span><span style=color:#e6db74> 'CRITICAL'</span><span>,</span></span>
+<span class=giallo-l><span> action:</span><span style=color:#e6db74> 'block_ip'</span></span>
+<span class=giallo-l><span> });</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span style=color:#88846f> // Data exfiltration detection</span></span>
+<span class=giallo-l><span style=color:#f92672> await</span><span style=color:#a6e22e> alertRule</span><span>({</span></span>
+<span class=giallo-l><span> name:</span><span style=color:#e6db74> 'High Data Volume'</span><span>,</span></span>
+<span class=giallo-l><span> condition:</span><span style=color:#e6db74> 'mb_returned > 1000'</span><span>,</span></span>
+<span class=giallo-l><span> window:</span><span style=color:#e6db74> '1h'</span><span>,</span></span>
+<span class=giallo-l><span> severity:</span><span style=color:#e6db74> 'CRITICAL'</span><span>,</span></span>
+<span class=giallo-l><span> action:</span><span style=color:#e6db74> 'revoke_token'</span></span>
+<span class=giallo-l><span> });</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h2 id=common-pitfalls-to-avoid>Common Pitfalls to Avoid</h2><h3 id=pitfall-1-long-lived-tokens>Pitfall 1: Long-Lived Tokens</h3><p><strong>Bad:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=json><span class=giallo-l><span>{</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "access_token"</span><span>:</span><span style=color:#cfcfc2> "eyJ..."</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "expires_in"</span><span>:</span><span style=color:#ae81ff> 86400</span><span style=color:#88846f> // 24 hours!</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><p><strong>Good:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=json><span class=giallo-l><span>{</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "access_token"</span><span>:</span><span style=color:#cfcfc2> "eyJ..."</span><span>,</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic> "expires_in"</span><span>:</span><span style=color:#ae81ff> 900</span><span style=color:#88846f> // 15 minutes</span></span>
+<span class=giallo-l><span>}</span></span></code></pre><h3 id=pitfall-2-over-scoped-tokens>Pitfall 2: Over-Scoped Tokens</h3><p><strong>Bad:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// The SaaS requests full access token</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> token</span><span style=color:#f92672> = await</span><span style=color:#a6e22e> getGatewayToken</span><span>(</span><span style=color:#e6db74>'full_access'</span><span>);</span></span></code></pre><p><strong>Good:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// The SaaS requests minimal scope</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> token</span><span style=color:#f92672> = await</span><span style=color:#a6e22e> getGatewayToken</span><span>(</span><span style=color:#e6db74>'read_customer_orders'</span><span>);</span></span></code></pre><h3 id=pitfall-3-skipping-input-validation>Pitfall 3: Skipping Input Validation</h3><p><strong>Bad:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Pass-through to Azure services</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> data</span><span style=color:#f92672> = await</span><span> cosmos.</span><span style=color:#a6e22e>query</span><span>(</span><span style=color:#e6db74>`SELECT * FROM c WHERE c.id = </span><span style=color:#f92672>${</span><span>customerId</span><span style=color:#f92672>}</span><span style=color:#e6db74>`</span><span>);</span></span></code></pre><p><strong>Good:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Validate and sanitize</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> sanitized</span><span style=color:#f92672> =</span><span style=color:#a6e22e> validateCustomerId</span><span>(customerId);</span></span>
+<span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> data</span><span style=color:#f92672> = await</span><span> cosmos.</span><span style=color:#a6e22e>query</span><span>(</span><span style=color:#e6db74>'SELECT * FROM c WHERE c.id = @id'</span><span>, {</span></span>
+<span class=giallo-l><span> parameters: [{ name:</span><span style=color:#e6db74> '@id'</span><span>, value: sanitized }]</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><h3 id=pitfall-4-no-per-client-monitoring>Pitfall 4: No Per-Client Monitoring</h3><p><strong>Bad:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Aggregated monitoring</span></span>
+<span class=giallo-l><span style=color:#a6e22e>log</span><span>(</span><span style=color:#e6db74>'Total requests: 10000'</span><span>);</span></span></code></pre><p><strong>Good:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#88846f>// Per-client monitoring</span></span>
+<span class=giallo-l><span style=color:#a6e22e>log</span><span>(</span><span style=color:#e6db74>'SaaS Client A: 5000 requests'</span><span>);</span></span>
+<span class=giallo-l><span style=color:#a6e22e>log</span><span>(</span><span style=color:#e6db74>'SaaS Client B: 3000 requests'</span><span>);</span></span>
+<span class=giallo-l><span style=color:#a6e22e>log</span><span>(</span><span style=color:#e6db74>'SaaS Client C: 2000 requests'</span><span>);</span></span>
+<span class=giallo-l><span style=color:#a6e22e>log</span><span>(</span><span style=color:#e6db74>'SaaS Client D: 0 requests (suspicious!)'</span><span>);</span></span></code></pre><h3 id=pitfall-5-hard-coded-secrets>Pitfall 5: Hard-Coded Secrets</h3><p><strong>Bad:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> cosmos</span><span style=color:#f92672> = new</span><span style=color:#a6e22e> CosmosClient</span><span>({</span></span>
+<span class=giallo-l><span> endpoint: process.env.COSMOS_ENDPOINT,</span></span>
+<span class=giallo-l><span> key:</span><span style=color:#e6db74> 'C2y6yZ...'</span><span style=color:#88846f> // Hard-coded!</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><p><strong>Good:</strong><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=javascript><span class=giallo-l><span style=color:#66d9ef;font-style:italic>const</span><span> cosmos</span><span style=color:#f92672> = new</span><span style=color:#a6e22e> CosmosClient</span><span>({</span></span>
+<span class=giallo-l><span> endpoint: process.env.COSMOS_ENDPOINT,</span></span>
+<span class=giallo-l><span> aadCredentials:</span><span style=color:#f92672> new</span><span style=color:#a6e22e> DefaultAzureCredential</span><span>()</span><span style=color:#88846f> // Managed identity</span></span>
+<span class=giallo-l><span>});</span></span></code></pre><h2 id=performance-considerations>Performance Considerations</h2><h3 id=gateway-as-bottleneck>Gateway as Bottleneck?</h3><p><strong>The gateway adds latency. Is it worth it?</strong><table><thead><tr><th>Operation<th>Direct Access<th>Through Gateway<th>Overhead<tbody><tr><td><strong>Token validation</strong><td>N/A<td>~5ms<td>Low<tr><td><strong>Rate limit check</strong><td>N/A<td>~10ms<td>Low<tr><td><strong>Logging</strong><td>N/A<td>~15ms<td>Low<tr><td><strong>Azure fetch</strong><td>~50ms<td>~55ms<td>Low<tr><td><strong>Total</strong><td>~50ms<td>~85ms<td>Acceptable</table><p><strong>Optimization strategies:</strong><ul><li>Cache token validations (5 min TTL)<li>Use in-memory rate limit tracking (Redis, not DB)<li>Async logging (don't block on logging)<li>Regional gateway deployment (reduce network hops)</ul><h3 id=scaling-your-gateway>Scaling Your Gateway</h3><pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=plain><span class=giallo-l><span>API Gateway Service</span></span>
+<span class=giallo-l><span> Azure App Service / Azure Functions</span></span>
+<span class=giallo-l><span> Scale out: 10-100 instances</span></span>
+<span class=giallo-l><span> Scale in: CPU-based / schedule-based</span></span>
+<span class=giallo-l></span>
+<span class=giallo-l><span>Azure Services (Data Layer)</span></span>
+<span class=giallo-l><span> Cosmos DB / SQL / Storage</span></span>
+<span class=giallo-l><span> Scales independently</span></span></code></pre><p><strong>Independent scaling:</strong> The gateway scales separately from the data services. Load spikes in the SaaS don't crash your databases.<h2 id=conclusion-why-this-pattern-works>Conclusion: Why This Pattern Works</h2><table><thead><tr><th>Aspect<th>With Your Gateway<th>Without Gateway<tbody><tr><td><strong>Trust boundary</strong><td>✅ Data never leaves your tenant<td>❌ The SaaS stores data<tr><td><strong>Security control</strong><td>✅ You control all enforcement<td>❌ The SaaS controls access<tr><td><strong>Compliance</strong><td>✅ You prove data handling<td>❌ The SaaS's compliance, not yours<tr><td><strong>Monitoring</strong><td>✅ Per-SaaS visibility<td>❌ No SaaS-level visibility<tr><td><strong>Vendor lock-in</strong><td>✅ Can switch SaaS easily<td>❌ Locked into SaaS<tr><td><strong>Isolation</strong><td>✅ Gateway isolates SaaS clients<td>❌ All clients share access</table><p><strong>Summary:</strong> Your PaaS API gateway creates a security-by-design architecture. Data sovereignty, trust boundaries, and proper monitoring give you a defensible security posture.<p>This isn't about hiding features or creating separation through obscurity. It's about <strong>enforcing security at every layer</strong> - from the SaaS request to the Azure service response.<p>The SaaS gets a clean UI and fast data. You get control, compliance, and peace of mind.<hr><p><em>This guide is based on real-world SaaS integrations with Azure services. Always adapt patterns to your specific requirements and threat model.</em></div></div></article></div><footer class=footer><div class=footer__inner><div class=copyright><span>© 2026</span></div><div class=build-info></div></div></footer></div>
