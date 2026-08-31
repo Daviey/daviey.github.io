@@ -28,7 +28,10 @@
 iOS .ipa, a UEFI boot image and a from-scratch SSH arcade, with a
 replay-verified leaderboard that nobody can lie to. Every number below is
 measured in-tree; every bug in the final section was hit by a real player.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A scripted demo run, captured from real terminal output&quot; &#x2F;&gt;&lt;&#x2F;p&gt;</summary>
+&lt;figure&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A scripted demo run, captured from real terminal output&quot;&gt;
+&lt;figcaption&gt;The scripted demo run, captured from real terminal output. Yes, those are character cells.&lt;&#x2F;figcaption&gt;
+&lt;&#x2F;figure&gt;</summary>
         
     </entry>
 </feed>
