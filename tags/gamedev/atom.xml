@@ -30,7 +30,7 @@ boot image and a from-scratch SSH arcade, with a replay-verified
 leaderboard that nobody can lie to. Every number below is
 measured in-tree; every bug in the final section was hit by a real player.&lt;&#x2F;p&gt;
 &lt;figure&gt;
-&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A scripted demo run, captured from real terminal output&quot;&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A demo run, captured from real terminal output&quot;&gt;
 &lt;figcaption&gt;The demo run, captured from real terminal output. Yes, those are character cells.&lt;&#x2F;figcaption&gt;
 &lt;&#x2F;figure&gt;</summary>
         
