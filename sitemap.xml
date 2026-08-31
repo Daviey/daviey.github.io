@@ -146,6 +146,10 @@
         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
+        <loc>https://daviey.github.io/posts/super-cli-mario-terminal-in-six-days/</loc>
+        <lastmod>2026-08-31</lastmod>
+    </url>
+    <url>
         <loc>https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/</loc>
         <lastmod>2025-11-10</lastmod>
     </url>
@@ -255,6 +259,9 @@
         <loc>https://daviey.github.io/tags/fosdem/</loc>
     </url>
     <url>
+        <loc>https://daviey.github.io/tags/gamedev/</loc>
+    </url>
+    <url>
         <loc>https://daviey.github.io/tags/go/</loc>
     </url>
     <url>
@@ -355,6 +362,9 @@
     </url>
     <url>
         <loc>https://daviey.github.io/tags/sysadmin/</loc>
+    </url>
+    <url>
+        <loc>https://daviey.github.io/tags/terminals/</loc>
     </url>
     <url>
         <loc>https://daviey.github.io/tags/testing/</loc>

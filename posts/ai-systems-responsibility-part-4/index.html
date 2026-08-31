@@ -98,13 +98,15 @@
 <span class=giallo-l><span style=color:#a6e22e>curl</span><span style=color:#ae81ff> -s</span><span style=color:#e6db74> http://model-service:8080/version</span></span>
 <span class=giallo-l></span>
 <span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> ""</span></span>
-<span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Deploying new version..."./deploy.sh v2.0.0</span></span>
+<span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Deploying new version..."</span></span>
+<span class=giallo-l><span style=color:#a6e22e>./deploy.sh</span><span style=color:#e6db74> v2.0.0</span></span>
 <span class=giallo-l></span>
 <span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Checking health..."</span></span>
 <span class=giallo-l><span style=color:#a6e22e>curl</span><span style=color:#ae81ff> -s</span><span style=color:#e6db74> http://model-service:8080/health</span></span>
 <span class=giallo-l></span>
 <span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> ""</span></span>
-<span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Rolling back..."./rollback.sh</span></span>
+<span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Rolling back..."</span></span>
+<span class=giallo-l><span style=color:#a6e22e>./rollback.sh</span></span>
 <span class=giallo-l></span>
 <span class=giallo-l><span style=color:#66d9ef>echo</span><span style=color:#e6db74> "Checking health after rollback..."</span></span>
 <span class=giallo-l><span style=color:#a6e22e>curl</span><span style=color:#ae81ff> -s</span><span style=color:#e6db74> http://model-service:8080/health</span></span>

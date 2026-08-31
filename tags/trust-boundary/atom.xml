@@ -23,8 +23,7 @@
         <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/saas-paas-gateway-security-pattern/"/>
         <id>https://daviey.github.io/posts/saas-paas-gateway-security-pattern/</id>
         
-        <summary type="html">&lt;h2 id=&quot;saas-paas-gateway-security-pattern-trust-boundaries-and-data-sovereignty&quot;&gt;SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty&lt;&#x2F;h2&gt;
-&lt;p&gt;Modern SaaS platforms often need to integrate with customer data stored in Azure. The user logs into the SaaS UI, but the actual data lives in the customer&#x27;s Azure subscription. How do you provide real-time access without storing customer data in the SaaS database?&lt;&#x2F;p&gt;
+        <summary type="html">&lt;p&gt;Modern SaaS platforms often need to integrate with customer data stored in Azure. The user logs into the SaaS UI, but the actual data lives in the customer&#x27;s Azure subscription. How do you provide real-time access without storing customer data in the SaaS database?&lt;&#x2F;p&gt;
 &lt;p&gt;The answer: a PaaS API gateway that acts as a controlled bridge.&lt;&#x2F;p&gt;</summary>
         
     </entry>

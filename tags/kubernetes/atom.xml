@@ -36,7 +36,7 @@
 &lt;aside class=&quot;pullquote&quot;&gt;
 Every hardcoded credential is a future incident waiting to happen. The question isn&#x27;t whether it leaks - it&#x27;s whether you notice when it does.
 &lt;&#x2F;aside&gt;
-&lt;p&gt;Workload identity is about giving your services proper identities without the secret sprawl. Not another password to rotate. Not another API key to revoke when it appears in a GitHub commit. An identity that your infrastructure manages, rotates, and revokes automatically.&lt;&#x2F;p&gt;
+&lt;p&gt;Workload identity is about giving your services proper identities without the secret sprawl. An identity that your infrastructure manages, rotates, and revokes automatically. No passwords to rotate, no API keys to revoke when they leak.&lt;&#x2F;p&gt;
 &lt;p&gt;This post covers what workload identity actually means, how to implement it on major clouds and on-prem, and the practical patterns that make it survivable.&lt;&#x2F;p&gt;</summary>
         
     </entry>

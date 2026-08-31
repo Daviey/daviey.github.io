@@ -54,12 +54,12 @@ A pentest that tells you what you already know is an expensive way to avoid fixi
         <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/bash-security-operators-guide/"/>
         <id>https://daviey.github.io/posts/bash-security-operators-guide/</id>
         
-        <summary type="html">&lt;p&gt;Bash is on every Unix-like system you&#x27;ll touch. No installation required. No suspicious binaries to explain. Just a shell that&#x27;s already there, waiting to be used.&lt;&#x2F;p&gt;
+        <summary type="html">&lt;p&gt;Bash is on every Unix-like system you&#x27;ll touch. The shell is already there, waiting to be used, with nothing to install and no suspicious binaries to explain.&lt;&#x2F;p&gt;
 &lt;p&gt;For security operators - red team, blue team, doesn&#x27;t matter - this makes Bash incredibly valuable. You can do reconnaissance, establish persistence, monitor systems, or respond to incidents without touching disk or installing tools. Living off the land, as they say.&lt;&#x2F;p&gt;
 &lt;aside class=&quot;pullquote&quot;&gt;
 &quot;The best tools are the ones already on the target. Bash is always there. No explanations needed when someone spots it running.&quot;
 &lt;&#x2F;aside&gt;
-&lt;p&gt;This is a practical guide to using Bash for security operations. Not theory. Not vendor pitches. Techniques that work when you&#x27;re on a system and need to get things done.&lt;&#x2F;p&gt;</summary>
+&lt;p&gt;This is a practical guide to using Bash for security operations. Techniques that work when you&#x27;re on a system and need to get things done.&lt;&#x2F;p&gt;</summary>
         
     </entry>
 </feed>

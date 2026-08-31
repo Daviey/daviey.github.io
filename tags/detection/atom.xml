@@ -65,7 +65,7 @@
 &lt;aside class=&quot;pullquote&quot;&gt;
 &quot;Prevention gets all the budget. Detection gets what&#x27;s left. Yet detection is what tells you when prevention failed - which it will.&quot;
 &lt;&#x2F;aside&gt;
-&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get an alert. No false positives. No tuning. No complex rules. Just a clear signal: someone&#x27;s where they shouldn&#x27;t be.&lt;&#x2F;p&gt;</summary>
+&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get a clear signal that someone&#x27;s where they shouldn&#x27;t be, with no false positives, no tuning, and no complex rules.&lt;&#x2F;p&gt;</summary>
         
     </entry>
 </feed>

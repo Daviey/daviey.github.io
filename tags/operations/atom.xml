@@ -36,7 +36,7 @@
 &lt;aside class=&quot;pullquote&quot;&gt;
 Every hardcoded credential is a future incident waiting to happen. The question isn&#x27;t whether it leaks - it&#x27;s whether you notice when it does.
 &lt;&#x2F;aside&gt;
-&lt;p&gt;Workload identity is about giving your services proper identities without the secret sprawl. Not another password to rotate. Not another API key to revoke when it appears in a GitHub commit. An identity that your infrastructure manages, rotates, and revokes automatically.&lt;&#x2F;p&gt;
+&lt;p&gt;Workload identity is about giving your services proper identities without the secret sprawl. An identity that your infrastructure manages, rotates, and revokes automatically. No passwords to rotate, no API keys to revoke when they leak.&lt;&#x2F;p&gt;
 &lt;p&gt;This post covers what workload identity actually means, how to implement it on major clouds and on-prem, and the practical patterns that make it survivable.&lt;&#x2F;p&gt;</summary>
         
     </entry>
@@ -566,12 +566,12 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
         <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/bash-security-operators-guide/"/>
         <id>https://daviey.github.io/posts/bash-security-operators-guide/</id>
         
-        <summary type="html">&lt;p&gt;Bash is on every Unix-like system you&#x27;ll touch. No installation required. No suspicious binaries to explain. Just a shell that&#x27;s already there, waiting to be used.&lt;&#x2F;p&gt;
+        <summary type="html">&lt;p&gt;Bash is on every Unix-like system you&#x27;ll touch. The shell is already there, waiting to be used, with nothing to install and no suspicious binaries to explain.&lt;&#x2F;p&gt;
 &lt;p&gt;For security operators - red team, blue team, doesn&#x27;t matter - this makes Bash incredibly valuable. You can do reconnaissance, establish persistence, monitor systems, or respond to incidents without touching disk or installing tools. Living off the land, as they say.&lt;&#x2F;p&gt;
 &lt;aside class=&quot;pullquote&quot;&gt;
 &quot;The best tools are the ones already on the target. Bash is always there. No explanations needed when someone spots it running.&quot;
 &lt;&#x2F;aside&gt;
-&lt;p&gt;This is a practical guide to using Bash for security operations. Not theory. Not vendor pitches. Techniques that work when you&#x27;re on a system and need to get things done.&lt;&#x2F;p&gt;</summary>
+&lt;p&gt;This is a practical guide to using Bash for security operations. Techniques that work when you&#x27;re on a system and need to get things done.&lt;&#x2F;p&gt;</summary>
         
     </entry>
     <entry xml:lang="en">
@@ -632,7 +632,7 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
 &lt;aside class=&quot;pullquote&quot;&gt;
 &quot;Prevention gets all the budget. Detection gets what&#x27;s left. Yet detection is what tells you when prevention failed - which it will.&quot;
 &lt;&#x2F;aside&gt;
-&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get an alert. No false positives. No tuning. No complex rules. Just a clear signal: someone&#x27;s where they shouldn&#x27;t be.&lt;&#x2F;p&gt;</summary>
+&lt;p&gt;Canary tokens are silent tripwires. Fake data that looks valuable. When accessed, you get a clear signal that someone&#x27;s where they shouldn&#x27;t be, with no false positives, no tuning, and no complex rules.&lt;&#x2F;p&gt;</summary>
         
     </entry>
     <entry xml:lang="en">

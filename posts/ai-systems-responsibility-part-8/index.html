@@ -94,7 +94,8 @@
 <span class=giallo-l><span>2. Check input distribution for drift</span></span>
 <span class=giallo-l><span>3. If drift detected, investigate upstream data pipeline</span></span>
 <span class=giallo-l><span>4. If no drift, check model version deployed</span></span>
-<span class=giallo-l><span>5. If wrong version, rollback using script:./rollback.sh</span></span>
+<span class=giallo-l><span>5. If wrong version, rollback using script:</span></span>
+<span class=giallo-l><span>./rollback.sh</span></span>
 <span class=giallo-l><span>6. If correct version, escalate to data science team</span></span></code></pre><p>Store in wiki. Update after every incident. Reference during incidents.<p>Cost: Free. Usefulness: High.<p><strong>ChatOps</strong><p>Run commands from Slack. View dashboards from Slack. Get alerts in Slack.<p>When incident happens, everyone's in the same Slack channel. Can see the same data. Can run the same commands.<p>PagerDuty, OpsGenie, or roll your own with Slack bots.<p><strong>Rollback scripts</strong><p>One command to roll back. Tested. Documented. Ready to run at 3am.<pre class=giallo style=color:#f8f8f2;background-color:#272822><code data-lang=shellscript><span class=giallo-l><span style=color:#88846f>#!/bin/bash</span></span>
 <span class=giallo-l><span style=color:#88846f># rollback.sh - Roll back to previous model version</span></span>
 <span class=giallo-l></span>

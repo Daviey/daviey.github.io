@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - gamedev</title>
+    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/gamedev/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-08-31T00:00:00+00:00</updated>
+    <id>https://daviey.github.io/tags/gamedev/atom.xml</id>
+    <entry xml:lang="en">
+        <title>SUPER CLI MARIO: a complete Mario clone for your terminal in zero-dependency Go</title>
+        <published>2026-08-31T00:00:00+00:00</published>
+        <updated>2026-08-31T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/super-cli-mario-terminal-in-six-days/"/>
+        <id>https://daviey.github.io/posts/super-cli-mario-terminal-in-six-days/</id>
+        
+        <content type="html" xml:base="https://daviey.github.io/posts/super-cli-mario-terminal-in-six-days/">&lt;span id=&quot;continue-reading&quot;&gt;&lt;&#x2F;span&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;icon.png&quot; alt=&quot;SUPER CLI MARIO icon: the Mario sprite on a sky tile&quot; width=&quot;128&quot; height=&quot;128&quot; style=&quot;float:left;margin:4px 22px 8px 0;image-rendering:pixelated;&quot;&gt;
+&lt;p&gt;TL;DR: one deterministic engine drives a terminal, a browser, an APK, an
+iOS .ipa, a UEFI boot image and a from-scratch SSH arcade, with a
+replay-verified leaderboard that nobody can lie to. Every number below is
+measured in-tree; every bug in the final section was hit by a real player.&lt;&#x2F;p&gt;
+&lt;p&gt;On 25 August 2026 I tagged v0.1.0 of SUPER CLI MARIO, a complete Super Mario
+Bros. style platformer that renders in a plain terminal. On 30 August I tagged
+v0.7.1. In the six days between them: 339 commits, 34,430 lines of Go (17,270
+of those lines are tests), zero external dependencies, and a game you can play
+by typing &lt;code&gt;ssh mario.baby&lt;&#x2F;code&gt;, or just by opening &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;mario.baby&quot;&gt;https:&#x2F;&#x2F;mario.baby&lt;&#x2F;a&gt; in a
+browser, with no client install, no account and no download.&lt;&#x2F;p&gt;
+&lt;p&gt;This post is the technical side of that: the decisions that shaped the
+codebase, the numbers that came out of it, and the bugs that only a machine
+could catch.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A scripted demo run, captured from real terminal output&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-it-is&quot;&gt;What it is&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;overworld.png&quot; alt=&quot;Overworld level 1-1 in the terminal&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;SUPER CLI MARIO is an SMB-style platformer: seven levels across two
+worlds and four themes (overworld, underground, sky, castle), with mushrooms,
+fire flowers, star power, hidden blocks, piranha plants, paratroopas, fire
+bars, lava, checkpoints and a flagpole sequence. It draws truecolor pixel art
+using half-block terminal glyphs, two square pixels per character cell, with a
+custom 3x5 arcade font for the HUD. It has an online leaderboard, a daily
+generated challenge, a browser build, an Android APK, an iOS .ipa, macOS and
+Linux packages, a bootable UEFI image, and an SSH game server that turns any
+machine into an arcade.&lt;&#x2F;p&gt;
+&lt;p&gt;All of it is one Go module, &lt;code&gt;github.com&#x2F;Daviey&#x2F;mario&lt;&#x2F;code&gt;, using only the
+standard library. The engine, the renderer, the SSH server, the Supabase
+client, the WASM build, even the &lt;code&gt;.deb&lt;&#x2F;code&gt; and &lt;code&gt;.rpm&lt;&#x2F;code&gt; packagers. Go 1.22 or
+newer, &lt;code&gt;CGO_ENABLED=0&lt;&#x2F;code&gt; everywhere.&lt;&#x2F;p&gt;
+&lt;p&gt;That constraint was inherited, not chosen for its own sake: the game began
+life as a library to hide inside another Go program. The zero-dependency
+rule and the clean library facade are that origin fossilised into
+architecture (what that bought, later).&lt;&#x2F;p&gt;
+&lt;p&gt;One tick, end to end:&lt;&#x2F;p&gt;
+&lt;pre&gt;
+raw stdin bytes
+  └▶ router ─▶ mapper (kitty&#x2F;legacy)
+               │  engine.Input
+               ▼
+  60 Hz ─▶ Game.Update()
+            │  deterministic: no
+            │  clock, no rng
+  ┌─────────┼───────────┐
+  ▼         ▼           ▼
+replay   render      sound
+log       Stream      events
+(input     │            │
+mask)    ┌─┴─┐          ▼
+  │     ▼   ▼        BEL &#x2F;
+  ▼   ANSI RGB       WebAudio
+submit   │   │
+ │       ▼   ▼
+ ▼      tty canvas&#x2F;
+board   out EFI fb
+&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;castle.png&quot; alt=&quot;Castle theme (2-4) with fire bars&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;determinism-came-first&quot;&gt;Determinism came first&lt;&#x2F;h2&gt;
+&lt;p&gt;The design decision everything else hangs on is that the engine is fully
+deterministic. &lt;code&gt;Game.Update(Input)&lt;&#x2F;code&gt; advances exactly one tick at a fixed 60 Hz.
+There is no &lt;code&gt;math&#x2F;rand&lt;&#x2F;code&gt; and no &lt;code&gt;time.Now()&lt;&#x2F;code&gt; anywhere in the engine or render
+logic. Blinking question blocks, the star power palette flicker, the fire bar
+angle: all of it is a pure function of the tick counter. Identical input
+sequences reproduce identical games, pixel for pixel.&lt;&#x2F;p&gt;
+&lt;p&gt;Why pay for that property? Two consumers turned out to need it.&lt;&#x2F;p&gt;
+&lt;p&gt;The first is the test suite. The determinism tests re-run the scripted demo
+playthrough and byte-compare the full rendered ANSI output against a
+reference. Any hidden clock, any floating point wobble, any map iteration
+order leaks straight into a diff.&lt;&#x2F;p&gt;
+&lt;p&gt;The second is the leaderboard. Every run is recorded as an input log, the
+recording is submitted with the score, and a verifier replays the inputs
+through the same engine. If the replay reproduces the claimed score, level and
+engine version, the row is kept. If not, it is deleted.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+You can cheat the physics with a debugger, but you have to cheat 130,000 recorded ticks.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Determinism is also a cost. Physics is written in a way that never depends on
+frame time, entity iteration order is fixed, and the level builder rounds
+carefully (the piranha plant markers live at float-adjacent coordinates and a
+plain &lt;code&gt;int()&lt;&#x2F;code&gt; truncation shifts a marker one column off its pipe). The 114
+functions in &lt;code&gt;engine&#x2F;&lt;&#x2F;code&gt; are boring on purpose.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;pixels-in-a-terminal&quot;&gt;Pixels in a terminal&lt;&#x2F;h2&gt;
+&lt;p&gt;The terminal is a hostile framebuffer. A character cell is roughly 1:2
+tall, so the renderer maps two square pixels into each cell with the half-block
+glyph &lt;code&gt;▀&lt;&#x2F;code&gt;: the upper pixel in the top half, the lower in the bottom. A solid
+vertical pair (upper colour equals lower colour) is rendered as a space with a
+background colour, which is cheaper to diff and reads cleaner.&lt;&#x2F;p&gt;
+&lt;p&gt;Colour depth is three-tier. Terminals that identify as truecolor get 24-bit SGR.
+Terminals that advertise 256 colours get the fixed xterm cube, with palette
+indices chosen as &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;bottosson.github.io&#x2F;posts&#x2F;oklab&#x2F;&quot;&gt;OKLab&lt;&#x2F;a&gt;-nearest matches so saturated reds stay saturated instead
+of washing out. Everyone else gets an honest base-16 fallback, and &lt;code&gt;-basic&lt;&#x2F;code&gt;
+forces it.&lt;&#x2F;p&gt;
+&lt;p&gt;The cube mapping does real colour-space maths. The
+xterm cube (216 colours, six levels per channel) and the 24-step gray ramp
+are spec-fixed. Every terminal renders them identically no matter how the
+user&#x27;s profile configures the 16 base colours, which is why the
+base colours are excluded as candidates. Tango&#x27;s &quot;red&quot; is &lt;code style=&quot;color:#EF2929&quot;&gt;#EF2929&lt;&#x2F;code&gt;,
+Solarized&#x27;s is &lt;code style=&quot;color:#DC322F&quot;&gt;#DC322F&lt;&#x2F;code&gt;; trusting either is how you get washed-out reds.
+Each palette colour is mapped to its nearest cube entry by distance in
+OKLab, computed once at palette build. The colour space is the whole
+trick: plain RGB distance maps the player red &lt;code style=&quot;color:#FF3B30&quot;&gt;#FF3B30&lt;&#x2F;code&gt; onto cube entry
+203 (&lt;code style=&quot;color:#FF5F5F&quot;&gt;#FF5F5F&lt;&#x2F;code&gt;, pink), while OKLab&#x27;s lightness&#x2F;chroma balance holds it on
+entry 196, &lt;code style=&quot;color:#FF0000&quot;&gt;#FF0000&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The bigger win is the wire format. Early on, SGR style sequences were about 80%
+of every frame. A full-screen redraw at 60 fps is a lot of bytes to push
+over SSH. The fix was a minimal-diff SGR encoder. Style state persists across
+cells, runs and rows, so a style is emitted only when it actually changes. A
+space never carries a foreground colour. Attribute clears that would need
+partial resets fall back to a full &lt;code&gt;0;...&lt;&#x2F;code&gt; form. The diff also bridges small
+clean gaps (12 cells or fewer) by rewriting identical cells when the exact
+serialised cost, styles included, beats sending a cursor address.&lt;&#x2F;p&gt;
+&lt;p&gt;The style comparison is wire-truth, not palette identity. In 16-colour
+mode, two palette entries that share an ANSI index are the same terminal
+colour and must not re-emit SGR every frame, while the terminal&#x27;s default
+colour is its own wire state and never compares equal to an indexed one,
+even when the numbers match.&lt;&#x2F;p&gt;
+&lt;p&gt;Measured at 60 fps by &lt;code&gt;TestStreamBandwidth&lt;&#x2F;code&gt;, which drives a scripted run
+through a 198-column, 29-row viewport:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Mode&lt;&#x2F;th&gt;&lt;th&gt;Bytes per tick&lt;&#x2F;th&gt;&lt;th&gt;Bandwidth&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Truecolor&lt;&#x2F;td&gt;&lt;td&gt;1,252 B&lt;&#x2F;td&gt;&lt;td&gt;~73 KiB&#x2F;s&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;256-colour cube&lt;&#x2F;td&gt;&lt;td&gt;887 B&lt;&#x2F;td&gt;&lt;td&gt;~51 KiB&#x2F;s&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;16-colour&lt;&#x2F;td&gt;&lt;td&gt;435 B&lt;&#x2F;td&gt;&lt;td&gt;~25 KiB&#x2F;s&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;The differential rework cut per-tick bandwidth by roughly 56% over the naive
+full-frame encoder. Two tests pin the contract: a round-trip test that
+reconstructs the screen from the emitted byte stream using a simulated
+terminal model, and a bandwidth test with hard caps. If the stream ever
+silently regresses to verbose SGR, the caps trip.&lt;&#x2F;p&gt;
+&lt;p&gt;Bandwidth is half the performance story; allocation was the other half. The
+engine itself measures 8 ns per tick with zero allocations, so the hot path
+was the renderer: per-tick frame buffers. Screens, the world raster and the
+RGB buffer are now recycled through the stream. Steady-state rendering
+allocates nothing, which one test pins by failing on any per-tick
+allocation. The rework cut allocation 778-fold and made the render loop 36%
+faster (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;fbce1c1&quot;&gt;&lt;code&gt;fbce1c1&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).
+Delivery: the wasm is 12,070,950 bytes raw and 3,190,927 gzipped (74% of
+the bytes never leave nginx), and &lt;code&gt;-s -w&lt;&#x2F;code&gt; strips 351 bytes of it: the size
+is nearly all Go runtime and engine code, not symbols.&lt;&#x2F;p&gt;
+&lt;p&gt;The viewport also follows terminal resizes live. &lt;code&gt;Resize&lt;&#x2F;code&gt; can land from any
+goroutine, the next &lt;code&gt;Step&lt;&#x2F;code&gt; picks it up, and the diff does a full repaint on a
+size change. There are race tests for concurrent resize and step, plus viewport
+sweeps: every screen must survive terminal widths from 16 columns up to 60 and
+heights down to 4 tiles tall, because people actually play in tiny panes.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;visual-evolution&quot;&gt;Visual evolution&lt;&#x2F;h3&gt;
+&lt;p&gt;It took a few iterations to get the aesthetics right. The very first working
+prototype used full-cell color blocks and was written before we even made our
+first git commit:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;color-block.png&quot; alt=&quot;The original color-block prototype&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Ninety minutes later the pixel renderer existed, but only for the world.
+The cast were still letters: a red &lt;code&gt;m&lt;&#x2F;code&gt; for Mario, &lt;code&gt;g&lt;&#x2F;code&gt; for goombas:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;first-pixel.png&quot; alt=&quot;Pixel terrain, letter cast&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;By the first commit the sprites were real (Mario grew a cap and overalls,
+goombas turned into domes), but the &lt;code&gt;?&lt;&#x2F;code&gt; block was still a blob:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;first-sprites.png&quot; alt=&quot;First real sprites, commit #1&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;An evening of polish fixed pipe rims and cloud occlusion, but no amount of
+polish fixes topology:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;pix4-play.png&quot; alt=&quot;The refined 4px era&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;A player quickly pointed out that a 16-pixel tile isn&#x27;t enough fidelity to
+draw a recognizable &lt;code&gt;?&lt;&#x2F;code&gt; block. That single complaint forced a resolution bump
+from 4 pixels per tile to 6 (a 2.25× increase in pixel density) and a complete
+redraw of the art assets:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;pix6-play.png&quot; alt=&quot;The 6-pixel era&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Which is close to where the game still looks today, 378 commits later:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;modern-play.png&quot; alt=&quot;Today&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Every gameplay shot above is the same two seconds of the same level, replayed
+by the actual binary of each era; the engine is deterministic, so the only
+thing that changes between them is the renderer.&lt;&#x2F;p&gt;
+&lt;p&gt;The first commit&#x27;s title screen, for the full 3x5-font effect:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;first.png&quot; alt=&quot;The first pixel-art iteration&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The title screen rode the same ladder, from Monday morning&#x27;s color
+blocks to today (watch the font survive its shadow, then grow a menu):&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;color-block-title.png&quot; alt=&quot;Title screen, color-block era&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;first-pixel-title.png&quot; alt=&quot;Title screen, first pixel era&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;pix6-title.png&quot; alt=&quot;Title screen, 6-pixel era&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;modern-title.png&quot; alt=&quot;Title screen, today&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The 3x5 pixel font had its own journey. One player complained that &quot;Mario&quot; on
+the title screen looked more like &quot;nario&quot; (an AI vision model agreed, reading it
+as &quot;YARIO&quot; and rating the M a 1&#x2F;10). The hidden killer was the drop shadow,
+which stamped a dark copy one pixel down-right and filled the counters of the
+letters:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;nario.png&quot; alt=&quot;The YARIO drop-shadow bug&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Even after stripping the shadow from the title bands, the M glyph was exactly
+one center-pixel away from reading as an X:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;m-glyph.png&quot; alt=&quot;The M-as-X glyph bug&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;How the game moves is deterministic too, and that starts with the
+animation being distance-based, not time-based. The player&#x27;s
+&lt;code&gt;WalkDist&lt;&#x2F;code&gt; accumulator adds ground covered
+each tick, including the friction slide after you release the key (the
+legs slow down with the body), and the walk-cycle frame is
+&lt;code&gt;int(WalkDist &#x2F; 0.55) % len(frames)&lt;&#x2F;code&gt;: about a third of a second per
+cycle walking, under two-tenths running. Enemies waddle on their own
+accumulator at 0.16 tiles per frame. Jump stretch and landing squash are
+6-tick pose timers, a hard landing is any fall over 0.12 tiles per tick,
+skids kick dust every fourth tick. There&#x27;s no wall-clock anywhere in the
+animation, so a replayed run animates identically, byte for byte.&lt;&#x2F;p&gt;
+&lt;p&gt;The jump feel is three classic algorithms in tick arithmetic: five ticks of
+coyote time after walking off a ledge, five ticks of jump buffering before
+landing, and a jump-cut that clamps velocity to −0.15 when the key is
+released early (full jump velocity is −0.43 and clears about 4.4 tiles;
+the reachability bounds elsewhere in this post are derived from those
+numbers).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;keyboard-input-in-a-hostile-world&quot;&gt;Keyboard input in a hostile world&lt;&#x2F;h2&gt;
+&lt;p&gt;Terminals disagree about keys. Modern ones speak the kitty keyboard protocol,
+where every press, repeat and release is an explicit &lt;code&gt;CSI ... u&lt;&#x2F;code&gt; sequence (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;sw.kovidgoyal.net&#x2F;kitty&#x2F;keyboard-protocol&#x2F;&quot;&gt;spec&lt;&#x2F;a&gt;).
+Older ones send a character once and then the OS&#x27;s autorepeat kicks in, with
+per-terminal and per-OS cadence that nobody documents.&lt;&#x2F;p&gt;
+&lt;p&gt;The input mapper handles both, and latches its regime. A &lt;code&gt;CSI u&lt;&#x2F;code&gt; final byte is
+unambiguous kitty, so once one is seen the stream is treated as kitty forever
+after, and typeless presses (ghostty and kitty omit the &lt;code&gt;:1&lt;&#x2F;code&gt; event type; it&#x27;s
+the default) are normalised to presses. Legacy-only streams keep the inference
+model, where hold windows are calibrated against observed OS repeat cadence.&lt;&#x2F;p&gt;
+&lt;p&gt;The nastiest case is single-key-repeat terminals: Wayland compositors, and
+anything behind tmux (which strips the kitty negotiation), autorepeat only the
+newest pressed key. Hold right and press jump, and right&#x27;s repeat stream dies
+forever. The mapper keeps a demotion model that resurrects proven holds through
+the silence, with a cap so a stale hold cannot run you off a ledge.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+Hold right, press jump: on half the desktops in the wild, right&#x27;s key repeat never comes back.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;The model is bounded on both ends. A demoted hold can be resurrected by a
+byte for another key within 80 ticks (about 1.3 s) of its expiry, and the
+jump key&#x27;s extension is capped at 24 ticks. The full rise takes about
+20.5, so the cap leaves slack for an honest held jump without letting a
+stale hold float you through the ≈41-tick landing.&lt;&#x2F;p&gt;
+&lt;p&gt;The kitty keyboard stack turned out to be screen-scoped, which cost a live
+report to learn. Push the flags after entering the alt screen (&lt;code&gt;?1049h&lt;&#x2F;code&gt;),
+pop before leaving it (&lt;code&gt;?1049l&lt;&#x2F;code&gt;), both on the alt screen: the first
+version pushed on the main screen, the epilogue&#x27;s pop then hit the alt
+screen&#x27;s empty stack and did nothing, and the player&#x27;s shell was left
+emitting &lt;code&gt;07;129u…&lt;&#x2F;code&gt; CSI-u garbage after exit. The tempting fix is also
+wrong: popping after &lt;code&gt;?1049l&lt;&#x2F;code&gt; targets the main screen&#x27;s stack and can eat
+a level a shell integration pushed there
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;2133c2c&quot;&gt;&lt;code&gt;2133c2c&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Keyboard ownership has a single router. While a leaderboard screen is
+reading keystrokes (typing a name for the board), bytes go to the UI alone,
+so the mapper never sees the releases for keys still held at that moment.
+Handing the keyboard over calls &lt;code&gt;ReleaseAll&lt;&#x2F;code&gt;, or a sticky kitty hold would
+run the next game for you.&lt;&#x2F;p&gt;
+&lt;p&gt;The byte-level cousin of that bug dismissed prompts instantly. At game over
+you are still holding movement keys, and their release sequences arrive as
+multi-byte escapes; read one byte at a time, a lone &lt;code&gt;0x1b&lt;&#x2F;code&gt; lands as Enter
+and the submit prompt vanishes before you ever see it. UI capture now goes
+through a proper plain-decoder instead of raw single bytes
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;6db81b7&quot;&gt;&lt;code&gt;6db81b7&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;And the native runner learned to have one owner of stdin the hard
+way. A leaderboard prompt reading &lt;code&gt;os.Stdin&lt;&#x2F;code&gt; directly raced the game&#x27;s own
+reader for file descriptor 0, and each keystroke went to a random one of
+them. Half the time the prompt silently ate nothing and looked frozen; a
+frozen full-screen prompt is exactly how sessions end up killed with
+terminal modes still pushed
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;c7506a5&quot;&gt;&lt;code&gt;c7506a5&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;your-machine-is-the-arcade&quot;&gt;Your machine is the arcade&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;mario -serve :1985&lt;&#x2F;code&gt; turns any machine into a multiplayer arcade (1985 is the
+year Super Mario Bros. shipped). Players connect with &lt;code&gt;ssh yourhost -p 1985&lt;&#x2F;code&gt;.
+Any username works. There&#x27;s no shell, no account, no
+forwarding. The only service the server provides is the game.&lt;&#x2F;p&gt;
+&lt;p&gt;The SSH implementation is written from scratch on the standard library: the
+transport with curve25519 key exchange and ed25519 host key, aes128-ctr with
+hmac-sha2-256 in MAC-then-encrypt order (the unencrypted length field must be
+readable before the MAC can be verified), &lt;code&gt;none&lt;&#x2F;code&gt; authentication, and one
+session channel per connection. No
+golang.org&#x2F;x&#x2F;crypto, because the zero-dependency rule extends to the network
+stack. The protocol notes that cost an afternoon each:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Modern OpenSSH does not reset packet sequence numbers at NEWKEYS unless strict
+KEX is negotiated, and this server does not offer strict KEX, so the
+per-direction counter runs for the life of the connection.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;CHANNEL_SUCCESS&lt;&#x2F;code&gt; and &lt;code&gt;CHANNEL_FAILURE&lt;&#x2F;code&gt; replies carry the four-byte recipient
+channel, not the sender&#x27;s.&lt;&#x2F;li&gt;
+&lt;li&gt;Teardown order is exit-status, then EOF, then &lt;code&gt;CHANNEL_CLOSE&lt;&#x2F;code&gt;, then a 300 ms
+grace, then TCP close, because closing with writes in flight gets you a RST.&lt;&#x2F;li&gt;
+&lt;li&gt;The client&#x27;s &lt;code&gt;CHANNEL_EOF&lt;&#x2F;code&gt; means stdin is done, not that the session is over,
+so the server keeps rendering attract mode until the channel actually closes.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Input feel over the wire holds most of the remaining subtlety. Three
+invariants, each of which was a live bug:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;The connection reader goroutine never writes to the socket once frames may
+be flowing. Keystroke bytes are fed to the game first, and everything the
+protocol owes back (window adjustments, keepalive replies) rides a separate
+control pump. A synchronous write behind a frame chunk wedged on a full
+kernel send buffer stalled input delivery for up to 30 seconds. Accepted
+connections also set TCP_NODELAY so control packets do not queue on Nagle
+behind 256 KB frame chunks.&lt;&#x2F;li&gt;
+&lt;li&gt;SSH receive-window adjustments coalesce into a lossless owed counter that
+replenishes at half the 2 MB window, OpenSSH&#x27;s own policy. Human typing
+generates zero adjust packets, and any leftover below the threshold
+simply carries over toward the next adjustment.&lt;&#x2F;li&gt;
+&lt;li&gt;The simulation runs at 60 Hz on the tick goroutine, but diffing and writing
+happen on a writer goroutine with a latest-frame mailbox. A slow link drops
+rendered frames, never simulation ticks, so keystrokes keep flowing and
+releases stay on time. Loopback, keypress to output measures about 18 ms,
+which is one tick.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Mosh support (&lt;code&gt;-mosh auto&lt;&#x2F;code&gt;) proxies the roaming handshake with a strict argv
+whitelist: the server rebuilds the &lt;code&gt;mosh-server new&lt;&#x2F;code&gt; command with its own
+binary and port range, and never execs the client&#x27;s own command line. mosh
+1.4 unconditionally overwrites the child&#x27;s TERM to &lt;code&gt;xterm-256color&lt;&#x2F;code&gt;, so the
+game&#x27;s environment strips inherited TERM and COLORTERM and re-sets
+&lt;code&gt;COLORTERM=truecolor&lt;&#x2F;code&gt; when the SSH phase saw a truecolor terminal. Without
+that fix, mosh users got the 16-colour palette, which is how &quot;less colours&quot;
+bugs get reported.&lt;&#x2F;p&gt;
+&lt;p&gt;The server also identifies each player&#x27;s terminal and picks the right colour
+depth with no config. When a shell session starts, it asks the client terminal
+to identify itself with device-attribute queries (DA2 &lt;code&gt;CSI &amp;gt; c&lt;&#x2F;code&gt; plus DA3
+&lt;code&gt;CSI = c&lt;&#x2F;code&gt;, the trick vim uses for &lt;code&gt;termresponse&lt;&#x2F;code&gt;) and sniffs the reply out of
+the inbound stream. That is the only reliable way to tell GNOME&#x27;s VTE from
+Apple Terminal, which both speak &lt;code&gt;xterm-256color&lt;&#x2F;code&gt; but only one renders 24-bit
+colour. Precedence is a forwarded COLORTERM environment request, then the TERM
+family, then the probe. Silent terminals wait at most 250 ms once per connect,
+pre-title.&lt;&#x2F;p&gt;
+&lt;p&gt;Capacity is bounded by &lt;code&gt;-maxsessions&lt;&#x2F;code&gt; (default 16; measured, a single core
+holds full-quality play to about 16 to 20 concurrent sessions and saturates
+around 32). Over-capacity players join a FIFO queue showing their position and
+an ETA computed from Little&#x27;s law against a session-length EWMA, and are
+admitted strictly in order via slot transfer under one mutex.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;a-leaderboard-nobody-can-cheat&quot;&gt;A leaderboard nobody can cheat*&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;em&gt;*Not quite nobody. The verifier proves the engine produced the score from
+a real input sequence; it can&#x27;t prove a human was holding the keys. A
+tool-assisted run still verifies, because it genuinely earned the score.
+What nobody can do is claim a number the game didn&#x27;t produce.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;board.png&quot; alt=&quot;The in-game leaderboard with verified rows checked&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The very first iteration of the leaderboard was drawn with raw pixel blocks,
+which we quickly abandoned for readability before it ever saw a public release:&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;pixel-board.png&quot; alt=&quot;The abandoned pixel-block leaderboard&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The board is a plain Supabase PostgREST table. There is no game server to run
+or trust, which is most of the design. Every submission carries the run&#x27;s
+replay recording, a device id, an engine version and a 20-bit SHA-256
+proof-of-work over &lt;code&gt;device_id:score:nonce&lt;&#x2F;code&gt;, solved client-side in &lt;code&gt;board&#x2F;pow.go&lt;&#x2F;code&gt;
+and checked by a &lt;code&gt;verify_pow()&lt;&#x2F;code&gt; trigger. Proof-of-work is the throttle against
+drive-by inserts from scripts. Twenty bits is about 0.1 seconds for an honest
+player (well under a second in wasm) and a real CPU cost per row for a
+scripted flooder, so rotating device ids no longer buys anything.&lt;&#x2F;p&gt;
+&lt;p&gt;On top of that: row-level security with a BEFORE INSERT trigger capping anon
+submissions at 10 per minute per source address (from Cloudflare&#x27;s
+&lt;code&gt;cf-connecting-ip&lt;&#x2F;code&gt;) and 2 per minute per device, a &lt;code&gt;board_rows&lt;&#x2F;code&gt; RPC that hides
+&lt;code&gt;device_id&lt;&#x2F;code&gt; from anonymous readers (mine-ness arrives precomputed), and a
+nightly pg_cron job that keeps the top 500 rows and drops anything older than
+60 days.&lt;&#x2F;p&gt;
+&lt;p&gt;The board is also an injection surface, which is easy to forget.
+The payload is text. The first schema checked name length and nothing else. A
+probe stored an eight-character name containing an ESC byte (HTTP 201) and
+an HTML payload (also 201), and the fetch path formatted names straight
+into the frame. Any anonymous player could have run escape sequences in
+every other player&#x27;s terminal. The fix is a charset allow-list (&lt;code&gt;A-Z 0-9 . -&lt;&#x2F;code&gt;, one source of truth shared by name entry, the Go client and a DB
+CHECK), plus sanitize-on-read so legacy rows can&#x27;t attack anyone either
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;36e7c74&quot;&gt;&lt;code&gt;36e7c74&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;The verifier is a GitHub Action that runs every 15 minutes. &lt;code&gt;mario -verify-pending&lt;&#x2F;code&gt; fetches unverified rows, replays each recording through the
+deterministic engine, and checks that score, level and engine version all
+match the row&#x27;s claim. A match sets &lt;code&gt;verified&lt;&#x2F;code&gt; (the green checkmark on every
+board surface). A mismatch deletes the row.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+A score is a claim. The recording is the proof, and the proof has to replay.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;Every deletion carries a reason. A &lt;code&gt;version&lt;&#x2F;code&gt; drop is a row recorded before an
+engine version bump, expected once per gameplay-changing release, and
+harmless. A &lt;code&gt;determinism&lt;&#x2F;code&gt; drop means the replay genuinely disagreed
+with the row&#x27;s claim: one is a corrupted recording, two means a systematic
+bug is deleting real scores. Two or more determinism drops fail the Action.&lt;&#x2F;p&gt;
+&lt;p&gt;That rule exists because of a bug that ran silent. The recorder arms on a
+world card&#x27;s first tick, and only continues an existing recording when the
+previous state was Dying or ScoreTick. The check compared that previous state
+after the update call had already performed the transition, so it always saw
+a card, the continuation branch was dead code, and a death respawn re-armed
+the recorder: every submitted run containing a death carried only the final
+life&#x27;s input segment, replayed to a different score, and got deleted.
+The player saw &lt;code&gt;SUBMIT FAILED&lt;&#x2F;code&gt; and moved on. The regression tests that caught
+the next one (&lt;code&gt;TestServeDeathRunRecordingE2E&lt;&#x2F;code&gt;,
+&lt;code&gt;TestVerifyPendingSystematicDropFails&lt;&#x2F;code&gt;) are tripwires planted at exactly that
+gap.&lt;&#x2F;p&gt;
+&lt;p&gt;The engine version discipline is the price of replay verification.
+&lt;code&gt;board.EngineVersion&lt;&#x2F;code&gt; is bumped on any gameplay or level change, currently
+&lt;code&gt;2026.08.31a&lt;&#x2F;code&gt; (the &lt;code&gt;a&lt;&#x2F;code&gt; marks a same-day coin-reachability correction).
+Forgetting to bump is worse than bumping. Live submissions get deleted at
+the next verification pass while looking correct. For postmortems there is
+&lt;code&gt;mario -dump-replays N&lt;&#x2F;code&gt; to export recent recordings with metadata,
+&lt;code&gt;mario -replay FILE&lt;&#x2F;code&gt; for a tick-by-tick trace of transitions and death
+causes, and &lt;code&gt;-trace-window&lt;&#x2F;code&gt; to trace a specific window of a run.&lt;&#x2F;p&gt;
+&lt;p&gt;One row claimed 3300 and replayed to 3300 at the commit it was recorded
+on, but 1500 on current main. The recording, the player and the verifier
+were all correct; only the engine had moved. A mismatched row is judged
+at its era. Check out that commit in a worktree and replay the recording
+there before suspecting the recorder.&lt;&#x2F;p&gt;
+&lt;p&gt;The recordings also cut the other way. They autopsy the player&#x27;s own bug
+reports. One SSH player reported the big pit jump early in level 1-2 as
+impossible, and the geometry half-agreed. At walk speed (0.085 tiles per
+tick) a jump covers about 3.5 tiles and the pit is 4 wide, so a walking
+jump can never clear it. Running covers about 5.9. The final attempt was
+textbook (full speed, takeoff one tick from the edge), but the recording
+showed &lt;code&gt;Run&lt;&#x2F;code&gt; dropping to zero on the tick &lt;em&gt;after&lt;&#x2F;em&gt; the jump press. Air
+control immediately clamps horizontal speed to walk max, and the player
+died at 64.215, 0.78 tiles short of the far side. The counterfactual
+closes the case. Patch that single input lane of the recording (Run held
+through the airborne window) and the same jump lands safely on the pipe
+top at 65.8. The real defect was discoverability. Every jump in the entire
+recording was a walk jump, because nothing on the SSH surface ever said run
+existed. The report shipped the in-game &lt;code&gt;X TO RUN&lt;&#x2F;code&gt; hint and the
+&lt;code&gt;-trace-window&lt;&#x2F;code&gt; postmortem tool
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;17e86a0&quot;&gt;&lt;code&gt;17e86a0&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+Full speed, perfect takeoff, and death 0.78 tiles short. The recording knew why.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;The recording format itself is tiny, run-length encoded,
+&lt;code&gt;{&quot;v&quot;:1,&quot;ticks&quot;:N,&quot;runs&quot;:[[mask,count],...]}&lt;&#x2F;code&gt;, where the mask is a 16-bit
+bitmask of the input struct. The bit numbers are a frozen wire format,
+documented as such in the source, because every stored recording decodes
+through them and renumbering would rewrite leaderboard history. The cap is
+130,000 ticks, about 36 minutes at 60 Hz.&lt;&#x2F;p&gt;
+&lt;p&gt;Running the verifier locally needs no dashboard secret either. The repo
+contains a from-scratch PostgreSQL wire client, &lt;code&gt;internal&#x2F;pgwire&lt;&#x2F;code&gt;: the
+v3 simple-query protocol, a TLS upgrade negotiated through SSLRequest,
+and SCRAM-SHA-256, MD5 and cleartext authentication, with the server
+signature verified, all on the standard library. It connects as the
+postgres role, which sits outside row-level security, so the database
+password alone is enough to read and verify pending rows. The dependency
+rule has now produced two from-scratch network protocols, an SSH
+transport and a database client, and the second one exists so a
+long-lived secret never has to sit on a dev machine.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;no-tracking-and-nothing-written-to-disk&quot;&gt;No tracking, and nothing written to disk&lt;&#x2F;h2&gt;
+&lt;p&gt;The obvious anti-abuse design is device fingerprinting. It is the wrong
+tool on both axes. Cooperative users get tracked and fragmented across
+identities, hostile users stay untraceable, and a hash of identifying
+signals is pseudonymised personal data, not anonymous data. So there is
+none.&lt;&#x2F;p&gt;
+&lt;p&gt;The native binary writes nothing to the player&#x27;s machine: no config file,
+no input-calibration cache, nothing. Player identity is process-lifetime
+only: a fresh UUID per launch. Clearing your traces means restarting
+the game, which is the correct consent story. The only storage anywhere is
+the browser build&#x27;s localStorage
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;c81ce7f&quot;&gt;&lt;code&gt;c81ce7f&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;). The cost of
+that choice is paid in the rate limits and proof-of-work above, which is a
+fair trade for never having a file to leak.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-feature-we-deleted-from-git-history&quot;&gt;The feature we deleted from git history&lt;&#x2F;h2&gt;
+&lt;p&gt;For about forty minutes, the server knew who you were.&lt;&#x2F;p&gt;
+&lt;p&gt;The idea: SSH clients volunteer their entire keyring during authentication. A
+server that denies every &lt;code&gt;publickey&lt;&#x2F;code&gt; probe (without ever asking anyone to
+sign) watches the client walk its whole agent and identity-file set, one
+public key at a time. Match those against &lt;code&gt;github.com&#x2F;&amp;lt;login&amp;gt;.keys&lt;&#x2F;code&gt;, and a
+player who connects as their GitHub login gets the leaderboard name entry
+pre-filled. Editable, of course, but a nice touch. Connect as
+&lt;code&gt;Daviey@mario.baby&lt;&#x2F;code&gt; and DAVIEY is just there.&lt;&#x2F;p&gt;
+&lt;p&gt;The wire details were lovely, in the way that costs afternoons:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;RFC 4256 numbers keyboard-interactive&#x27;s info-request at 60, the same
+number as publickey&#x27;s PK_OK, and the response at 61. An off-by-one there
+isn&#x27;t a negotiation failure; it&#x27;s a client-side
+&lt;code&gt;protocol error: rcvd type 61&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;OpenSSH 8.8 and later refuse to probe RSA keys at a server that never sent
+an EXT_INFO &lt;code&gt;server-sig-algs&lt;&#x2F;code&gt; after its first NEWKEYS. Without that one
+extension message, every RSA key on the planet silently declines to
+introduce itself.&lt;&#x2F;li&gt;
+&lt;li&gt;Keyless players still had to just work. Keyboard-interactive with zero
+prompts: a compliant client auto-answers an empty info-request without a
+single keystroke or a TTY. Batch-mode clients cannot do kbd-int at all,
+which quietly locked the health-check canary out until it learned
+&lt;code&gt;BatchMode=no&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It shipped, validated against real OpenSSH builds, deployed to both
+endpoints. Then I ran the reference implementation.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;ssh whoami.filippo.io&lt;&#x2F;code&gt; is &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;whoami.filippo.io&quot;&gt;Filippo Valsorda&#x27;s&lt;&#x2F;a&gt; public demonstration of
+this exact enumeration. It watches your client offer its keyring, matches
+the keys against a crawled database of public keys from every GitHub
+account, and greets you by name: no username typed, no signature given. Run
+it once and the framing inverts. What I had built was not a login
+convenience; it was a deanonymisation service with an arcade attached. Any
+player whose SSH key was also their GitHub key could be identified on
+connect, by a game server, without consent or indication, and the guesses
+were being written to telemetry columns.&lt;&#x2F;p&gt;
+&lt;p&gt;The arithmetic didn&#x27;t survive that framing. The feature&#x27;s entire value was
+an editable pre-fill that only fired if the player already knew to type
+their GitHub login. Against it: enumerating every visitor&#x27;s keyring, storing
+identity guesses, an auth state machine with three more failure modes, and a
+broken client class. Reverted the same evening, fully: &lt;code&gt;main&lt;&#x2F;code&gt; force-pushed
+back so the commits are gone from the repository (which is why this section
+links to nothing), the telemetry columns dropped from the live database,
+both endpoints rolled back, the canary restored.&lt;&#x2F;p&gt;
+&lt;p&gt;The previous section says there is no fingerprinting. The strongest evidence
+is what happened the one time identity crept in.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+It was removed so thoroughly that git has forgotten it ever existed.
+&lt;&#x2F;aside&gt;
+&lt;h2 id=&quot;one-level-a-day&quot;&gt;One level a day&lt;&#x2F;h2&gt;
+&lt;p&gt;Daily mode generates a new challenge level from the date seed. The same level
+for everyone on a given day, with its own leaderboard partition (&lt;code&gt;mode=&#x27;daily&#x27;&lt;&#x2F;code&gt;
+plus the day, read through &lt;code&gt;board_rows&lt;&#x2F;code&gt;). The generator is deterministic too,
+which means the daily level is replay-verified by the same machinery.&lt;&#x2F;p&gt;
+&lt;p&gt;A generated level is only as good as its hardest jump, so the generator
+bounds the clearances structurally: pits at most 4 tiles wide because a
+full-speed running jump covers about 5, pipes at most 3 tall, mid-level
+stair sets at most 4 steps. The tests check the shape of 30 generated
+levels: pit widths, plants sitting on pipe mouths, and player start and flag
+standing on solid ground. When a level was too hard, the fix was not &quot;make Mario jump higher&quot; but
+to encode the reach bound into the generator and let the tests reject the
+bad seeds.&lt;&#x2F;p&gt;
+&lt;p&gt;The first version of that proof had a hole, and a player fell through it.
+The daily for 30 August carried coin rows nobody could collect, and the
+geometry agreed with the player. Both coin emitters could place their
+shelf five tiles above the floor, a full jump rises 4.4, and the coins sat
+another 1.2 above the shelf top. The shape tests counted pits and plants
+but never asked whether a coin can be collected.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;shelf-before.png&quot; alt=&quot;The impossible 5-tile shelf&quot; &#x2F;&gt;
+&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;shelf-after.png&quot; alt=&quot;The fixed 4-tile shelf&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The fix is a proof, not a rule of thumb. &lt;code&gt;engine&#x2F;reach.go&lt;&#x2F;code&gt; flood-fills
+every tile a small Mario can stand on, starting from the spawn, using the
+engine&#x27;s own tick physics as the probe: run and walk, both directions,
+full jumps from three run-up lengths, cut hops for coins under ceilings,
+walk-offs for falls. A coin no scripted run ever touches is a bug. The
+sweep covers the seven built-in levels and every month-day seed the
+generator can produce, runs in seconds, and on its first pass found the
+same five-tile shelf in two of the built-ins, whose shelves carried no
+bound at all. Coin
+shelves are capped at four tiles now, the same bound as stairs, and the
+check runs on every push.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;one-codebase-every-surface&quot;&gt;One codebase, every surface&lt;&#x2F;h2&gt;
+&lt;p&gt;The library origin shaped every surface. The engine lives in an
+importable library (&lt;code&gt;package mario&lt;&#x2F;code&gt;) with thin command-line entry points,
+because embedding meant the game could never assume it owns the process: no global state, a clock the
+host drives (&lt;code&gt;App.Step()&lt;&#x2F;code&gt; advances one tick; the host owns the timer), and
+input delivered as bytes the host decodes. Every later surface, terminal
+to UEFI, fell out of that discipline for free.&lt;&#x2F;p&gt;
+&lt;p&gt;The browser build did not start as pixels. The first version embedded
+ghostty-web, a WebAssembly terminal emulator, and piped the game&#x27;s ANSI
+stream into it. No new render code; the page was literally a terminal. It
+shipped with an unavoidable flaw. At any browser zoom that is not an exact
+integer, the browser resamples the emulator&#x27;s canvas, and the player saw
+&quot;alternatiting black lines across the screen&quot;: dark bands every other cell
+row, about 15 px apart at 110% zoom. The emulator&#x27;s backing store was
+pixel-exact (a 1075×680 backing behind an 860×544 element at device pixel
+ratio exactly 1.25, frames byte-identical) and &lt;code&gt;image-rendering: pixelated&lt;&#x2F;code&gt;
+changed nothing. The resampling happens above the canvas, where a terminal
+emulator cannot reach.&lt;&#x2F;p&gt;
+&lt;p&gt;So the page stopped being a terminal that same evening; the game moved off
+ANSI and onto raw pixels over a plain canvas.&lt;&#x2F;p&gt;
+&lt;p&gt;The same engine compiles to every target. The native binary is the obvious
+one. The browser build is Go to WebAssembly: the page provides &lt;code&gt;marioFrame&lt;&#x2F;code&gt;
+for the pixel canvas, &lt;code&gt;marioBoard&lt;&#x2F;code&gt; for the leaderboard DOM, &lt;code&gt;marioSfx&lt;&#x2F;code&gt; for a
+WebAudio synth, and the game exports &lt;code&gt;marioFeed&lt;&#x2F;code&gt;. It ships as a PWA with a
+service worker, an on-screen touch gamepad (virtual joystick with tilt-to-run,
+A&#x2F;B buttons, a draggable arrange mode that persists in localStorage), and a
+boot screen that is a level of the game: Mario reaches the flagpole at 100%
+download.&lt;&#x2F;p&gt;
+&lt;p&gt;The loader is honest by construction: a host that strips Content-Length
+gets a progress bar that drops the total rather than inventing a
+denominator, the fade-out fires on the first painted game frame rather
+than the download finishing, and a corrupted body surfaces as the
+browser&#x27;s own compile error naming the wasm magic bytes instead of a dead
+black screen.&lt;&#x2F;p&gt;
+&lt;p&gt;The on-screen pad feeds the game kitty-protocol press&#x2F;release pairs rather
+than plain bytes, because a bare byte is a legacy press whose hold decays
+in the mapper after about a fifth of a second: pad-held movement would
+stall after one step. That regression killed phone movement for an
+afternoon; the capture paths that need plain bytes decode the pairs back.&lt;&#x2F;p&gt;
+&lt;p&gt;Back on the terminal surface, sound is one byte: BEL. It&#x27;s the only audio
+channel every terminal guarantees (a C0 control every parser executes even
+mid-sequence), so coin, stomp and fireball events all collapse onto it,
+throttled to one BEL per 120 ms so a stomp chain doesn&#x27;t machine-gun. The
+attract demo stays silent, because a title screen must not beep at people
+walking past (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;ecc713d&quot;&gt;&lt;code&gt;ecc713d&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).
+What the player actually hears is their terminal&#x27;s bell setting;
+gnome-terminal ships with it off. The browser build gets the same engine
+events as a real WebAudio synth instead.&lt;&#x2F;p&gt;
+&lt;p&gt;The Android APK is a thin WebView shell around the same web bundle, locked to
+landscape. Chromium blocks &lt;code&gt;fetch()&lt;&#x2F;code&gt; on &lt;code&gt;file:&#x2F;&#x2F;&lt;&#x2F;code&gt; origins, so the activity
+intercepts requests to a virtual scheme and serves the bundled assets, and it
+replaces the service worker with a no-op one, because a cache-first worker
+would otherwise serve the previous release&#x27;s wasm after every app update.&lt;&#x2F;p&gt;
+&lt;p&gt;The iOS .ipa is built on Linux with no Mac and no Xcode: &lt;code&gt;clang&lt;&#x2F;code&gt; targeting
+&lt;code&gt;arm64-apple-ios&lt;&#x2F;code&gt;, &lt;code&gt;lld&lt;&#x2F;code&gt;, and &lt;code&gt;ldid&lt;&#x2F;code&gt; for an ad-hoc signature, wrapping a
+WKWebView shell in a from-scratch Info.plist. Users sideload it with AltStore
+or Sideloadly. The macOS .app is a universal (fat) Mach-O assembled by a
+pure-Go tool, no Xcode either. There is also an AppImage, a Nix flake, a
+&lt;code&gt;.deb&lt;&#x2F;code&gt; and a &lt;code&gt;.rpm&lt;&#x2F;code&gt; for each of the five Linux architectures, and an AUR
+package for local builds. &lt;code&gt;make release&lt;&#x2F;code&gt; cross-compiles 17 OS&#x2F;arch pairs from
+one tree.&lt;&#x2F;p&gt;
+&lt;p&gt;The bootable targets are the odd ones out. &lt;code&gt;make efi&lt;&#x2F;code&gt; produces a single-file
+UEFI boot image: a tiny custom Linux kernel (EFISTUB, simpledrm, evdev) with
+an initramfs containing only the static game binary as &lt;code&gt;&#x2F;init&lt;&#x2F;code&gt;, driving the
+same &lt;code&gt;App.Step()&lt;&#x2F;code&gt; at 60 Hz and blitting &lt;code&gt;RenderPixels&lt;&#x2F;code&gt; to &lt;code&gt;&#x2F;dev&#x2F;fb0&lt;&#x2F;code&gt;. &lt;code&gt;make iso&lt;&#x2F;code&gt; wraps the same payload in a BIOS-bootable hybrid ISO via xorriso, and
+&lt;code&gt;make iso-qemu&lt;&#x2F;code&gt; smoke-boots it headlessly in QEMU.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;web-mobile.png&quot; alt=&quot;The web build on a phone, with the on-screen gamepad&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The packaging tools follow the dependency rule. &lt;code&gt;tools&#x2F;mkdeb&lt;&#x2F;code&gt; builds a &lt;code&gt;.deb&lt;&#x2F;code&gt;
+by hand (ar, tar, gzip), &lt;code&gt;tools&#x2F;mkrpm&lt;&#x2F;code&gt; writes an RPM v3 (lead, digest-only
+signature header, header, cpio payload), &lt;code&gt;tools&#x2F;mkapp&lt;&#x2F;code&gt; assembles the macOS
+bundle, &lt;code&gt;tools&#x2F;mkipa&lt;&#x2F;code&gt; the iOS one. All of them are deterministic: the tests
+parse the archives back and check the bytes. Determinism here matters because
+re-running a release run must produce identical artifacts.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tests-ci-and-the-bugs-only-a-machine-catches&quot;&gt;Tests, CI, and the bugs only a machine catches&lt;&#x2F;h2&gt;
+&lt;p&gt;The test suite is 17,270 lines against 17,160 lines of product code, stdlib
+&lt;code&gt;testing&lt;&#x2F;code&gt; only, no assertion libraries, no golden files. Assertions are
+programmatic: pixel reads through &lt;code&gt;Frame.At&lt;&#x2F;code&gt;, string-contains on ANSI output,
+geometry checks. The categories worth calling out:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Determinism: full rendered runs byte-compared.&lt;&#x2F;li&gt;
+&lt;li&gt;Viewport sweeps, plus cloud tests that assert the pixel-level title-band
+suppression is non-vacuous.&lt;&#x2F;li&gt;
+&lt;li&gt;Wire round-trip: a simulated terminal model parses the emitted byte stream
+and reconstructs the screen.&lt;&#x2F;li&gt;
+&lt;li&gt;Fake backends: &lt;code&gt;fakePostgREST&lt;&#x2F;code&gt; and injectable submit&#x2F;fetch functions keep
+leaderboard tests offline; &lt;code&gt;LIVE=1&lt;&#x2F;code&gt; gates the real-Supabase E2E.&lt;&#x2F;li&gt;
+&lt;li&gt;Real-client E2E: &lt;code&gt;SSHE2E=1&lt;&#x2F;code&gt; drives an actual OpenSSH client through the
+from-scratch server, including a latency guard.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;One more from the bugs-only-a-machine-catches file, except here the machine
+was complicit. A leaderboard hint&#x27;s fit check read &lt;code&gt;hintY+5 &amp;lt;= f.H-5&lt;&#x2F;code&gt;, and &lt;code&gt;hintY&lt;&#x2F;code&gt; works
+out to &lt;code&gt;f.H-5&lt;&#x2F;code&gt;, so the check reduces to &lt;code&gt;f.H &amp;lt;= f.H-5&lt;&#x2F;code&gt;: false at every
+viewport size there is. Comments
+still described the hint, and the test asserted the hint&#x27;s screen band
+through the same broken gate, so the suite stayed green while the feature
+rendered nowhere for days. The fix&#x27;s real content was the test: assert the
+hint draws at &lt;em&gt;some&lt;&#x2F;em&gt; viewport, and at all of them
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;8313e0a&quot;&gt;&lt;code&gt;8313e0a&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;). A test
+written from the same misunderstanding as the code is a witness for the
+defence, not a tripwire.&lt;&#x2F;p&gt;
+&lt;p&gt;CI runs on a self-hosted runner. Push to main: &lt;code&gt;make check&lt;&#x2F;code&gt; (fmtcheck, vet,
+test), native build, the full 17-target release matrix, and a WASM
+compile-check. Tag push: the same gate, then the per-target build matrix, packaging, a
+GitHub release with SHA256SUMS, and a Pages deploy that fires via
+&lt;code&gt;workflow_run&lt;&#x2F;code&gt; because
+the Pages environment&#x27;s protection rules reject tag refs. Release notes are
+generated from the commit log by an agent and land in the release body and in
+CHANGELOG.md.&lt;&#x2F;p&gt;
+&lt;p&gt;The runner image has no C toolchain, which means the race detector can never
+run in CI (&lt;code&gt;make race&lt;&#x2F;code&gt; is a local-only gate) and every Makefile goal must
+force &lt;code&gt;CGO_ENABLED=0&lt;&#x2F;code&gt; or it dies compiling &lt;code&gt;runtime&#x2F;cgo&lt;&#x2F;code&gt;. The web deploy to
+mario.baby is a tar-over-ssh to a NixOS box, extracted to a release directory
+and cut over with a single same-filesystem &lt;code&gt;mv -T&lt;&#x2F;code&gt; onto a symlinked content
+path, so a failed deploy leaves the old site standing. TLS is Let&#x27;s Encrypt
+via ACME DNS-01 (the A&#x2F;AAAA records are DNS-only, grey, because a proxied
+record would eat the SSH that reaches the game on port 22).&lt;&#x2F;p&gt;
+&lt;p&gt;The worst web failure never touched game code. The wasm binary has no
+environment to read, so its Supabase credentials only exist through a
+&lt;code&gt;-ldflags -X&lt;&#x2F;code&gt; injection wired in the Makefile. A security rework kept
+the &lt;code&gt;$(WEBLDFLAGS)&lt;&#x2F;code&gt; reference and deleted the variable&#x27;s definition,
+and make expands undefined variables to an empty string, so for three
+days every web build shipped a board that read OFFLINE: GitHub Pages,
+the APK and the first mario.baby deploys
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;b498abb&quot;&gt;&lt;code&gt;b498abb&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; is the
+restoration). The credential guard in
+&lt;code&gt;make web&lt;&#x2F;code&gt; validates the variables but cannot see the flags line that
+fails to carry them. Since v0.8.0 the tripwire is the build itself: &lt;code&gt;make web&lt;&#x2F;code&gt; greps the wasm for &lt;code&gt;supabase.co&lt;&#x2F;code&gt; and fails when it is missing
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;9bb196d&quot;&gt;&lt;code&gt;9bb196d&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;). The same symptom had a second cause: the service worker
+was cache-first, so returning visitors kept the previous release&#x27;s wasm
+even after the fix deployed. It is network-first now, because a release
+has to go live on the next page load.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+Root with no capabilities is less than a user.
+&lt;&#x2F;aside&gt;
+&lt;p&gt;The AppImage job died in bubblewrap with EPERM. Jobs in that container
+run as uid 0, and bwrap,
+finding itself root, skips its unprivileged user-namespace path and
+calls &lt;code&gt;unshare(CLONE_NEWNS)&lt;&#x2F;code&gt; directly, which needs CAP_SYS_ADMIN. The
+runner unit&#x27;s capability bounding set was empty, so root was denied a
+syscall an ordinary user would have passed through the namespace path.
+The root cause came from running strace inside the CI job, and the fix
+was one line of systemd configuration.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-six-days-of-releases-bought&quot;&gt;What six days of releases bought&lt;&#x2F;h2&gt;
+&lt;p&gt;The release cadence (v0.1.0 to v0.7.1 in six days) was a side effect of the
+architecture, not a goal. The leaderboard is live and public from day one, so
+every gameplay change has to bump the engine version, and every SSH or input
+change has to survive a real terminal on a real link. The bugs that shaped the
+codebase are the ones players hit:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A kitty keyboard level pushed on the wrong screen left CSI-u garbage in the
+player&#x27;s shell after &lt;code&gt;ssh mario.baby&lt;&#x2F;code&gt; exited.&lt;&#x2F;li&gt;
+&lt;li&gt;The recorder-wipe bug above, found by scripting a pty playthrough whose
+400-point run replayed to 0.&lt;&#x2F;li&gt;
+&lt;li&gt;A checkpoint respawn that killed the player at tick 0, because a level reload
+puts every enemy back at its spawn point and the auto-picked checkpoint
+column sat exactly on one.&lt;&#x2F;li&gt;
+&lt;li&gt;A 2-pixel gap between the castle roof and the flagpole mast in 2-4, found by
+looking at the level the way a player does, fixed in the most recent release.&lt;&#x2F;li&gt;
+&lt;li&gt;A coin row no jump could reach, reported the day after v0.7.1. Three
+levels had all placed coin shelves five tiles above the floor, 0.6 past
+the apex of a full jump; the reachability proof above exists because of
+it.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Each one is small. Each one is invisible to a human who tested &quot;it works&quot;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-seventh-day&quot;&gt;The seventh day&lt;&#x2F;h2&gt;
+&lt;p&gt;The seventh day shipped v0.8.0, and it shipped no levels, no enemies and no
+features. It shipped a broom.&lt;&#x2F;p&gt;
+&lt;p&gt;A debt audit had walked the tree with six read-only scouts, and the fix wave
+landed as 42 commits between the v0.7.1 and v0.8.0 tags: the 1,596-line
+&lt;code&gt;render.go&lt;&#x2F;code&gt; split into seam files (camera, palette, screen, world, title,
+hud), the SSH server&#x27;s 1,179-line &lt;code&gt;server.go&lt;&#x2F;code&gt; split the same way, the input
+hold model extracted to a file of its own, and the dead code the audit
+turned up simply deleted (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;ed3666a&quot;&gt;&lt;code&gt;ed3666a&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;3a249d7&quot;&gt;&lt;code&gt;3a249d7&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;Thirty-seven of those 42 commits carry &lt;code&gt;github-actions[bot]&lt;&#x2F;code&gt; as the author,
+because the fix wave ran as parallel agents on a shared tree. The reason
+that is a calm sentence instead of a terrifying one is the same determinism
+the rest of this post keeps leaning on: v0.8.0 pins the engine&#x27;s level
+bytes in tests, so a 42-commit restructuring that changes nothing shows up
+as nothing (&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;5f34243&quot;&gt;&lt;code&gt;5f34243&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;). A robot can hold the broom when the
+floor is tiled with tripwires.&lt;&#x2F;p&gt;
+&lt;p&gt;The scraps that rode along, because no broom pass is pure: a physical
+backspace now deletes a character in name entry (it did not before), &lt;code&gt;r&lt;&#x2F;code&gt;
+restarts from the game-over ask, and the site serves a SECURITY.md
+(&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;9a6f5dc&quot;&gt;&lt;code&gt;9a6f5dc&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;, &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&#x2F;commit&#x2F;b685015&quot;&gt;&lt;code&gt;b685015&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;where-it-stands&quot;&gt;Where it stands&lt;&#x2F;h2&gt;
+&lt;p&gt;As of v0.8.0, by the numbers:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Measure&lt;&#x2F;th&gt;&lt;th&gt;Value&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Days, v0.1.0 to v0.8.0&lt;&#x2F;td&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Commits&lt;&#x2F;td&gt;&lt;td&gt;378&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Lines of Go&lt;&#x2F;td&gt;&lt;td&gt;36,728 (18,730 of them tests)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;External dependencies&lt;&#x2F;td&gt;&lt;td&gt;0&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Engine functions&lt;&#x2F;td&gt;&lt;td&gt;114&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Release targets&lt;&#x2F;td&gt;&lt;td&gt;17&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Frame at 60 Hz, truecolor&lt;&#x2F;td&gt;&lt;td&gt;1,252 B&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Engine tick&lt;&#x2F;td&gt;&lt;td&gt;8 ns, zero allocations&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;Levels&lt;&#x2F;td&gt;&lt;td&gt;7 built-in, plus the daily&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;The scoreboard at mario.baby has survived its own players. The parts I am most satisfied
+with are the ones that cost the most to get right: the differential renderer
+that makes remote play feel local, the from-scratch SSH server that survives
+real terminals and real links, and the replay verifier that lets a stranger&#x27;s
+score sit on a public board with a checkmark next to it.&lt;&#x2F;p&gt;
+&lt;p&gt;The source is at &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;Daviey&#x2F;mario&quot;&gt;github.com&#x2F;Daviey&#x2F;mario&lt;&#x2F;a&gt;.
+The fastest way to try it is
+&lt;code&gt;ssh mario.baby&lt;&#x2F;code&gt;, or &lt;code&gt;go install github.com&#x2F;Daviey&#x2F;mario&#x2F;cmd&#x2F;mario@latest&lt;&#x2F;code&gt;
+if you want it in your own terminal.&lt;&#x2F;p&gt;
+&lt;p&gt;There is a new level every day, and the scoreboard is public. Bring a
+running jump.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

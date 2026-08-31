@@ -33,7 +33,7 @@
 &lt;aside class=&quot;pullquote&quot;&gt;
 OBO is how you keep user identity across service boundaries without turning your API gateway into a skeleton key.
 &lt;&#x2F;aside&gt;
-&lt;p&gt;It matters because it preserves user identity through a service chain, enables proper audit trails, and limits the damage when a single service gets popped.&lt;&#x2F;p&gt;
+&lt;p&gt;It preserves user identity through a service chain and limits damage when a single service gets popped.&lt;&#x2F;p&gt;
 &lt;p&gt;If you&#x27;re building microservices that need to maintain user context across service boundaries, this covers when to use OBO versus client credentials, security considerations, and practical implementation patterns.&lt;&#x2F;p&gt;</summary>
         
     </entry>
