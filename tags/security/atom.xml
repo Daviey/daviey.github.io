@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Dave&#x27;s Blog - security</title>
     <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
-    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/security/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/security/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2026-02-11T00:00:00+00:00</updated>
-    <id>https://daviey.github.io/tags/security/atom.xml</id>
+    <id>https://blog.daviey.com/tags/security/atom.xml</id>
     <entry xml:lang="en">
         <title>SaaS + PaaS Gateway Security Pattern: Trust Boundaries and Data Sovereignty</title>
         <published>2026-02-11T00:00:00+00:00</published>
@@ -20,8 +20,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/saas-paas-gateway-security-pattern/"/>
-        <id>https://daviey.github.io/posts/saas-paas-gateway-security-pattern/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/saas-paas-gateway-security-pattern/"/>
+        <id>https://blog.daviey.com/posts/saas-paas-gateway-security-pattern/</id>
         
         <summary type="html">&lt;p&gt;Modern SaaS platforms often need to integrate with customer data stored in Azure. The user logs into the SaaS UI, but the actual data lives in the customer&#x27;s Azure subscription. How do you provide real-time access without storing customer data in the SaaS database?&lt;&#x2F;p&gt;
 &lt;p&gt;The answer: a PaaS API gateway that acts as a controlled bridge.&lt;&#x2F;p&gt;</summary>
@@ -40,8 +40,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/threat-analysis-practical-guide/"/>
-        <id>https://daviey.github.io/posts/threat-analysis-practical-guide/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/threat-analysis-practical-guide/"/>
+        <id>https://blog.daviey.com/posts/threat-analysis-practical-guide/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; We have thousands of systems. How do we prioritize what to protect?&lt;&#x2F;p&gt;
@@ -73,8 +73,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/workload-identity-beyond-api-keys/"/>
-        <id>https://daviey.github.io/posts/workload-identity-beyond-api-keys/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/workload-identity-beyond-api-keys/"/>
+        <id>https://blog.daviey.com/posts/workload-identity-beyond-api-keys/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The database connection is failing.&lt;&#x2F;p&gt;
@@ -106,8 +106,8 @@ Every hardcoded credential is a future incident waiting to happen. The question 
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/azure-logic-apps-security-guide/"/>
-        <id>https://daviey.github.io/posts/azure-logic-apps-security-guide/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/azure-logic-apps-security-guide/"/>
+        <id>https://blog.daviey.com/posts/azure-logic-apps-security-guide/</id>
         
         <summary type="html">&lt;p&gt;Azure Logic Apps are everywhere in modern cloud architectures. They&#x27;re the glue between services - orchestrating workflows, connecting APIs, moving data between systems. But from a security perspective, they&#x27;re also potential attack surfaces if configured poorly.&lt;&#x2F;p&gt;
 &lt;aside class=&quot;pullquote&quot;&gt;
@@ -130,8 +130,8 @@ Every hardcoded credential is a future incident waiting to happen. The question 
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/oauth2-obo-flow-complete-guide/"/>
-        <id>https://daviey.github.io/posts/oauth2-obo-flow-complete-guide/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/oauth2-obo-flow-complete-guide/"/>
+        <id>https://blog.daviey.com/posts/oauth2-obo-flow-complete-guide/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Service A already has the user&#x27;s access token. Why don&#x27;t we just forward it to Service B?&lt;&#x2F;p&gt;
@@ -160,8 +160,8 @@ OBO is how you keep user identity across service boundaries without turning your
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-as-code-beyond-scanning/"/>
-        <id>https://daviey.github.io/posts/security-as-code-beyond-scanning/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/security-as-code-beyond-scanning/"/>
+        <id>https://blog.daviey.com/posts/security-as-code-beyond-scanning/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Engineering manager:&lt;&#x2F;span&gt; We&#x27;ve got security as code! Look, the dashboard shows our scans running in CI.&lt;&#x2F;p&gt;
@@ -188,8 +188,8 @@ OBO is how you keep user identity across service boundaries without turning your
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/penetration-testing-what-works/"/>
-        <id>https://daviey.github.io/posts/penetration-testing-what-works/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/penetration-testing-what-works/"/>
+        <id>https://blog.daviey.com/posts/penetration-testing-what-works/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need a penetration test for compliance.&lt;&#x2F;p&gt;
@@ -219,8 +219,8 @@ A pentest that tells you what you already know is an expensive way to avoid fixi
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/oauth2-vs-saml-differences/"/>
-        <id>https://daviey.github.io/posts/oauth2-vs-saml-differences/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/oauth2-vs-saml-differences/"/>
+        <id>https://blog.daviey.com/posts/oauth2-vs-saml-differences/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need single sign-on for our new internal app.&lt;&#x2F;p&gt;
@@ -247,8 +247,8 @@ A pentest that tells you what you already know is an expensive way to avoid fixi
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/"/>
-        <id>https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/supply-chain-attacks-how-they-happen/"/>
+        <id>https://blog.daviey.com/posts/supply-chain-attacks-how-they-happen/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; Our own code is secure. Dependencies from npm, GitHub, Docker Hub. That&#x27;s safe, right?&lt;&#x2F;p&gt;
@@ -276,8 +276,8 @@ A pentest that tells you what you already know is an expensive way to avoid fixi
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/stepca-running-internal-pki/"/>
-        <id>https://daviey.github.io/posts/stepca-running-internal-pki/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/stepca-running-internal-pki/"/>
+        <id>https://blog.daviey.com/posts/stepca-running-internal-pki/</id>
         
         <summary type="html">&lt;p&gt;If you read my post on building your own CA and thought &quot;fine, but how do I actually issue certs without becoming the Certificate Person&quot;, this is the next step.&lt;&#x2F;p&gt;
 &lt;p&gt;&lt;code&gt;step-ca&lt;&#x2F;code&gt; (Smallstep Certificate Authority) is the bit that makes internal PKI usable: automated issuance, short-lived certs, predictable renewal, and enough policy to stop someone minting a wildcard for your entire estate.&lt;&#x2F;p&gt;
@@ -308,8 +308,8 @@ Internal PKI fails in three ways: you lose the keys, you lose the trust, or you 
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/building-your-own-ca/"/>
-        <id>https://daviey.github.io/posts/building-your-own-ca/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/building-your-own-ca/"/>
+        <id>https://blog.daviey.com/posts/building-your-own-ca/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We just need to issue some internal certs. How hard can it be?&lt;&#x2F;p&gt;
@@ -336,8 +336,8 @@ Internal PKI fails in three ways: you lose the keys, you lose the trust, or you 
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-as-code/"/>
-        <id>https://daviey.github.io/posts/security-as-code/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/security-as-code/"/>
+        <id>https://blog.daviey.com/posts/security-as-code/</id>
         
         <summary type="html">&lt;p&gt;&quot;Here&#x27;s the security checklist for the new release.&quot;&lt;&#x2F;p&gt;
 &lt;p&gt;&quot;We&#x27;re deploying next week. When can we do the review?&quot;&lt;&#x2F;p&gt;
@@ -363,8 +363,8 @@ Internal PKI fails in three ways: you lose the keys, you lose the trust, or you 
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/zero-trust-what-it-actually-means/"/>
-        <id>https://daviey.github.io/posts/zero-trust-what-it-actually-means/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/zero-trust-what-it-actually-means/"/>
+        <id>https://blog.daviey.com/posts/zero-trust-what-it-actually-means/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; Our zero trust platform provides seamless, frictionless, AI-powered security across your entire estate.&lt;&#x2F;p&gt;
@@ -394,8 +394,8 @@ Zero trust is not a product. It&#x27;s the slow, painful process of removing imp
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/incident-response-what-actually-works/"/>
-        <id>https://daviey.github.io/posts/incident-response-what-actually-works/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/incident-response-what-actually-works/"/>
+        <id>https://blog.daviey.com/posts/incident-response-what-actually-works/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;On-call:&lt;&#x2F;span&gt; I&#x27;m getting paged. Something about unusual outbound traffic.&lt;&#x2F;p&gt;
@@ -426,8 +426,8 @@ The best incident response plan is the one your team has actually practised. The
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/dns-security-what-actually-breaks/"/>
-        <id>https://daviey.github.io/posts/dns-security-what-actually-breaks/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/dns-security-what-actually-breaks/"/>
+        <id>https://blog.daviey.com/posts/dns-security-what-actually-breaks/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-oncall&quot;&gt;On-call:&lt;&#x2F;span&gt; The website is down.&lt;&#x2F;p&gt;
@@ -458,8 +458,8 @@ DNS isn&#x27;t a phone book. It&#x27;s a control plane.
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/oauth2-security-pitfalls/"/>
-        <id>https://daviey.github.io/posts/oauth2-security-pitfalls/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/oauth2-security-pitfalls/"/>
+        <id>https://blog.daviey.com/posts/oauth2-security-pitfalls/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We need OAuth for the new API.&lt;&#x2F;p&gt;
@@ -490,8 +490,8 @@ DNS isn&#x27;t a phone book. It&#x27;s a control plane.
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/chaos-engineering-security-tool/"/>
-        <id>https://daviey.github.io/posts/chaos-engineering-security-tool/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/chaos-engineering-security-tool/"/>
+        <id>https://blog.daviey.com/posts/chaos-engineering-security-tool/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Our security team is world-class. Firewalls, IDS, EDR, SIEM. We&#x27;re covered.&lt;&#x2F;p&gt;
@@ -519,8 +519,8 @@ DNS isn&#x27;t a phone book. It&#x27;s a control plane.
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/password-managers-2025/"/>
-        <id>https://daviey.github.io/posts/password-managers-2025/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/password-managers-2025/"/>
+        <id>https://blog.daviey.com/posts/password-managers-2025/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; &quot;We need a password manager for a team.&quot;&lt;&#x2F;p&gt;
@@ -549,8 +549,8 @@ DNS isn&#x27;t a phone book. It&#x27;s a control plane.
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ssh-hardening-what-actually-matters/"/>
-        <id>https://daviey.github.io/posts/ssh-hardening-what-actually-matters/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ssh-hardening-what-actually-matters/"/>
+        <id>https://blog.daviey.com/posts/ssh-hardening-what-actually-matters/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; I&#x27;ve hardened SSH. Disabled root login, changed the port, installed fail2ban.&lt;&#x2F;p&gt;
@@ -580,8 +580,8 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/confidential-computing-encrypted-data-processing/"/>
-        <id>https://daviey.github.io/posts/confidential-computing-encrypted-data-processing/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/confidential-computing-encrypted-data-processing/"/>
+        <id>https://blog.daviey.com/posts/confidential-computing-encrypted-data-processing/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Our data never leaves the network. Encrypted at rest, encrypted in transit. We&#x27;re covered.&lt;&#x2F;p&gt;
@@ -611,8 +611,8 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/bash-security-operators-guide/"/>
-        <id>https://daviey.github.io/posts/bash-security-operators-guide/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/bash-security-operators-guide/"/>
+        <id>https://blog.daviey.com/posts/bash-security-operators-guide/</id>
         
         <summary type="html">&lt;p&gt;Bash is on every Unix-like system you&#x27;ll touch. The shell is already there, waiting to be used, with nothing to install and no suspicious binaries to explain.&lt;&#x2F;p&gt;
 &lt;p&gt;For security operators - red team, blue team, doesn&#x27;t matter - this makes Bash incredibly valuable. You can do reconnaissance, establish persistence, monitor systems, or respond to incidents without touching disk or installing tools. Living off the land, as they say.&lt;&#x2F;p&gt;
@@ -635,8 +635,8 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-tools-marketing-vs-reality/"/>
-        <id>https://daviey.github.io/posts/security-tools-marketing-vs-reality/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/security-tools-marketing-vs-reality/"/>
+        <id>https://blog.daviey.com/posts/security-tools-marketing-vs-reality/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-vendor&quot;&gt;Vendor:&lt;&#x2F;span&gt; Our AI-powered platform detects zero-day threats before they happen using quantum machine learning.&lt;&#x2F;p&gt;
@@ -667,8 +667,8 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/canary-tokens-early-warning/"/>
-        <id>https://daviey.github.io/posts/canary-tokens-early-warning/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/canary-tokens-early-warning/"/>
+        <id>https://blog.daviey.com/posts/canary-tokens-early-warning/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; How long did the attacker have access before you detected them?&lt;&#x2F;p&gt;
@@ -696,8 +696,8 @@ The threat isn&#x27;t someone brute-forcing your SSH port. It&#x27;s the key tha
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/prometheus-security-monitoring/"/>
-        <id>https://daviey.github.io/posts/prometheus-security-monitoring/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/prometheus-security-monitoring/"/>
+        <id>https://blog.daviey.com/posts/prometheus-security-monitoring/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need better visibility into security events.&lt;&#x2F;p&gt;

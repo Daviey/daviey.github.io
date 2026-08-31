@@ -1,402 +1,402 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://daviey.github.io/</loc>
+        <loc>https://blog.daviey.com/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/about/</loc>
+        <loc>https://blog.daviey.com/about/</loc>
         <lastmod>2026-02-04</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/archive/</loc>
+        <loc>https://blog.daviey.com/archive/</loc>
         <lastmod>2026-01-01</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/page/1/</loc>
+        <loc>https://blog.daviey.com/page/1/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/</loc>
+        <loc>https://blog.daviey.com/posts/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-1/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-1/</loc>
         <lastmod>2025-12-05</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-2/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-2/</loc>
         <lastmod>2025-12-12</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-3/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-3/</loc>
         <lastmod>2025-12-19</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-4/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-4/</loc>
         <lastmod>2026-01-02</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-5/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-5/</loc>
         <lastmod>2026-01-09</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-6/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-6/</loc>
         <lastmod>2026-01-16</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-7/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-7/</loc>
         <lastmod>2026-01-23</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ai-systems-responsibility-part-8/</loc>
+        <loc>https://blog.daviey.com/posts/ai-systems-responsibility-part-8/</loc>
         <lastmod>2026-01-30</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/azure-logic-apps-security-guide/</loc>
+        <loc>https://blog.daviey.com/posts/azure-logic-apps-security-guide/</loc>
         <lastmod>2026-02-06</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/bash-security-operators-guide/</loc>
+        <loc>https://blog.daviey.com/posts/bash-security-operators-guide/</loc>
         <lastmod>2024-12-03</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/building-your-own-ca/</loc>
+        <loc>https://blog.daviey.com/posts/building-your-own-ca/</loc>
         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/canary-tokens-early-warning/</loc>
+        <loc>https://blog.daviey.com/posts/canary-tokens-early-warning/</loc>
         <lastmod>2024-11-06</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/chaos-engineering-security-tool/</loc>
+        <loc>https://blog.daviey.com/posts/chaos-engineering-security-tool/</loc>
         <lastmod>2025-05-15</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/confidential-computing-encrypted-data-processing/</loc>
+        <loc>https://blog.daviey.com/posts/confidential-computing-encrypted-data-processing/</loc>
         <lastmod>2025-03-01</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/dns-security-what-actually-breaks/</loc>
+        <loc>https://blog.daviey.com/posts/dns-security-what-actually-breaks/</loc>
         <lastmod>2025-06-12</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/fosdem-2026-recap/</loc>
+        <loc>https://blog.daviey.com/posts/fosdem-2026-recap/</loc>
         <lastmod>2026-02-04</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/incident-response-what-actually-works/</loc>
+        <loc>https://blog.daviey.com/posts/incident-response-what-actually-works/</loc>
         <lastmod>2025-07-02</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/oauth2-obo-flow-complete-guide/</loc>
+        <loc>https://blog.daviey.com/posts/oauth2-obo-flow-complete-guide/</loc>
         <lastmod>2026-02-04</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/oauth2-security-pitfalls/</loc>
+        <loc>https://blog.daviey.com/posts/oauth2-security-pitfalls/</loc>
         <lastmod>2025-05-20</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/oauth2-vs-saml-differences/</loc>
+        <loc>https://blog.daviey.com/posts/oauth2-vs-saml-differences/</loc>
         <lastmod>2025-11-10</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/page/1/</loc>
+        <loc>https://blog.daviey.com/posts/page/1/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/page/2/</loc>
+        <loc>https://blog.daviey.com/posts/page/2/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/page/3/</loc>
+        <loc>https://blog.daviey.com/posts/page/3/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/page/4/</loc>
+        <loc>https://blog.daviey.com/posts/page/4/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/password-managers-2025/</loc>
+        <loc>https://blog.daviey.com/posts/password-managers-2025/</loc>
         <lastmod>2025-04-15</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/penetration-testing-what-works/</loc>
+        <loc>https://blog.daviey.com/posts/penetration-testing-what-works/</loc>
         <lastmod>2025-11-20</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/prometheus-security-monitoring/</loc>
+        <loc>https://blog.daviey.com/posts/prometheus-security-monitoring/</loc>
         <lastmod>2024-10-18</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/saas-paas-gateway-security-pattern/</loc>
+        <loc>https://blog.daviey.com/posts/saas-paas-gateway-security-pattern/</loc>
         <lastmod>2026-02-11</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/security-as-code-beyond-scanning/</loc>
+        <loc>https://blog.daviey.com/posts/security-as-code-beyond-scanning/</loc>
         <lastmod>2025-11-22</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/security-as-code/</loc>
+        <loc>https://blog.daviey.com/posts/security-as-code/</loc>
         <lastmod>2025-09-18</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/security-tools-marketing-vs-reality/</loc>
+        <loc>https://blog.daviey.com/posts/security-tools-marketing-vs-reality/</loc>
         <lastmod>2024-11-12</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/ssh-hardening-what-actually-matters/</loc>
+        <loc>https://blog.daviey.com/posts/ssh-hardening-what-actually-matters/</loc>
         <lastmod>2025-03-18</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/stepca-running-internal-pki/</loc>
+        <loc>https://blog.daviey.com/posts/stepca-running-internal-pki/</loc>
         <lastmod>2025-10-28</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/super-cli-mario-terminal-in-six-days/</loc>
+        <loc>https://blog.daviey.com/posts/super-cli-mario-terminal-in-six-days/</loc>
         <lastmod>2026-08-31</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/supply-chain-attacks-how-they-happen/</loc>
+        <loc>https://blog.daviey.com/posts/supply-chain-attacks-how-they-happen/</loc>
         <lastmod>2025-11-10</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/threat-analysis-practical-guide/</loc>
+        <loc>https://blog.daviey.com/posts/threat-analysis-practical-guide/</loc>
         <lastmod>2026-02-08</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/workload-identity-beyond-api-keys/</loc>
+        <loc>https://blog.daviey.com/posts/workload-identity-beyond-api-keys/</loc>
         <lastmod>2026-02-08</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/posts/zero-trust-what-it-actually-means/</loc>
+        <loc>https://blog.daviey.com/posts/zero-trust-what-it-actually-means/</loc>
         <lastmod>2025-08-05</lastmod>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/</loc>
+        <loc>https://blog.daviey.com/tags/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/ai/</loc>
+        <loc>https://blog.daviey.com/tags/ai/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/api-gateway/</loc>
+        <loc>https://blog.daviey.com/tags/api-gateway/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/architecture/</loc>
+        <loc>https://blog.daviey.com/tags/architecture/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/assessment/</loc>
+        <loc>https://blog.daviey.com/tags/assessment/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/authentication/</loc>
+        <loc>https://blog.daviey.com/tags/authentication/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/authorization/</loc>
+        <loc>https://blog.daviey.com/tags/authorization/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/automation/</loc>
+        <loc>https://blog.daviey.com/tags/automation/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/azure/</loc>
+        <loc>https://blog.daviey.com/tags/azure/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/bash/</loc>
+        <loc>https://blog.daviey.com/tags/bash/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/blue-team/</loc>
+        <loc>https://blog.daviey.com/tags/blue-team/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/case-studies/</loc>
+        <loc>https://blog.daviey.com/tags/case-studies/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/certificates/</loc>
+        <loc>https://blog.daviey.com/tags/certificates/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/chaos-engineering/</loc>
+        <loc>https://blog.daviey.com/tags/chaos-engineering/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/cloud-security/</loc>
+        <loc>https://blog.daviey.com/tags/cloud-security/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/cloud/</loc>
+        <loc>https://blog.daviey.com/tags/cloud/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/compliance/</loc>
+        <loc>https://blog.daviey.com/tags/compliance/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/conferences/</loc>
+        <loc>https://blog.daviey.com/tags/conferences/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/confidential-computing/</loc>
+        <loc>https://blog.daviey.com/tags/confidential-computing/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/containers/</loc>
+        <loc>https://blog.daviey.com/tags/containers/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/culture/</loc>
+        <loc>https://blog.daviey.com/tags/culture/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/deception/</loc>
+        <loc>https://blog.daviey.com/tags/deception/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/defense/</loc>
+        <loc>https://blog.daviey.com/tags/defense/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/dependencies/</loc>
+        <loc>https://blog.daviey.com/tags/dependencies/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/detection/</loc>
+        <loc>https://blog.daviey.com/tags/detection/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/devsecops/</loc>
+        <loc>https://blog.daviey.com/tags/devsecops/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/dns/</loc>
+        <loc>https://blog.daviey.com/tags/dns/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/ebpf/</loc>
+        <loc>https://blog.daviey.com/tags/ebpf/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/encryption/</loc>
+        <loc>https://blog.daviey.com/tags/encryption/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/enterprise/</loc>
+        <loc>https://blog.daviey.com/tags/enterprise/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/fosdem/</loc>
+        <loc>https://blog.daviey.com/tags/fosdem/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/gamedev/</loc>
+        <loc>https://blog.daviey.com/tags/gamedev/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/go/</loc>
+        <loc>https://blog.daviey.com/tags/go/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/hardening/</loc>
+        <loc>https://blog.daviey.com/tags/hardening/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/homomorphic-encryption/</loc>
+        <loc>https://blog.daviey.com/tags/homomorphic-encryption/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/identity/</loc>
+        <loc>https://blog.daviey.com/tags/identity/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/incident-response/</loc>
+        <loc>https://blog.daviey.com/tags/incident-response/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/infrastructure/</loc>
+        <loc>https://blog.daviey.com/tags/infrastructure/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/kubernetes/</loc>
+        <loc>https://blog.daviey.com/tags/kubernetes/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/linux/</loc>
+        <loc>https://blog.daviey.com/tags/linux/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/logic-apps/</loc>
+        <loc>https://blog.daviey.com/tags/logic-apps/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/management/</loc>
+        <loc>https://blog.daviey.com/tags/management/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/methodology/</loc>
+        <loc>https://blog.daviey.com/tags/methodology/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/microservices/</loc>
+        <loc>https://blog.daviey.com/tags/microservices/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/monitoring/</loc>
+        <loc>https://blog.daviey.com/tags/monitoring/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/networking/</loc>
+        <loc>https://blog.daviey.com/tags/networking/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/nixos/</loc>
+        <loc>https://blog.daviey.com/tags/nixos/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/oauth2/</loc>
+        <loc>https://blog.daviey.com/tags/oauth2/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/operations/</loc>
+        <loc>https://blog.daviey.com/tags/operations/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/passwords/</loc>
+        <loc>https://blog.daviey.com/tags/passwords/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/penetration-testing/</loc>
+        <loc>https://blog.daviey.com/tags/penetration-testing/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/pki/</loc>
+        <loc>https://blog.daviey.com/tags/pki/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/privacy/</loc>
+        <loc>https://blog.daviey.com/tags/privacy/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/prometheus/</loc>
+        <loc>https://blog.daviey.com/tags/prometheus/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/red-team/</loc>
+        <loc>https://blog.daviey.com/tags/red-team/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/resilience/</loc>
+        <loc>https://blog.daviey.com/tags/resilience/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/risk-management/</loc>
+        <loc>https://blog.daviey.com/tags/risk-management/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/saas/</loc>
+        <loc>https://blog.daviey.com/tags/saas/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/saml/</loc>
+        <loc>https://blog.daviey.com/tags/saml/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/security/</loc>
+        <loc>https://blog.daviey.com/tags/security/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/series/</loc>
+        <loc>https://blog.daviey.com/tags/series/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/serverless/</loc>
+        <loc>https://blog.daviey.com/tags/serverless/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/spiffe/</loc>
+        <loc>https://blog.daviey.com/tags/spiffe/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/ssh/</loc>
+        <loc>https://blog.daviey.com/tags/ssh/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/supply-chain/</loc>
+        <loc>https://blog.daviey.com/tags/supply-chain/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/sysadmin/</loc>
+        <loc>https://blog.daviey.com/tags/sysadmin/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/terminals/</loc>
+        <loc>https://blog.daviey.com/tags/terminals/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/testing/</loc>
+        <loc>https://blog.daviey.com/tags/testing/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/threat-analysis/</loc>
+        <loc>https://blog.daviey.com/tags/threat-analysis/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/tls/</loc>
+        <loc>https://blog.daviey.com/tags/tls/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/tools/</loc>
+        <loc>https://blog.daviey.com/tags/tools/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/travel/</loc>
+        <loc>https://blog.daviey.com/tags/travel/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/trust-boundary/</loc>
+        <loc>https://blog.daviey.com/tags/trust-boundary/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/vault/</loc>
+        <loc>https://blog.daviey.com/tags/vault/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/vendor-bullshit/</loc>
+        <loc>https://blog.daviey.com/tags/vendor-bullshit/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/vulnerabilities/</loc>
+        <loc>https://blog.daviey.com/tags/vulnerabilities/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/web-security/</loc>
+        <loc>https://blog.daviey.com/tags/web-security/</loc>
     </url>
     <url>
-        <loc>https://daviey.github.io/tags/zero-trust/</loc>
+        <loc>https://blog.daviey.com/tags/zero-trust/</loc>
     </url>
 </urlset>

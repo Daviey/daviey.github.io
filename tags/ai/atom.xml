@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Dave&#x27;s Blog - ai</title>
     <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
-    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/ai/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/ai/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2026-01-30T00:00:00+00:00</updated>
-    <id>https://daviey.github.io/tags/ai/atom.xml</id>
+    <id>https://blog.daviey.com/tags/ai/atom.xml</id>
     <entry xml:lang="en">
         <title>AI Systems Responsibility: Part 8 - Practical Tools That Actually Help (Bonus Episode)</title>
         <published>2026-01-30T00:00:00+00:00</published>
@@ -20,8 +20,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-8/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-8/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-8/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-8/</id>
         
         <summary type="html">&lt;p&gt;Part 7 was meant to be the end. &quot;Good luck, you&#x27;ll need it.&quot; Fin.&lt;&#x2F;p&gt;
 &lt;p&gt;Then someone asked: &quot;Alright, but what tools actually work? Not vendor pitches. Not &#x27;AI observability platforms&#x27; that cost more than my salary. Actual tools that help run AI systems without making everything worse.&quot;&lt;&#x2F;p&gt;
@@ -45,8 +45,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-7/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-7/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-7/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-7/</id>
         
         <summary type="html">&lt;p&gt;Six parts of this series explaining what goes wrong with AI systems. Testing that doesn&#x27;t happen. Monitoring that doesn&#x27;t exist. Models shipped before they&#x27;re ready. Incidents that could have been prevented.&lt;&#x2F;p&gt;
 &lt;p&gt;You&#x27;d think after reading all that, teams would learn. They don&#x27;t.&lt;&#x2F;p&gt;
@@ -70,8 +70,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-6/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-6/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-6/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-6/</id>
         
         <summary type="html">&lt;p&gt;This is where I tell you about actual AI deployments that went wrong. Real incidents. Real failures. Real consequences.&lt;&#x2F;p&gt;
 &lt;p&gt;Names changed. Details changed enough that you can&#x27;t identify the companies. But the failures? Those are real.&lt;&#x2F;p&gt;
@@ -94,8 +94,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-5/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-5/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-5/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-5/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need to deploy the customer sentiment analysis model by end of week.&lt;&#x2F;p&gt;
@@ -127,8 +127,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-4/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-4/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-4/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-4/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; We&#x27;ve tested the model. It works.&lt;&#x2F;p&gt;
@@ -159,8 +159,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-3/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-3/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-3/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-3/</id>
         
         <summary type="html">&lt;p&gt;3:47am. Phone rings. On-call engineer sounds panicked.&lt;&#x2F;p&gt;
 &lt;div class=&quot;dialogue&quot;&gt;
@@ -196,8 +196,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-2/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-2/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-2/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-2/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The model&#x27;s working fine. Look, uptime is 99.9%!&lt;&#x2F;p&gt;
@@ -226,8 +226,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-1/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-1/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-1/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-1/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Management:&lt;&#x2F;span&gt; We need to deploy the AI model to production by Friday.&lt;&#x2F;p&gt;

@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Dave&#x27;s Blog - culture</title>
     <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
-    <link rel="self" type="application/atom+xml" href="https://daviey.github.io/tags/culture/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
+    <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/culture/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2026-01-23T00:00:00+00:00</updated>
-    <id>https://daviey.github.io/tags/culture/atom.xml</id>
+    <id>https://blog.daviey.com/tags/culture/atom.xml</id>
     <entry xml:lang="en">
         <title>AI Systems Responsibility: Part 7 - Why Smart People Keep Making Dumb Decisions</title>
         <published>2026-01-23T00:00:00+00:00</published>
@@ -20,8 +20,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/ai-systems-responsibility-part-7/"/>
-        <id>https://daviey.github.io/posts/ai-systems-responsibility-part-7/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-systems-responsibility-part-7/"/>
+        <id>https://blog.daviey.com/posts/ai-systems-responsibility-part-7/</id>
         
         <summary type="html">&lt;p&gt;Six parts of this series explaining what goes wrong with AI systems. Testing that doesn&#x27;t happen. Monitoring that doesn&#x27;t exist. Models shipped before they&#x27;re ready. Incidents that could have been prevented.&lt;&#x2F;p&gt;
 &lt;p&gt;You&#x27;d think after reading all that, teams would learn. They don&#x27;t.&lt;&#x2F;p&gt;
@@ -45,8 +45,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://daviey.github.io/posts/security-as-code-beyond-scanning/"/>
-        <id>https://daviey.github.io/posts/security-as-code-beyond-scanning/</id>
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/security-as-code-beyond-scanning/"/>
+        <id>https://blog.daviey.com/posts/security-as-code-beyond-scanning/</id>
         
         <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
 &lt;p&gt;&lt;span class=&quot;speaker speaker-management&quot;&gt;Engineering manager:&lt;&#x2F;span&gt; We&#x27;ve got security as code! Look, the dashboard shows our scans running in CI.&lt;&#x2F;p&gt;
