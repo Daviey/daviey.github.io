@@ -4,3 +4,4 @@
 .post-content a.read-more{display:inline-block;margin-top:-0.9em;padding:.4em 1em .35em;border:1px solid var(--accent);color:var(--accent);background:transparent;text-decoration:none;font-size:.95em;transition:background .15s,color .15s}
 .post-content a.read-more:hover{background:var(--accent);color:var(--background)}
 .post-content a.read-more .button__text::after{content:" \2192"}
+.post-content .teaser{position:relative;max-height:12em;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent 74%);mask-image:linear-gradient(to bottom,#000 30%,transparent 74%)}.post-content .teaser p{margin-bottom:0}.teaser-readmore{position:relative;z-index:2;margin-top:-2.6em;display:flex;justify-content:flex-end}.teaser-readmore .read-more{background:var(--background)}
