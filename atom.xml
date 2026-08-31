@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title>Dave&#x27;s Blog</title>
-    <subtitle>Engineering, security, and the messy reality of running systems in production.</subtitle>
+    <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
     <link rel="self" type="application/atom+xml" href="https://daviey.github.io/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://daviey.github.io"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
@@ -873,43 +873,41 @@ Every hardcoded credential is a future incident waiting to happen. The question 
         <link rel="alternate" type="text/html" href="https://daviey.github.io/about/"/>
         <id>https://daviey.github.io/about/</id>
         
-        <content type="html" xml:base="https://daviey.github.io/about/">&lt;h1 id=&quot;hi-i-m-dave&quot;&gt;Hi, I&#x27;m Dave&lt;&#x2F;h1&gt;
-&lt;p&gt;British engineer specialising in security, operations, and breaking things.&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;what-this-blog-is-about&quot;&gt;What This Blog Is About&lt;&#x2F;h2&gt;
-&lt;p&gt;Security operations and the messy reality of running systems in production.&lt;&#x2F;p&gt;
-&lt;p&gt;Not theory. Not vendor marketing. What actually works when things go wrong at 3am.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Main topics:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
-&lt;ul&gt;
-&lt;li&gt;Security operations and incident response&lt;&#x2F;li&gt;
-&lt;li&gt;Cloud security (mostly GCP these days)&lt;&#x2F;li&gt;
-&lt;li&gt;AI systems and ML operations&lt;&#x2F;li&gt;
-&lt;li&gt;OAuth 2.0 and authentication (it&#x27;s harder than it looks)&lt;&#x2F;li&gt;
-&lt;li&gt;DevOps, containers, and infrastructure&lt;&#x2F;li&gt;
-&lt;li&gt;Conference writeups&lt;&#x2F;li&gt;
-&lt;&#x2F;ul&gt;
-&lt;h2 id=&quot;background&quot;&gt;Background&lt;&#x2F;h2&gt;
-&lt;p&gt;Years of breaking into systems professionally. Then years of defending them properly.&lt;&#x2F;p&gt;
-&lt;p&gt;Making Linux. Breaking it. Using it in fintechs and other places that can&#x27;t afford things to break.&lt;&#x2F;p&gt;
-&lt;p&gt;The hard way. Through incidents, post-mortems, and learning that boring tools + discipline beat fancy platforms + chaos every time.&lt;&#x2F;p&gt;
-&lt;p&gt;I write about what I&#x27;ve learned running production systems, dealing with breaches, and watching smart people make dumb decisions because of organisational dysfunction.&lt;&#x2F;p&gt;
+        <content type="html" xml:base="https://daviey.github.io/about/">&lt;h1 id=&quot;dr-dave-walker&quot;&gt;Dr. Dave Walker&lt;&#x2F;h1&gt;
+&lt;p&gt;Security leader. Built and led teams securing billions in assets across cloud, crypto, and enterprise infrastructure.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-this-blog-covers&quot;&gt;What This Blog Covers&lt;&#x2F;h2&gt;
+&lt;p&gt;Cloud security architecture on GCP. Cryptocurrency key custody and blockchain defence. Identity, access, and zero trust. AI&#x2F;ML applied to threat detection. The hard calls that come with owning security outcomes at scale.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;track-record&quot;&gt;Track Record&lt;&#x2F;h2&gt;
+&lt;p&gt;Head of Engineering for Ubuntu Server and Cloud. Ubuntu Core Developer. Built the product that runs most of the cloud you use today.&lt;&#x2F;p&gt;
+&lt;p&gt;Moved into security leadership for global financial institutions. Defined GCP security baselines adopted enterprise-wide. Built CSIRT programmes, led penetration testing and red team operations, drove vulnerability management across multi-cloud estates. Owned security governance under NIST 800-53, SOC 2, FedRAMP, and ISO27001.&lt;&#x2F;p&gt;
+&lt;p&gt;Designed cryptocurrency key custody for production blockchain systems: HSM-backed signing, multi-signature approval workflows, full audit trails. Audited smart contracts for institutional token deployments using Slither and Mythril.&lt;&#x2F;p&gt;
+&lt;p&gt;PhD in Information Security. Research on defensive controls for blockchain systems: kill switch mechanisms, ML-based threat detection achieving 98.2% detection rate for reentrancy attacks, BLS threshold signatures for protocol-level security.&lt;&#x2F;p&gt;
+&lt;p&gt;Currently focused on GCP security architecture and AI&#x2F;ML security operations.&lt;&#x2F;p&gt;
 &lt;aside class=&quot;pullquote&quot;&gt;
-&quot;The system is designed to produce bad outcomes. Your job is to minimise the damage. Not prevent it entirely. Minimise it.&quot;
+&quot;Your job is to own the outcome. All of it. Including the parts you can&#x27;t control.&quot;
 &lt;&#x2F;aside&gt;
-&lt;h2 id=&quot;philosophy&quot;&gt;Philosophy&lt;&#x2F;h2&gt;
+&lt;h2 id=&quot;credentials&quot;&gt;Credentials&lt;&#x2F;h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Security isn&#x27;t a checklist — it&#x27;s understanding the system and identifying where it can be broken&lt;&#x2F;li&gt;
+&lt;li&gt;OSCP, CISSP&lt;&#x2F;li&gt;
+&lt;li&gt;Top 100 HackTheBox (Elite Hacker)&lt;&#x2F;li&gt;
+&lt;li&gt;Vulnerability discovery awards from UK MoD and US DoD&lt;&#x2F;li&gt;
+&lt;li&gt;Synack Red Team approved researcher&lt;&#x2F;li&gt;
+&lt;li&gt;OpenUK New Year&#x27;s Honour (2021)&lt;&#x2F;li&gt;
+&lt;li&gt;PhD Information Security, MSc with Distinction&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;how-i-think-about-security&quot;&gt;How I Think About Security&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Security leaders own outcomes, not controls&lt;&#x2F;li&gt;
+&lt;li&gt;Meetings are inputs. Judge yourself by what ships after them&lt;&#x2F;li&gt;
 &lt;li&gt;Monitoring accuracy matters more than monitoring uptime&lt;&#x2F;li&gt;
 &lt;li&gt;Build political capital and spend it when you need to say no&lt;&#x2F;li&gt;
-&lt;li&gt;Use boring proven tools over AI-specific platforms&lt;&#x2F;li&gt;
-&lt;li&gt;Be honest about what doesn&#x27;t work (spoiler: most things don&#x27;t)&lt;&#x2F;li&gt;
+&lt;li&gt;Ship security decisions, not security documents&lt;&#x2F;li&gt;
+&lt;li&gt;Boring tools plus discipline beat fancy platforms every time&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;h2 id=&quot;recent&quot;&gt;Recent&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;strong&gt;FOSDEM 2026&lt;&#x2F;strong&gt; was proper brilliant. Go track, NixOS track, Daniel Stenberg&#x27;s keynote on real security work vs AI hype.&lt;&#x2F;p&gt;
-&lt;p&gt;Spent too much on Belgian beer. Again.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;contact&quot;&gt;Contact&lt;&#x2F;h2&gt;
-&lt;p&gt;You can find me on &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;daviey&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;daviey&quot;&gt;GitHub&lt;&#x2F;a&gt; | &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;linkedin.com&#x2F;in&#x2F;daviey&#x2F;&quot;&gt;LinkedIn&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
 &lt;hr &#x2F;&gt;
-&lt;p&gt;&lt;em&gt;No sponsors. No ads. Just writing about what I&#x27;ve learned.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;em&gt;Just writing about what I&#x27;ve learned.&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
 </content>
         
     </entry>
