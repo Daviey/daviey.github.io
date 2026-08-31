@@ -24,9 +24,10 @@
         <id>https://blog.daviey.com/posts/super-cli-mario-terminal-in-six-days/</id>
         
         <summary type="html">&lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;icon.png&quot; alt=&quot;SUPER CLI MARIO icon: the Mario sprite on a sky tile&quot; width=&quot;128&quot; height=&quot;128&quot; style=&quot;float:left;margin:4px 22px 8px 0;image-rendering:pixelated;&quot;&gt;
-&lt;p&gt;TL;DR: one deterministic engine drives a terminal, a browser, an APK, an
-iOS .ipa, a UEFI boot image and a from-scratch SSH arcade, with a
-replay-verified leaderboard that nobody can lie to. Every number below is
+&lt;p&gt;TL;DR: a terminal game first. One deterministic engine renders into a
+terminal, then mimics itself onto a browser, an APK, an iOS .ipa, a UEFI
+boot image and a from-scratch SSH arcade, with a replay-verified
+leaderboard that nobody can lie to. Every number below is
 measured in-tree; every bug in the final section was hit by a real player.&lt;&#x2F;p&gt;
 &lt;figure&gt;
 &lt;img src=&quot;&#x2F;img&#x2F;mario&#x2F;demo.gif&quot; alt=&quot;A scripted demo run, captured from real terminal output&quot;&gt;
