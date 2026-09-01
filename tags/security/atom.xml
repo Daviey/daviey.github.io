@@ -5,8 +5,73 @@
     <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/security/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2026-06-05T00:00:00+00:00</updated>
+    <updated>2026-09-02T00:00:00+00:00</updated>
     <id>https://blog.daviey.com/tags/security/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Running an Abliterated Model: What Actually Breaks</title>
+        <published>2026-09-02T00:00:00+00:00</published>
+        <updated>2026-09-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/running-an-abliterated-model-what-actually-breaks/"/>
+        <id>https://blog.daviey.com/posts/running-an-abliterated-model-what-actually-breaks/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The agent stopped mid-engagement.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; Crash?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The model refused. Said it couldn&#x27;t assist with code that &quot;could facilitate unauthorized access&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; The code is a fuzzer for our own auth service.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Tell the model.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; It&#x27;s a general-purpose API model with someone else&#x27;s policy baked into the weights.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; So the red-team tooling needs a model with a policy we set. Ours.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;That conversation is why I run an abliterated model. Not for edginess, not to own anyone in an argument, and not because I have exotic hobbies. Because I run an autonomous security agent that does offensive work all day, and a refusal from its brain is not a safety feature. For an unattended agent it&#x27;s a wedged turn, a burned retry, and a half-finished task discovered hours later.&lt;&#x2F;p&gt;
+&lt;p&gt;This post explains what &quot;abliterated&quot; actually means, what it costs you, what we do with ours, a live demo, and the operational reality of self-hosting one. The short version is that removing the model&#x27;s refusals doesn&#x27;t remove your safety problem. It relocates the problem out of the weights and into your infrastructure, where you have to solve it yourself.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Abliteration doesn&#x27;t remove the safety problem. It moves it out of the model and into your infrastructure, where nobody else is maintaining it.&quot;
+&lt;&#x2F;aside&gt;</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Post-Quantum Migration: What Actually Breaks First</title>
+        <published>2026-08-11T00:00:00+00:00</published>
+        <updated>2026-08-11T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/post-quantum-migration-what-actually-breaks/"/>
+        <id>https://blog.daviey.com/posts/post-quantum-migration-what-actually-breaks/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; The quantum deadline moved.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The 2035 one?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; June&#x27;s executive order. 2030 for key exchange, 2031 for signatures.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; That&#x27;s four years out.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; The inventory takes two if you start today. Ask the firmware.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-sysadmin&quot;&gt;Sysadmin:&lt;&#x2F;span&gt; The firmware is from 2019 and the vendor got acquired twice since.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Then it stays on the list forever. Welcome to post-quantum migration.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;On 22 June 2026, Executive Order 14412 turned post-quantum cryptography from a conference track into a compliance date. US federal agencies must be on quantum-resistant key establishment by 31 December 2030 and quantum-resistant signatures by 31 December 2031. Through the Federal Acquisition Regulation Council the same dates land on every covered contractor, which in practice means most of the supply chain. Yesterday the IETF published RFC 10024, putting the hybrid &lt;code&gt;X25519MLKEM768&lt;&#x2F;code&gt; key exchange on the standards track for TLS 1.3. The browsers already have it on by default. Cloudflare already serves it.&lt;&#x2F;p&gt;
+&lt;p&gt;Your government and your browser vendor agree on the message. Stop planning, start shipping.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;A quantum computer doesn&#x27;t have to exist for the attack to work. Recording your traffic today and filing it away is free.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;I run my own CA, a fleet of Linux boxes, and enough SSH to constitute a lifestyle. This post is the migration order I&#x27;m actually following: what the algorithms are, what you can turn on this week, where the real time sink hides, and why signatures will hurt more than key exchange.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
     <entry xml:lang="en">
         <title>AI Agents With Shell Access: What Actually Breaks</title>
         <published>2026-06-05T00:00:00+00:00</published>

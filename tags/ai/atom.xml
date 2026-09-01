@@ -5,8 +5,40 @@
     <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/ai/atom.xml"/>
     <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
-    <updated>2026-06-05T00:00:00+00:00</updated>
+    <updated>2026-09-02T00:00:00+00:00</updated>
     <id>https://blog.daviey.com/tags/ai/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Running an Abliterated Model: What Actually Breaks</title>
+        <published>2026-09-02T00:00:00+00:00</published>
+        <updated>2026-09-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/running-an-abliterated-model-what-actually-breaks/"/>
+        <id>https://blog.daviey.com/posts/running-an-abliterated-model-what-actually-breaks/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The agent stopped mid-engagement.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; Crash?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The model refused. Said it couldn&#x27;t assist with code that &quot;could facilitate unauthorized access&quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; The code is a fuzzer for our own auth service.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Tell the model.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; It&#x27;s a general-purpose API model with someone else&#x27;s policy baked into the weights.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; So the red-team tooling needs a model with a policy we set. Ours.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;That conversation is why I run an abliterated model. Not for edginess, not to own anyone in an argument, and not because I have exotic hobbies. Because I run an autonomous security agent that does offensive work all day, and a refusal from its brain is not a safety feature. For an unattended agent it&#x27;s a wedged turn, a burned retry, and a half-finished task discovered hours later.&lt;&#x2F;p&gt;
+&lt;p&gt;This post explains what &quot;abliterated&quot; actually means, what it costs you, what we do with ours, a live demo, and the operational reality of self-hosting one. The short version is that removing the model&#x27;s refusals doesn&#x27;t remove your safety problem. It relocates the problem out of the weights and into your infrastructure, where you have to solve it yourself.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Abliteration doesn&#x27;t remove the safety problem. It moves it out of the model and into your infrastructure, where nobody else is maintaining it.&quot;
+&lt;&#x2F;aside&gt;</summary>
+        
+    </entry>
     <entry xml:lang="en">
         <title>AI Agents With Shell Access: What Actually Breaks</title>
         <published>2026-06-05T00:00:00+00:00</published>

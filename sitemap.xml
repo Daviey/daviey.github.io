@@ -122,8 +122,16 @@
         <lastmod>2025-11-20</lastmod>
     </url>
     <url>
+        <loc>https://blog.daviey.com/posts/post-quantum-migration-what-actually-breaks/</loc>
+        <lastmod>2026-08-11</lastmod>
+    </url>
+    <url>
         <loc>https://blog.daviey.com/posts/prometheus-security-monitoring/</loc>
         <lastmod>2024-10-18</lastmod>
+    </url>
+    <url>
+        <loc>https://blog.daviey.com/posts/running-an-abliterated-model-what-actually-breaks/</loc>
+        <lastmod>2026-09-02</lastmod>
     </url>
     <url>
         <loc>https://blog.daviey.com/posts/saas-paas-gateway-security-pattern/</loc>
@@ -233,6 +241,9 @@
         <loc>https://blog.daviey.com/tags/containers/</loc>
     </url>
     <url>
+        <loc>https://blog.daviey.com/tags/cryptography/</loc>
+    </url>
+    <url>
         <loc>https://blog.daviey.com/tags/culture/</loc>
     </url>
     <url>
@@ -293,6 +304,9 @@
         <loc>https://blog.daviey.com/tags/linux/</loc>
     </url>
     <url>
+        <loc>https://blog.daviey.com/tags/llm/</loc>
+    </url>
+    <url>
         <loc>https://blog.daviey.com/tags/logic-apps/</loc>
     </url>
     <url>
@@ -330,6 +344,9 @@
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/pki/</loc>
+    </url>
+    <url>
+        <loc>https://blog.daviey.com/tags/post-quantum/</loc>
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/privacy/</loc>
