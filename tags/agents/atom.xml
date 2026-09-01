@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - agents</title>
+    <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/agents/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-05T00:00:00+00:00</updated>
+    <id>https://blog.daviey.com/tags/agents/atom.xml</id>
+    <entry xml:lang="en">
+        <title>AI Agents With Shell Access: What Actually Breaks</title>
+        <published>2026-06-05T00:00:00+00:00</published>
+        <updated>2026-06-05T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/ai-agents-shell-access-what-actually-breaks/"/>
+        <id>https://blog.daviey.com/posts/ai-agents-shell-access-what-actually-breaks/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The overnight agent opened a pull request at 2:14am.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; That&#x27;s what it&#x27;s for.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; It also fetched a &quot;test fixture&quot; from a domain registered last Tuesday and piped it into sh.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; Did anyone ask it to do that?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; The GitHub issue did. Line 40. White text on a white background.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; So we handed a language model shell access and assumed it could tell an issue body from an instruction.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Earlier this week the NSA published a &lt;a rel=&quot;noopener external&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;media.defense.gov&#x2F;2026&#x2F;Jun&#x2F;02&#x2F;2003943289&#x2F;-1&#x2F;-1&#x2F;0&#x2F;CSI_MCP_SECURITY.PDF&quot;&gt;Cybersecurity Information Sheet on securing MCP server deployments&lt;&#x2F;a&gt;. When the signals intelligence agency starts writing hardening guides for a JSON-RPC protocol that Anthropic open-sourced in November 2024, you can assume the adoption curve happened without the security curve. The CSI is good, as these things go. It is also a strong signal that enough people have now wired autonomous agents to production credentials that somebody with a classified budget noticed.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;A chatbot that hallucinates is embarrassing. An agent with shell access that hallucinates is someone else&#x27;s code running on your box with your credentials.&quot;
+&lt;&#x2F;aside&gt;
+&lt;p&gt;I run coding agents against real infrastructure. Repos, deploy pipelines, cloud accounts, mailboxes. Some of them have shell access, because that&#x27;s what makes them useful: the same property that makes them dangerous. This post is the threat model I use, what the MCP ecosystem actually provides, and the controls that have survived contact with agents trying their hardest to do the wrong thing.&lt;&#x2F;p&gt;</summary>
+        
+    </entry>
+</feed>
