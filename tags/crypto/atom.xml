@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Dave&#x27;s Blog - crypto</title>
+    <subtitle>GCP security, crypto key management, AI&#x2F;ML, and Linux infrastructure from someone who&#x27;s run production systems.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://blog.daviey.com/tags/crypto/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://blog.daviey.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-08-08T00:00:00+00:00</updated>
+    <id>https://blog.daviey.com/tags/crypto/atom.xml</id>
+    <entry xml:lang="en">
+        <title>How North Korea Actually Steals Crypto</title>
+        <published>2026-08-08T00:00:00+00:00</published>
+        <updated>2026-08-08T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://blog.daviey.com/posts/how-north-korea-actually-steals-crypto/"/>
+        <id>https://blog.daviey.com/posts/how-north-korea-actually-steals-crypto/</id>
+        
+        <summary type="html">&lt;div class=&quot;dialogue&quot;&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Weekly sweep. Moving 401,000 ETH to cold storage, same as every fortnight.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; Interface shows the transfer. Simulation matches.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-engineer&quot;&gt;Engineer:&lt;&#x2F;span&gt; Hardware wallet wants a signature over a blob of hex. It always does.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-security&quot;&gt;Security:&lt;&#x2F;span&gt; Sign it then. Lunch?&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;span class=&quot;speaker speaker-ciso&quot;&gt;CISO:&lt;&#x2F;span&gt; Approved. Quiet week.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;p&gt;Three signers at Bybit approved roughly that transaction on 21 February 2025, and about $1.5bn left the exchange within minutes. The screen told them the truth. The keys signed a lie. Nearly every large North Korean crypto theft since 2019 contains some version of that gap, and the gap is where the money goes.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a sourced tour of how the DPRK actually steals digital assets. The running totals, the people-attacks that open the door, the kill chains inside six named heists, the laundering pipeline behind them, and the defences that held up when tested. Every claim carries a source and a date, because a fair chunk of what everyone knows about this subject is wrong, and I will flag the wrong bits as we pass them.&lt;&#x2F;p&gt;
+&lt;aside class=&quot;pullquote&quot;&gt;
+&quot;Nobody broke the cryptography. They broke the screen between the signers and the keys.&quot;
+&lt;&#x2F;aside&gt;</summary>
+        
+    </entry>
+</feed>

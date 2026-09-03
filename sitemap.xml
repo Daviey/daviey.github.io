@@ -86,6 +86,10 @@
         <lastmod>2026-02-04</lastmod>
     </url>
     <url>
+        <loc>https://blog.daviey.com/posts/how-north-korea-actually-steals-crypto/</loc>
+        <lastmod>2026-08-08</lastmod>
+    </url>
+    <url>
         <loc>https://blog.daviey.com/posts/incident-response-what-actually-works/</loc>
         <lastmod>2025-07-02</lastmod>
     </url>
@@ -241,6 +245,9 @@
         <loc>https://blog.daviey.com/tags/containers/</loc>
     </url>
     <url>
+        <loc>https://blog.daviey.com/tags/crypto/</loc>
+    </url>
+    <url>
         <loc>https://blog.daviey.com/tags/cryptography/</loc>
     </url>
     <url>
@@ -296,6 +303,9 @@
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/infrastructure/</loc>
+    </url>
+    <url>
+        <loc>https://blog.daviey.com/tags/key-management/</loc>
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/kubernetes/</loc>
@@ -398,6 +408,9 @@
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/threat-analysis/</loc>
+    </url>
+    <url>
+        <loc>https://blog.daviey.com/tags/threat-intel/</loc>
     </url>
     <url>
         <loc>https://blog.daviey.com/tags/tls/</loc>
