@@ -13,3 +13,4 @@
 .dialogue{border-radius:6px}
 .post-content a{text-decoration-color:color-mix(in srgb,var(--accent) 45%,transparent)}.post-content a:hover{text-decoration-color:var(--accent)}
 ::selection{background:var(--accent);color:var(--background)}
+.container{max-width:912px}
